@@ -1,0 +1,36 @@
+{
+  "name": "bittersweet.oi-2.0.0",
+  "version": "2.0.0",
+  "description": "BitterSweet Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/camiloriosf/BitterSweet.io-2.0.0.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/camiloriosf/BitterSweet.io-2.0.0/issues"
+  },
+  "homepage": "https://github.com/camiloriosf/BitterSweet.io-2.0.0#readme",
+  "dependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.0.1",
+    "material-ui": "^1.0.0-alpha.16",
+    "material-ui-icons": "^1.0.0-alpha.3",
+    "next": "^2.4.3",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-swipeable-views": "^0.12.3"
+  }
+}
