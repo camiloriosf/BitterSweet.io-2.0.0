@@ -4,30 +4,34 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
-import Drawer from 'material-ui/Drawer';
-import List, { ListItem, ListItemText } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import MenuIcon from 'material-ui-icons/Menu';
 import Hidden from 'material-ui/Hidden';
-import { indigo } from 'material-ui/styles/colors';
+import Grid from 'material-ui/Grid';
+import { transparent } from 'material-ui/styles/colors';
+import Scrollspy from 'react-scrollspy';
 
-const styleSheet = createStyleSheet('ButtonAppBar', {
+const styleSheet = createStyleSheet('Header', {
   root: {
     position: 'relative',
     width: '100%',
-    background: indigo[500],
+    background: transparent,
   },
   appBar: {
     position: 'relative',
     boxShadow: 'none',
     background: 'inherit',
   },
-  flex: {
+  title: {
     flex: 1,
+    padding: 0,
+    marginTop: 20,
   },
-  listFull: {
-    width: 'auto',
-    flex: 'initial',
+  scrollspy: {
+    textAlign: 'center',
+    margin: 0,
+    padding: 0,
+  },
+  anchor: {
+    textDecoration: 'none',
   },
 });
 
@@ -45,56 +49,24 @@ class Header extends Component {
       <div className={this.props.classes.root}>
         <AppBar className={this.props.classes.appBar} >
           <Toolbar>
-            <Typography type="title" colorInherit className={this.props.classes.flex}>BitterSweet.io</Typography>
-            <Hidden smDown>
-              <div>
-                <Button contrast>FEATURES</Button>
-                <Button contrast>SERVICES</Button>
-                <Button contrast>HOW</Button>
-                <Button contrast>PRICING</Button>
-                <Button contrast>QUOTE</Button>
-                <Button contrast>FAQ</Button>
-                <Button contrast>CONTACT</Button>
-              </div>
-            </Hidden>
-            <Hidden mdUp>
-              <IconButton onClick={() => this.toggleDrawer(true)}>
-                <MenuIcon />
-              </IconButton>
-            </Hidden>
+            <Grid container justify="center" align="flex-start">
+              <Grid item xs={12} sm={12} style={{ padding: 0 }}>
+                <Hidden xsDown>
+                  <Scrollspy className={this.props.classes.scrollspy}>
+                    <a href="#services" className={this.props.classes.anchor}><Button contrast>WHAT WE DO</Button></a>
+                    <a href="#how" className={this.props.classes.anchor}><Button contrast>HOW</Button></a>
+                    <a href="#pricing" className={this.props.classes.anchor}><Button contrast>PRICING</Button></a>
+                    <a href="#quote" className={this.props.classes.anchor}><Button contrast>QUOTE</Button></a>
+                    <a href="#faq" className={this.props.classes.anchor}><Button contrast>FAQ</Button></a>
+                    <a href="#contact" className={this.props.classes.anchor}><Button contrast>CONTACT</Button></a>
+                  </Scrollspy>
+                </Hidden>
+              </Grid>
+              <Grid item xs={12} sm={12} style={{ padding: 0 }}>
+                <Typography type="title" align="center" colorInherit className={this.props.classes.title}>BitterSweet.io</Typography>
+              </Grid>
+            </Grid>
           </Toolbar>
-          <Drawer anchor="top" open={this.state.open} onRequestClose={() => this.toggleDrawer(false)} onClick={() => this.toggleDrawer(false)}>
-            <div>
-              <List className={this.props.classes.listFull} disablePadding>
-                <div>
-                  <ListItem>
-                    <Typography type="title" colorInherit>BitterSweet.io</Typography>
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="FEATURES" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="SERVICES" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="HOW" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="PRICING" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="QUOTE" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="FAQ" />
-                  </ListItem>
-                  <ListItem button>
-                    <ListItemText primary="CONTACT" />
-                  </ListItem>
-                </div>
-              </List>
-            </div>
-          </Drawer>
         </AppBar>
       </div>
     );

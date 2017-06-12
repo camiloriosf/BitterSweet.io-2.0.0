@@ -4,12 +4,12 @@ import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { blue, red } from 'material-ui/styles/colors';
+import { red, indigo } from 'material-ui/styles/colors';
 import Header from './Header';
 
 const muiTheme = createMuiTheme({
   palette: createPalette({
-    primary: blue,
+    primary: indigo,
     accent: red,
   }),
 });
@@ -48,7 +48,9 @@ export default ({ children, title = 'BitterSweet.io' }) => (
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
         </Head>
-        <Header />
+        <div style={{ background: indigo[500] }}>
+          <Header />
+        </div>
         <div>
           {children}
         </div>
