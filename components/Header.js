@@ -9,27 +9,25 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Hidden from 'material-ui/Hidden';
-import { transparent } from 'material-ui/styles/colors';
+import { indigo } from 'material-ui/styles/colors';
 
 const styleSheet = createStyleSheet('ButtonAppBar', {
   root: {
     position: 'relative',
     width: '100%',
+    background: indigo[500],
   },
   appBar: {
     position: 'relative',
-    background: transparent,
+    boxShadow: 'none',
+    background: 'inherit',
   },
   flex: {
     flex: 1,
-    color: '#000',
   },
   listFull: {
     width: 'auto',
     flex: 'initial',
-  },
-  title: {
-    padding: 10,
   },
 });
 
@@ -48,15 +46,18 @@ class Header extends Component {
         <AppBar className={this.props.classes.appBar} >
           <Toolbar>
             <Typography type="title" colorInherit className={this.props.classes.flex}>BitterSweet.io</Typography>
-            <Hidden xsDown>
+            <Hidden smDown>
               <div>
-                <Button>QUOTE</Button>
-                <Button>SERVICES</Button>
-                <Button>HOW</Button>
-                <Button>CONTACT</Button>
+                <Button contrast>FEATURES</Button>
+                <Button contrast>SERVICES</Button>
+                <Button contrast>HOW</Button>
+                <Button contrast>PRICING</Button>
+                <Button contrast>QUOTE</Button>
+                <Button contrast>FAQ</Button>
+                <Button contrast>CONTACT</Button>
               </div>
             </Hidden>
-            <Hidden smUp>
+            <Hidden mdUp>
               <IconButton onClick={() => this.toggleDrawer(true)}>
                 <MenuIcon />
               </IconButton>
@@ -70,13 +71,22 @@ class Header extends Component {
                     <Typography type="title" colorInherit>BitterSweet.io</Typography>
                   </ListItem>
                   <ListItem button>
-                    <ListItemText primary="QUOTE" />
+                    <ListItemText primary="FEATURES" />
                   </ListItem>
                   <ListItem button>
                     <ListItemText primary="SERVICES" />
                   </ListItem>
                   <ListItem button>
                     <ListItemText primary="HOW" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="PRICING" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="QUOTE" />
+                  </ListItem>
+                  <ListItem button>
+                    <ListItemText primary="FAQ" />
                   </ListItem>
                   <ListItem button>
                     <ListItemText primary="CONTACT" />

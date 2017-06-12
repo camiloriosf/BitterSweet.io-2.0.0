@@ -4,13 +4,13 @@ import createMuiTheme from 'material-ui/styles/theme';
 import createPalette from 'material-ui/styles/palette';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { blue, green } from 'material-ui/styles/colors';
+import { blue, red } from 'material-ui/styles/colors';
 import Header from './Header';
 
 const muiTheme = createMuiTheme({
   palette: createPalette({
     primary: blue,
-    accent: green,
+    accent: red,
   }),
 });
 
@@ -49,7 +49,7 @@ export default ({ children, title = 'BitterSweet.io' }) => (
           />
         </Head>
         <Header />
-        <div style={{ padding: 10 }}>
+        <div>
           {children}
         </div>
       </div>
