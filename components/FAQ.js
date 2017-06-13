@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
-import { fullWhite } from 'material-ui/styles/colors';
+import { fullWhite, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 const styleSheet = createStyleSheet('FAQ', {
@@ -22,7 +22,10 @@ const styleSheet = createStyleSheet('FAQ', {
   padXSFAQ: {
     marginTop: '20%',
   },
-  FAQ: {
+  sectionTitle: {
+    color: indigo[500],
+  },
+  sectionSubTitle: {
     marginTop: 10,
     marginBottom: 40,
   },
@@ -35,10 +38,10 @@ function FAQ(props) {
       <Hidden xsDown><div className={props.classes.padSections} /></Hidden>
       <Grid container justify="center" align="flex-start">
         <Grid item xs={12} sm={12}>
-          <Typography type="display1" align="center" colorInherit>
+          <Typography type="display1" align="center" className={props.classes.sectionTitle}>
             Frequently Asked Questions
           </Typography>
-          <Typography type="subheading" align="center" colorInherit className={props.classes.FAQ}>
+          <Typography type="subheading" align="center" className={props.classes.sectionSubTitle}>
             Got questions? We have answers.
           </Typography>
         </Grid>

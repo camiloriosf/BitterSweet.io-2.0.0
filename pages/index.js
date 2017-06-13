@@ -1,7 +1,9 @@
 import React from 'react';
-import MainLayout from '../components/MainLayout';
+import App from '../components/App';
+import Header from '../components/Header';
 import HeroTest from '../components/Hero';
 import Services from '../components/Services';
+import How from '../components/How';
 import FAQ from '../components/FAQ';
 
 const styles = {
@@ -12,16 +14,19 @@ const styles = {
 
 function Index() {
   return (
-    <MainLayout title="BitterSweet.io - Welcome">
+    <App>
       <div style={styles.root}>
+        <Header />
         <section id="hero" />
         <HeroTest />
         <section id="services" />
         <Services />
+        <section id="how" />
+        <How />
         <section id="faq" />
         <FAQ />
       </div>
-    </MainLayout>
+    </App>
   );
 }
 
