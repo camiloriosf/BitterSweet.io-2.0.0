@@ -53,7 +53,7 @@ function How(props) {
             </Typography>
             <Typography type="body1" align="center">
             In BitterSweet.io we have created a new way of developing apps.
-            With it we are able to lower costs, increase release times and add
+            With it we are able to lower costs, release times and add
             all the features industrial grade softwares have.
             </Typography>
           </div>
@@ -81,7 +81,7 @@ function How(props) {
               No templates, we build from the ground up
             </Typography>
             <Typography type="body1" align="center">
-              We beleive each requeriment requires a different approach, that is why
+              We believe each requeriment requires a different approach, that is why
               we don&apos;t use pre made templates, we build everything ourselves.
             </Typography>
           </div>
