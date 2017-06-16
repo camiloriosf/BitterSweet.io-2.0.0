@@ -4,7 +4,12 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
 import { indigo, grey } from 'material-ui/styles/colors';
-import MoodIcon from 'material-ui-icons/Mood';
+import AssignmentIcon from 'material-ui-icons/Assignment';
+import PhonelinkIcon from 'material-ui-icons/Phonelink';
+import WeekendIcon from 'material-ui-icons/Weekend';
+import MoneyOffIcon from 'material-ui-icons/MoneyOff';
+import SecurityIcon from 'material-ui-icons/Security';
+import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
 const styleSheet = createStyleSheet('Services', {
@@ -24,7 +29,7 @@ const styleSheet = createStyleSheet('Services', {
     marginTop: '20%',
   },
   icon: {
-    fill: indigo[500],
+    fill: indigo[100],
     width: 50,
     height: 50,
   },
@@ -57,75 +62,74 @@ function Services(props) {
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
           <Paper className={props.classes.paper} elevation={24}>
-            <MoodIcon className={props.classes.icon} />
-            <Typography type="headline" align="left" colorInherit>
-                First Feature
+            <PhonelinkIcon className={props.classes.icon} />
+            <Typography type="title" align="left">
+                Multiplatform Dev
             </Typography>
-            <Typography type="subheading" align="left" colorInherit>
-                Forget about technical stuff and FOCUS on your business
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Paper className={props.classes.paper} square elevation={24}>
-            <MoodIcon className={props.classes.icon} />
-            <Typography type="headline" align="left" colorInherit>
-                Second Feature
-            </Typography>
-            <Typography type="subheading" align="left" colorInherit>
-                Build high-performing apps that automatically scales
+            <Typography type="body1" align="left">
+                We can develop your app for the Web, Android, iOS or Desktop.
             </Typography>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={4} md={3}>
           <Paper className={props.classes.paper} square elevation={24}>
-            <MoodIcon className={props.classes.icon} />
-            <Typography type="headline" align="left" colorInherit>
-                Third Feature
+            <FavoriteBorderIcon className={props.classes.icon} />
+            <Typography type="title" align="left">
+              Clear and Fair Price
             </Typography>
-            <Typography type="subheading" align="left" colorInherit>
-              No hidden costs
+            <Typography type="body1" align="left">
+              No hidden costs, we charge the same ammount every month, with
+              no huge investments.
             </Typography>
-            <Typography type="body1" align="left" colorInherit>
-              No huge investments
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <Paper className={props.classes.paper} square elevation={24}>
+            <MoneyOffIcon className={props.classes.icon} />
+            <Typography type="title" align="left">
+              Zero Risk
+            </Typography>
+            <Typography type="body1" align="left">
+              We only charge you when your app is up and running
+              and you are happy with it.
             </Typography>
           </Paper>
         </Grid>
       </Grid>
       <Grid container justify="center" align="flex-start" className={props.classes.secondRow}>
         <Grid item xs={12} sm={4} md={3}>
+          <Paper className={props.classes.paper} square elevation={24}>
+            <AssignmentIcon className={props.classes.icon} />
+            <Typography type="title" align="left">
+              No Contracts
+            </Typography>
+            <Typography type="body1" align="left">
+              Stop the service whenever you like, there are no long-term
+              contracts.
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
+          <Paper className={props.classes.paper} square elevation={24}>
+            <WeekendIcon className={props.classes.icon} />
+            <Typography type="title" align="left">
+              Relax
+            </Typography>
+            <Typography type="body1" align="left">
+              We take care of everything. From development to
+              SEO optimization and support. You just focus on your business.
+            </Typography>
+          </Paper>
+        </Grid>
+        <Grid item xs={12} sm={4} md={3}>
           <Paper className={props.classes.paper} elevation={24}>
-            <MoodIcon className={props.classes.icon} />
-            <Typography type="headline" align="left" colorInherit>
-                First Feature
+            <SecurityIcon className={props.classes.icon} />
+            <Typography type="title" align="left">
+                Small and Big Companies alike
             </Typography>
-            <Typography type="subheading" align="left" colorInherit>
-                Forget about technical stuff and FOCUS on your business
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Paper className={props.classes.paper} square elevation={24}>
-            <MoodIcon className={props.classes.icon} />
-            <Typography type="headline" align="left" colorInherit>
-                Second Feature
-            </Typography>
-            <Typography type="subheading" align="left" colorInherit>
-                Build high-performing apps that automatically scales
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={4} md={3}>
-          <Paper className={props.classes.paper} square elevation={24}>
-            <MoodIcon className={props.classes.icon} />
-            <Typography type="headline" align="left" colorInherit>
-                Third Feature
-            </Typography>
-            <Typography type="subheading" align="left" colorInherit>
-              No hidden costs
-            </Typography>
-            <Typography type="body1" align="left" colorInherit>
-              No huge investments
+            <Typography type="body1" align="left">
+                We only use top of the line technologies, with
+                integrated SSL certificates, load-balancing, auto scaling and CDN.
             </Typography>
           </Paper>
         </Grid>

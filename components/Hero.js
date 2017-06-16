@@ -5,6 +5,7 @@ import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
 import { indigo, fullWhite } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Scrollspy from 'react-scrollspy';
 
 const styleSheet = createStyleSheet('Hero', {
   section: {
@@ -79,6 +80,14 @@ const styleSheet = createStyleSheet('Hero', {
     position: 'absolute',
     zIndex: 700000,
   },
+  scrollspy: {
+    textAlign: 'center',
+    margin: 0,
+    padding: 0,
+  },
+  anchor: {
+    textDecoration: 'none',
+  },
 });
 
 function Hero(props) {
@@ -88,14 +97,14 @@ function Hero(props) {
         <Grid item xs={12} sm={12}>
           <Hidden smUp><div className={props.classes.padXS1} /></Hidden>
           <Hidden xsDown><div className={props.classes.pad1} /></Hidden>
-          <Typography type="display3" align="center" colorInherit className={props.classes.title}>
-                MAKE YOUR BUSINESS EASIER
-              </Typography>
+          <Typography type="display3" align="center" className={props.classes.title}>
+            MAKE YOUR BUSINESS EASIER
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={12}>
           <Hidden smUp><div className={props.classes.padXS2} /></Hidden>
           <Hidden xsDown><div className={props.classes.pad2} /></Hidden>
-          <Typography type="headline" align="center" colorInherit className={props.classes.subTitle}>
+          <Typography type="headline" align="center" className={props.classes.subTitle}>
             BitterSweet.io simplifies software development,
             taking care of the whole life cycle of your project.
           </Typography>
@@ -104,9 +113,13 @@ function Hero(props) {
           <Hidden smUp><div className={props.classes.padXS3} /></Hidden>
           <Hidden xsDown><div className={props.classes.pad3} /></Hidden>
           <Grid container justify="center" align="center" >
-            <Button raised color="accent" accent className={props.classes.button}>
-              <Typography type="title" align="center" colorInherit color="inherit">QUOTE</Typography>
-            </Button>
+            <Scrollspy className={props.classes.scrollspy}>
+              <a href="#quote" className={props.classes.anchor}>
+                <Button raised color="accent" className={props.classes.button}>
+                  <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                </Button>
+              </a>
+            </Scrollspy>
           </Grid>
           <Hidden smUp><div className={props.classes.padXS4} /></Hidden>
           <Hidden xsDown><div className={props.classes.pad4} /></Hidden>

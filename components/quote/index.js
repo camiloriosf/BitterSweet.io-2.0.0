@@ -1,0 +1,10 @@
+export { default as Quote01 } from './01';
+export { default as Quote02 } from './02';
+export { default as Quote03 } from './03';
+export { default as Quote04 } from './04';
+export { default as Quote05 } from './05';
+export { default as Quote06 } from './06';
+export { default as Quote07 } from './07';
+export { default as Quote08 } from './08';
+export { default as Quote09 } from './09';
+export { default as Send } from './Send';

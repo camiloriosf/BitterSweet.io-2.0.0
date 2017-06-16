@@ -1,0 +1,170 @@
+import React, { Component } from 'react';
+import Typography from 'material-ui/Typography';
+import { fullWhite, indigo, blue } from 'material-ui/styles/colors';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import NotInterestedIcon from 'material-ui-icons/NotInterested';
+import EmailIcon from 'material-ui-icons/Email';
+import ShareIcon from 'material-ui-icons/Share';
+import Grid from 'material-ui/Grid';
+import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import HelpIcon from 'material-ui-icons/Help';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+
+const styleSheet = createStyleSheet('Quote02', {
+  slide: {
+    padding: 15,
+    color: '#fff',
+  },
+  title1: {
+    color: fullWhite,
+    marginBottom: 20,
+  },
+  icon: {
+    width: 40,
+    height: 40,
+    fill: indigo[500],
+  },
+  helpIcon: {
+    fill: blue[200],
+  },
+  paperSelected: {
+    textAlign: 'center',
+    padding: 5,
+    cursor: 'pointer',
+  },
+  paperUnSelected: {
+    textAlign: 'center',
+    padding: 5,
+    background: indigo[200],
+    cursor: 'pointer',
+  },
+});
+
+class Quote02 extends Component {
+  state = {
+    authentication: 'opt1',
+    open: false,
+  };
+
+  handleRequestClose = () => this.setState({ open: false });
+
+  handleChange = (authentication) => {
+    this.setState({ authentication });
+  };
+
+  render() {
+    return (
+      <div className={this.props.classes.slide}>
+        <Typography type="title" align="center" className={this.props.classes.title1}>
+          Authentication
+          <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
+            <HelpIcon className={this.props.classes.helpIcon} />
+          </IconButton>
+        </Typography>
+        <Grid container justify="center" align="flex-start">
+          <Grid item xs={12} sm={2}>
+            <Paper
+              className={
+                this.state.authentication === 'opt1' ?
+                this.props.classes.paperSelected :
+                this.props.classes.paperUnSelected
+              }
+              elevation={
+                this.state.authentication === 'opt1' ? 12 : 1
+              }
+              onClick={() => this.handleChange('opt1')}
+            >
+              <NotInterestedIcon className={this.props.classes.icon} />
+              <Typography type="subheading" align="center">
+                  No Login
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <Paper
+              className={
+                this.state.authentication === 'opt2' ?
+                this.props.classes.paperSelected :
+                this.props.classes.paperUnSelected
+              }
+              elevation={
+                this.state.authentication === 'opt2' ? 12 : 1
+              }
+              onClick={() => this.handleChange('opt2')}
+            >
+              <EmailIcon className={this.props.classes.icon} />
+              <Typography type="subheading" align="center">
+                  Email
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <Paper
+              className={
+                this.state.authentication === 'opt3' ?
+                this.props.classes.paperSelected :
+                this.props.classes.paperUnSelected
+              }
+              elevation={
+                this.state.authentication === 'opt3' ? 12 : 1
+              }
+              onClick={() => this.handleChange('opt3')}
+            >
+              <div className={this.props.classes.iconDiv}>
+                <EmailIcon className={this.props.classes.icon} />
+                <ShareIcon className={this.props.classes.icon} />
+              </div>
+              <Typography type="subheading" align="center">
+                  Email + Social
+              </Typography>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={2}>
+            <Paper
+              className={
+                this.state.authentication === 'opt4' ?
+                this.props.classes.paperSelected :
+                this.props.classes.paperUnSelected
+              }
+              elevation={
+                this.state.authentication === 'opt4' ? 12 : 1
+              }
+              onClick={() => this.handleChange('opt4')}
+            >
+              <ShareIcon className={this.props.classes.icon} />
+              <Typography type="subheading" align="center">
+                  Social
+              </Typography>
+            </Paper>
+          </Grid>
+        </Grid>
+        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+          <DialogTitle>
+            Authentication
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Select if you want your users to sign in into your site<br /><br />
+              Email: Users will be asked for an email and a
+              password to sign into your site.<br /><br />
+              Social: Users will be asked for a
+              social account (Facebook, Google, etc.) to sign into your site.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+}
+
+export default withStyles(styleSheet)(Quote02);
