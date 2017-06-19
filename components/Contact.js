@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
@@ -6,6 +6,9 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { grey, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { gql, graphql } from 'react-apollo';
+import VisibilitySensor from 'react-visibility-sensor';
+import { logEvent } from '../lib/analytics';
 
 const styleSheet = createStyleSheet('Contact', {
   section: {
@@ -32,37 +35,68 @@ const styleSheet = createStyleSheet('Contact', {
   },
 });
 
-function Contact(props) {
-  return (
-    <div className={props.classes.section}>
-      <Hidden smUp><div className={props.classes.padXSSections} /></Hidden>
-      <Hidden xsDown><div className={props.classes.padSections} /></Hidden>
-      <Grid container justify="center" align="flex-start">
-        <Grid item xs={12} sm={12}>
-          <Typography type="display1" align="center" className={props.classes.sectionTitle}>
-            Get in touch
-          </Typography>
-          <Typography type="subheading" align="center" className={props.classes.sectionSubTitle}>
-            We are here to help you.
-          </Typography>
+class Contact extends Component {
+  state = {
+    isVisible: null,
+  };
+
+  handleClick = (action) => {
+    if (!this.props.data.loading) {
+      logEvent('click', action);
+    }
+  };
+
+  handleChange = (isVisible) => {
+    if (!this.props.data.loading) {
+      if (isVisible !== this.state.isVisible) {
+        if (isVisible) logEvent('section', 'contact');
+        this.setState({ isVisible });
+      }
+    }
+  };
+
+  render() {
+    return (
+      <div className={this.props.classes.section}>
+        <VisibilitySensor onChange={this.handleChange} />
+        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
+        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
+        <Grid container justify="center" align="flex-start">
+          <Grid item xs={12} sm={12}>
+            <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
+              Get in touch
+            </Typography>
+            <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
+              We are here to help you.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <div className={this.props.classes.div}>
+              <form>
+                <TextField label="Name" type="text" />
+                <TextField label="Email" type="email" />
+                <TextField label="About your company and project" rows="4" multiline type="text" />
+                <div className={this.props.classes.buttonDiv}>
+                  <Button raised type="submit">Send</Button>
+                </div>
+              </form>
+            </div>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <div className={props.classes.div}>
-            <form>
-              <TextField label="Name" type="text" />
-              <TextField label="Email" type="email" />
-              <TextField label="About your company and project" rows="4" multiline type="text" />
-              <div className={props.classes.buttonDiv}>
-                <Button raised type="submit">Send</Button>
-              </div>
-            </form>
-          </div>
-        </Grid>
-      </Grid>
-      <Hidden smUp><div className={props.classes.padXSSections} /></Hidden>
-      <Hidden xsDown><div className={props.classes.padSections} /></Hidden>
-    </div>
-  );
+        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
+        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
+      </div>
+    );
+  }
 }
 
-export default withStyles(styleSheet)(Contact);
+const user = gql`
+  query User {
+    user {
+      token
+      id
+    }
+  }
+`;
+
+export default graphql(user, { props: data => data })(withStyles(styleSheet)(Contact));

@@ -23,6 +23,11 @@ class Index extends Component {
     show: false,
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.state.show === nextState.show) return false;
+    return true;
+  }
+
   onChange = (isVisible) => {
     this.setState({ show: !isVisible });
   };

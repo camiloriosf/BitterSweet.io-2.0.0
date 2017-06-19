@@ -4,6 +4,8 @@ import KeyboardArrowUpIcon from 'material-ui-icons/KeyboardArrowUp';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import Scrollspy from 'react-scrollspy';
+import { gql, graphql } from 'react-apollo';
+import { logEvent } from '../lib/analytics';
 
 const styleSheet = createStyleSheet('Tools', {
   section: {
@@ -23,11 +25,17 @@ const styleSheet = createStyleSheet('Tools', {
 });
 
 function Tools(props) {
+  const handleClick = (action) => {
+    if (!props.data.loading) {
+      logEvent('click', action);
+    }
+  };
+
   return (
     <div className={props.classes.section} >
       <Fade enterTransitionDuration={1000} leaveTransitionDuration={1000} in>
         <Scrollspy className={props.classes.scrollspy}>
-          <a href="#home" className={props.classes.anchor}>
+          <a href="#home" className={props.classes.anchor} onClick={() => handleClick('tool')}>
             <Button fab color="accent">
               <KeyboardArrowUpIcon />
             </Button>
@@ -38,4 +46,13 @@ function Tools(props) {
   );
 }
 
-export default withStyles(styleSheet)(Tools);
+const user = gql`
+  query User {
+    user {
+      token
+      id
+    }
+  }
+`;
+
+export default graphql(user, { props: data => data })(withStyles(styleSheet)(Tools));

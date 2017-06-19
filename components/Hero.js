@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -6,6 +6,9 @@ import Hidden from 'material-ui/Hidden';
 import { indigo, fullWhite } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Scrollspy from 'react-scrollspy';
+import { gql, graphql } from 'react-apollo';
+import VisibilitySensor from 'react-visibility-sensor';
+import { logPageView, setUser, logEvent } from '../lib/analytics';
 
 const styleSheet = createStyleSheet('Hero', {
   section: {
@@ -90,57 +93,98 @@ const styleSheet = createStyleSheet('Hero', {
   },
 });
 
-function Hero(props) {
-  return (
-    <div className={props.classes.section}>
-      <Grid container justify="center" align="flex-start">
-        <Grid item xs={12} sm={12}>
-          <Hidden smUp><div className={props.classes.padXS1} /></Hidden>
-          <Hidden xsDown><div className={props.classes.pad1} /></Hidden>
-          <Typography type="display3" align="center" className={props.classes.title}>
-            MAKE YOUR BUSINESS EASIER
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <Hidden smUp><div className={props.classes.padXS2} /></Hidden>
-          <Hidden xsDown><div className={props.classes.pad2} /></Hidden>
-          <Typography type="headline" align="center" className={props.classes.subTitle}>
-            BitterSweet.io simplifies software development,
-            taking care of the whole life cycle of your project.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={12}>
-          <Hidden smUp><div className={props.classes.padXS3} /></Hidden>
-          <Hidden xsDown><div className={props.classes.pad3} /></Hidden>
-          <Grid container justify="center" align="center" >
-            <Scrollspy className={props.classes.scrollspy}>
-              <a href="#quote" className={props.classes.anchor}>
-                <Button raised color="accent" className={props.classes.button}>
-                  <Typography type="title" align="center" color="inherit">QUOTE</Typography>
-                </Button>
-              </a>
-            </Scrollspy>
+class Hero extends Component {
+  state = {
+    isVisible: null,
+    user: false,
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data.user && !this.state.user) {
+      setUser(nextProps.data.user.id);
+      logPageView();
+      this.setState({ user: true });
+    }
+  }
+
+  handleClick = (action) => {
+    if (!this.props.data.loading) {
+      logEvent('click', action);
+    }
+  };
+
+  handleChange = (isVisible) => {
+    if (!this.props.data.loading) {
+      if (isVisible !== this.state.isVisible && this.state.user) {
+        if (isVisible) logEvent('section', 'hero');
+        this.setState({ isVisible });
+      }
+    }
+  };
+
+  render() {
+    return (
+      <div className={this.props.classes.section}>
+        <VisibilitySensor onChange={this.handleChange} />
+        <Grid container justify="center" align="flex-start">
+          <Grid item xs={12} sm={12}>
+            <Hidden smUp><div className={this.props.classes.padXS1} /></Hidden>
+            <Hidden xsDown><div className={this.props.classes.pad1} /></Hidden>
+            <Typography type="display3" align="center" className={this.props.classes.title}>
+              MAKE YOUR BUSINESS EASIER
+            </Typography>
           </Grid>
-          <Hidden smUp><div className={props.classes.padXS4} /></Hidden>
-          <Hidden xsDown><div className={props.classes.pad4} /></Hidden>
+          <Grid item xs={12} sm={12}>
+            <Hidden smUp><div className={this.props.classes.padXS2} /></Hidden>
+            <Hidden xsDown><div className={this.props.classes.pad2} /></Hidden>
+            <Typography type="headline" align="center" className={this.props.classes.subTitle}>
+              BitterSweet.io simplifies software development,
+              taking care of the whole life cycle of your project.
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Hidden smUp><div className={this.props.classes.padXS3} /></Hidden>
+            <Hidden xsDown><div className={this.props.classes.pad3} /></Hidden>
+            <Grid container justify="center" align="center" >
+              <Scrollspy className={this.props.classes.scrollspy}>
+                <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
+                  <Button raised color="accent" className={this.props.classes.button}>
+                    <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                  </Button>
+                </a>
+              </Scrollspy>
+            </Grid>
+            <Hidden smUp><div className={this.props.classes.padXS4} /></Hidden>
+            <Hidden xsDown><div className={this.props.classes.pad4} /></Hidden>
+          </Grid>
+          <Grid item xs={12} sm={12}>
+            <Hidden smDown>
+              <div className={this.props.classes.crop1}>
+                <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup1} />
+                <img src="static/home_mockups_2.png" alt="WebSite Mockup 2" className={this.props.classes.mockup2} />
+                <img src="static/home_mockups_3.png" alt="WebSite Mockup 3" className={this.props.classes.mockup3} />
+              </div>
+            </Hidden>
+            <Hidden mdUp xsDown>
+              <div className={this.props.classes.crop2}>
+                <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup11} />
+              </div>
+            </Hidden>
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={12}>
-          <Hidden smDown>
-            <div className={props.classes.crop1}>
-              <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={props.classes.mockup1} />
-              <img src="static/home_mockups_2.png" alt="WebSite Mockup 2" className={props.classes.mockup2} />
-              <img src="static/home_mockups_3.png" alt="WebSite Mockup 3" className={props.classes.mockup3} />
-            </div>
-          </Hidden>
-          <Hidden mdUp xsDown>
-            <div className={props.classes.crop2}>
-              <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={props.classes.mockup11} />
-            </div>
-          </Hidden>
-        </Grid>
-      </Grid>
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
-export default withStyles(styleSheet)(Hero);
+const user = gql`
+  query User {
+    user {
+      token
+      id
+    }
+  }
+`;
+
+export default graphql(user, { props: data => data })(withStyles(styleSheet)(Hero));
+

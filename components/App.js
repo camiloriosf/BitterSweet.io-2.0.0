@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet, MuiThemeProvider } from 'material-ui/styles';
 import { getDefaultContext } from '../styles/createDefaultContext';
+import withData from '../lib/withData';
+import { initGA } from '../lib/analytics';
 
 const styleSheet = createStyleSheet('App', theme => ({
   '@global': {
@@ -28,6 +30,11 @@ class App extends Component {
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+
+    if (!window.GA_INITIALIZED) {
+      initGA();
+      window.GA_INITIALIZED = true;
+    }
   }
 
   render() {
@@ -46,4 +53,4 @@ App.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default App;
+export default withData(App);

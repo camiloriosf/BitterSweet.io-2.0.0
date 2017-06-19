@@ -6,6 +6,9 @@ import { indigo, fullWhite } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import MobileStepper from 'material-ui/MobileStepper';
 import SwipeableViews from 'react-swipeable-views';
+import { gql, graphql } from 'react-apollo';
+import VisibilitySensor from 'react-visibility-sensor';
+import { logEvent } from '../lib/analytics';
 import { Quote01, Quote02, Quote03, Quote04, Quote05, Quote06, Quote07, Quote08, Quote09, Send } from './quote/';
 
 const styleSheet = createStyleSheet('Quote', {
@@ -44,6 +47,22 @@ class Quote extends Component {
   state = {
     steps: 10,
     activeStep: 0,
+    isVisible: null,
+  };
+
+  handleClick = (action) => {
+    if (!this.props.data.loading) {
+      logEvent('click', action);
+    }
+  };
+
+  handleLogChange = (isVisible) => {
+    if (!this.props.data.loading) {
+      if (isVisible !== this.state.isVisible) {
+        if (isVisible) logEvent('section', 'quote');
+        this.setState({ isVisible });
+      }
+    }
   };
 
   handleChange = (index) => {
@@ -67,6 +86,7 @@ class Quote extends Component {
   render() {
     return (
       <div className={this.props.classes.section}>
+        <VisibilitySensor onChange={this.handleLogChange} />
         <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
         <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
         <Grid container justify="center" align="flex-start">
@@ -120,4 +140,13 @@ class Quote extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote);
+const user = gql`
+  query User {
+    user {
+      token
+      id
+    }
+  }
+`;
+
+export default graphql(user, { props: data => data })(withStyles(styleSheet)(Quote));
