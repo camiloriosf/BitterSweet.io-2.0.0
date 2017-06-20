@@ -15,6 +15,7 @@ export default class MyDocument extends Document {
 
   render() {
     const styleContext = getDefaultContext();
+    const script = `window.ENV = '${process.env.NODE_ENV || 'development'}';`;
     return (
       <html lang="en">
         <Head>
@@ -34,6 +35,7 @@ export default class MyDocument extends Document {
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
+          <script dangerouslySetInnerHTML={{ __html: script }} />
         </Head>
         <body>
           <Main />
