@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 import { fullWhite, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
@@ -12,23 +11,26 @@ import { logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('How', {
   section: {
     background: fullWhite,
-    padding: 10,
+    padding: '10px 10px 30px 10px',
   },
   padSections: {
-    marginTop: '5%',
+    marginTop: 10,
   },
   sectionTitle: {
     color: indigo[500],
   },
   sectionSubTitle: {
     marginTop: 10,
-    marginBottom: 40,
+    marginBottom: 10,
   },
   div: {
-    padding: 100,
+    padding: '10px 50px 10px 50px',
   },
   grid: {
     textAlign: 'center',
+  },
+  img: {
+
   },
 });
 
@@ -56,9 +58,7 @@ class How extends Component {
     return (
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleChange} />
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
-        <Grid container justify="center" align="flex-start">
+        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
               {this.props.t('how.title')}
@@ -68,7 +68,9 @@ class How extends Component {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
+            <div className={this.props.classes.img}>
+              Imagen 1
+            </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
@@ -78,6 +80,11 @@ class How extends Component {
               <Typography type="body1" align="center">
                 {this.props.t('how.features.0.description')}
               </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
+            <div className={this.props.classes.img}>
+              Imagen 2
             </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
@@ -90,11 +97,15 @@ class How extends Component {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
+          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
+            <div className={this.props.classes.img}>
+              Imagen 2
+            </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
+            <div className={this.props.classes.img}>
+              Imagen 3
+            </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
@@ -104,6 +115,11 @@ class How extends Component {
               <Typography type="body1" align="center">
                 {this.props.t('how.features.2.description')}
               </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
+            <div className={this.props.classes.img}>
+              Imagen 4
             </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
@@ -116,11 +132,15 @@ class How extends Component {
               </Typography>
             </div>
           </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
+          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
+            <div className={this.props.classes.img}>
+              Imagen 4
+            </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
+            <div className={this.props.classes.img}>
+              Imagen 5
+            </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
@@ -133,8 +153,6 @@ class How extends Component {
             </div>
           </Grid>
         </Grid>
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
       </div>
     );
   }

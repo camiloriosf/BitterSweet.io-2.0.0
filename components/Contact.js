@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import { grey, indigo } from 'material-ui/styles/colors';
@@ -14,16 +13,17 @@ import { logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('Contact', {
   section: {
     background: grey[100],
-    padding: 10,
+    padding: '10px 10px 30px 10px',
   },
   padSections: {
-    marginTop: '5%',
+    marginTop: 10,
   },
   sectionTitle: {
     color: indigo[500],
   },
   sectionSubTitle: {
     marginTop: 10,
+    marginBottom: 10,
   },
   div: {
     margin: '0 auto',
@@ -60,9 +60,7 @@ class Contact extends Component {
     return (
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleChange} />
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
-        <Grid container justify="center" align="flex-start">
+        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
               {this.props.t('contact.title')}
@@ -84,8 +82,6 @@ class Contact extends Component {
             </div>
           </Grid>
         </Grid>
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
       </div>
     );
   }

@@ -6,6 +6,7 @@ import WebIcon from 'material-ui-icons/Web';
 import AndroidIcon from 'material-ui-icons/Android';
 import TabletMacIcon from 'material-ui-icons/TabletMac';
 import DesktopMacIcon from 'material-ui-icons/DesktopMac';
+import GestureIcon from 'material-ui-icons/Gesture';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Button from 'material-ui/Button';
@@ -23,12 +24,12 @@ import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote01', {
   slide: {
-    padding: 15,
+    padding: 10,
     color: '#fff',
   },
   title1: {
     color: fullWhite,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   icon: {
     width: 40,
@@ -208,6 +209,7 @@ class Quote01 extends Component {
               }
               onClick={() => this.setState({ design: !this.state.design })}
             >
+              <GestureIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
                 {this.props.t('quote.01.design')}
               </Typography>

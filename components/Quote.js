@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 import { indigo, fullWhite } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import MobileStepper from 'material-ui/MobileStepper';
@@ -15,32 +14,28 @@ import { Quote01, Quote02, Quote03, Quote04, Quote05, Quote06, Quote07, Quote08,
 const styleSheet = createStyleSheet('Quote', {
   section: {
     background: indigo[500],
-    padding: 10,
+    padding: '10px 10px 30px 10px',
   },
   padSections: {
-    marginTop: '5%',
+    marginTop: 10,
   },
   sectionTitle: {
     color: fullWhite,
   },
   sectionSubTitle: {
     marginTop: 10,
+    marginBottom: 0,
     color: fullWhite,
   },
   stepperDiv: {
-    padding: 10,
+    padding: 5,
   },
   stepper: {
     flexGrow: 1,
     margin: '0 auto',
   },
-  slide: {
-    padding: 15,
-    minHeight: 100,
-    color: '#fff',
-  },
-  title: {
-    color: fullWhite,
+  swipeableViews: {
+    padding: 0,
   },
 });
 
@@ -88,9 +83,7 @@ class Quote extends Component {
     return (
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleLogChange} />
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
-        <Grid container justify="center" align="flex-start">
+        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
               {this.props.t('quote.title')}
@@ -100,22 +93,24 @@ class Quote extends Component {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
-            <SwipeableViews
-              enableMouseEvents
-              index={this.state.activeStep}
-              onChangeIndex={this.handleChange}
-            >
-              <Quote01 />
-              <Quote02 />
-              <Quote03 />
-              <Quote04 />
-              <Quote05 />
-              <Quote06 />
-              <Quote07 />
-              <Quote08 />
-              <Quote09 />
-              <Send />
-            </SwipeableViews>
+            <div className={this.props.classes.swipeableViews}>
+              <SwipeableViews
+                enableMouseEvents
+                index={this.state.activeStep}
+                onChangeIndex={this.handleChange}
+              >
+                <Quote01 />
+                <Quote02 />
+                <Quote03 />
+                <Quote04 />
+                <Quote05 />
+                <Quote06 />
+                <Quote07 />
+                <Quote08 />
+                <Quote09 />
+                <Send />
+              </SwipeableViews>
+            </div>
           </Grid>
           <Grid item xs={12} sm={8}>
             <div className={this.props.classes.stepperDiv}>
@@ -135,8 +130,6 @@ class Quote extends Component {
             </div>
           </Grid>
         </Grid>
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
       </div>
     );
   }

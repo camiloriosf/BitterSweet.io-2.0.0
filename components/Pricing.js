@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 import FlightTakeoffIcon from 'material-ui-icons/FlightTakeoff';
 import FlightIcon from 'material-ui-icons/Flight';
 import Divider from 'material-ui/Divider';
@@ -17,17 +16,17 @@ import { logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('Pricing', {
   section: {
     background: grey[100],
-    padding: 10,
+    padding: '10px 10px 30px 10px',
   },
   padSections: {
-    marginTop: '5%',
+    marginTop: 10,
   },
   sectionTitle: {
     color: indigo[500],
   },
   sectionSubTitle: {
     marginTop: 10,
-    marginBottom: 40,
+    marginBottom: 10,
   },
   service: {
     color: grey[700],
@@ -50,12 +49,6 @@ const styleSheet = createStyleSheet('Pricing', {
     marginBottom: 20,
     marginRight: 20,
     marginLeft: 20,
-  },
-  dividerFeature: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginRight: 40,
-    marginLeft: 40,
   },
   quote: {
     textAlign: 'center',
@@ -94,9 +87,7 @@ class Pricing extends Component {
     return (
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleChange} />
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
-        <Grid container justify="center" align="flex-start">
+        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
               {this.props.t('pricing.title')}
@@ -106,7 +97,7 @@ class Pricing extends Component {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Paper square elevation={24} className={this.props.classes.paper}>
+            <Paper square elevation={10} className={this.props.classes.paper}>
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <FlightTakeoffIcon className={this.props.classes.icon} />
@@ -114,21 +105,17 @@ class Pricing extends Component {
                     {this.props.t('pricing.payg.title')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.payg.features.0')}
                   </Typography>
-                  <Divider light className={this.props.classes.dividerFeature} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
-                    {this.props.t('pricing.payg.features.1')}
-                    <br /><br />
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.payg.features.1')}<br />
                     {this.props.t('pricing.payg.features.2')}
                   </Typography>
-                  <Divider light className={this.props.classes.dividerFeature} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.payg.features.3')}
                   </Typography>
-                  <Divider light className={this.props.classes.dividerFeature} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.payg.features.4')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
@@ -146,7 +133,7 @@ class Pricing extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4}>
-            <Paper square elevation={24} className={this.props.classes.paper}>
+            <Paper square elevation={10} className={this.props.classes.paper}>
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <FlightIcon className={this.props.classes.icon} />
@@ -154,21 +141,17 @@ class Pricing extends Component {
                     {this.props.t('pricing.fee.title')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.fee.features.0')}
                   </Typography>
-                  <Divider light className={this.props.classes.dividerFeature} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
-                    {this.props.t('pricing.fee.features.1')}
-                    <br /><br />
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.fee.features.1')}<br />
                     {this.props.t('pricing.fee.features.2')}
                   </Typography>
-                  <Divider light className={this.props.classes.dividerFeature} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.fee.features.3')}
                   </Typography>
-                  <Divider light className={this.props.classes.dividerFeature} />
-                  <Typography type="caption" align="center" className={this.props.classes.features}>
+                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.fee.features.4')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
@@ -186,8 +169,6 @@ class Pricing extends Component {
             </Paper>
           </Grid>
         </Grid>
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
       </div>
     );
   }

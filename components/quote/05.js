@@ -19,12 +19,12 @@ import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote05', {
   slide: {
-    padding: 15,
+    padding: 10,
     color: '#fff',
   },
   title1: {
     color: fullWhite,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   title2: {
     color: fullWhite,

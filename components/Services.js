@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Paper from 'material-ui/Paper';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 import { indigo, grey } from 'material-ui/styles/colors';
 import AssignmentIcon from 'material-ui-icons/Assignment';
 import PhonelinkIcon from 'material-ui-icons/Phonelink';
@@ -19,7 +18,7 @@ import { logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('Services', {
   section: {
     background: grey[100],
-    padding: 10,
+    padding: '10px 10px 30px 10px',
   },
   paper: {
     textAlign: 'left',
@@ -27,10 +26,7 @@ const styleSheet = createStyleSheet('Services', {
     padding: 20,
   },
   padSections: {
-    marginTop: '5%',
-  },
-  padXSSections: {
-    marginTop: '20%',
+    marginTop: 10,
   },
   icon: {
     fill: indigo[100],
@@ -42,10 +38,10 @@ const styleSheet = createStyleSheet('Services', {
   },
   sectionSubTitle: {
     marginTop: 10,
-    marginBottom: 40,
+    marginBottom: 10,
   },
   secondRow: {
-    marginTop: 20,
+    marginTop: 10,
   },
 });
 
@@ -73,9 +69,7 @@ class Services extends Component {
     return (
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleChange} />
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
-        <Grid container justify="center" align="flex-start">
+        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
               {this.props.t('services.title')}
@@ -85,7 +79,7 @@ class Services extends Component {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={24}>
+            <Paper className={this.props.classes.paper} elevation={10}>
               <PhonelinkIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
                 {this.props.t('services.features.0.title')}
@@ -96,7 +90,7 @@ class Services extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} square elevation={24}>
+            <Paper className={this.props.classes.paper} elevation={10}>
               <FavoriteBorderIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
                 {this.props.t('services.features.1.title')}
@@ -107,7 +101,7 @@ class Services extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} square elevation={24}>
+            <Paper className={this.props.classes.paper} elevation={10}>
               <MoneyOffIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
                 {this.props.t('services.features.2.title')}
@@ -120,7 +114,7 @@ class Services extends Component {
         </Grid>
         <Grid container justify="center" align="flex-start" className={this.props.classes.secondRow}>
           <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} square elevation={24}>
+            <Paper className={this.props.classes.paper} elevation={10}>
               <AssignmentIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
                 {this.props.t('services.features.3.title')}
@@ -131,7 +125,7 @@ class Services extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} square elevation={24}>
+            <Paper className={this.props.classes.paper} elevation={10}>
               <WeekendIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
                 {this.props.t('services.features.4.title')}
@@ -142,7 +136,7 @@ class Services extends Component {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={24}>
+            <Paper className={this.props.classes.paper} elevation={10}>
               <SecurityIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
                 {this.props.t('services.features.5.title')}
@@ -153,8 +147,6 @@ class Services extends Component {
             </Paper>
           </Grid>
         </Grid>
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
       </div>
     );
   }

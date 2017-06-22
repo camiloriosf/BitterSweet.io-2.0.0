@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Hidden from 'material-ui/Hidden';
 import { fullWhite, indigo, grey } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
@@ -12,20 +11,17 @@ import { logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('FAQ', {
   section: {
     background: fullWhite,
-    padding: 10,
+    padding: '10px 10px 30px 10px',
   },
   padSections: {
-    marginTop: '5%',
-  },
-  padXSSections: {
-    marginTop: '20%',
+    marginTop: 10,
   },
   sectionTitle: {
     color: indigo[500],
   },
   sectionSubTitle: {
     marginTop: 10,
-    marginBottom: 40,
+    marginBottom: 10,
   },
   question: {
     color: indigo[400],
@@ -59,9 +55,7 @@ class FAQ extends Component {
     return (
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleChange} />
-        <Hidden smUp><div className={this.props.classes.padXSSections} /></Hidden>
-        <Hidden xsDown><div className={this.props.classes.padSections} /></Hidden>
-        <Grid container justify="center" align="flex-start">
+        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
               {this.props.t('faq.title')}

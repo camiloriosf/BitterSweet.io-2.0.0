@@ -27,18 +27,6 @@ const styleSheet = createStyleSheet('Hero', {
   pad4: {
     marginTop: '3%',
   },
-  padXS1: {
-    marginTop: '7%',
-  },
-  padXS2: {
-    marginTop: '1%',
-  },
-  padXS3: {
-    marginTop: '3%',
-  },
-  padXS4: {
-    marginTop: '20%',
-  },
   title: {
     color: fullWhite,
   },
@@ -131,23 +119,17 @@ class Hero extends Component {
       <div className={this.props.classes.section}>
         <VisibilitySensor onChange={this.handleChange} />
         <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={12}>
-            <Hidden smUp><div className={this.props.classes.padXS1} /></Hidden>
-            <Hidden xsDown><div className={this.props.classes.pad1} /></Hidden>
+          <Grid item xs={12} sm={12} className={this.props.classes.pad1}>
             <Typography type="display3" align="center" className={this.props.classes.title}>
               {this.props.t('hero.title')}
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <Hidden smUp><div className={this.props.classes.padXS2} /></Hidden>
-            <Hidden xsDown><div className={this.props.classes.pad2} /></Hidden>
+          <Grid item xs={12} sm={12} className={this.props.classes.pad2}>
             <Typography type="headline" align="center" className={this.props.classes.subTitle}>
               {this.props.t('hero.subtitle')}
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <Hidden smUp><div className={this.props.classes.padXS3} /></Hidden>
-            <Hidden xsDown><div className={this.props.classes.pad3} /></Hidden>
+          <Grid item xs={12} sm={12} className={this.props.classes.pad3}>
             <Grid container justify="center" align="center" >
               <div className={this.props.classes.quote}>
                 <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
@@ -157,10 +139,8 @@ class Hero extends Component {
                 </a>
               </div>
             </Grid>
-            <Hidden smUp><div className={this.props.classes.padXS4} /></Hidden>
-            <Hidden xsDown><div className={this.props.classes.pad4} /></Hidden>
           </Grid>
-          <Grid item xs={12} sm={12}>
+          <Grid item xs={12} sm={12} className={this.props.classes.pad4}>
             <Hidden smDown>
               <div className={this.props.classes.crop1}>
                 <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup1} />
