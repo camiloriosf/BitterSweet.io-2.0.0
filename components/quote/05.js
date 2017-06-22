@@ -15,6 +15,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote05', {
   slide: {
@@ -84,7 +85,7 @@ class Quote05 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Cloud APIs
+          {this.props.t('quote.05.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -95,7 +96,7 @@ class Quote05 extends Component {
               <Grid container justify="center" align="center">
                 <Grid item xs={12}>
                   <Typography type="subheading" align="center">
-                    Number of Cloud APIs
+                    {this.props.t('quote.05.apis')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -119,17 +120,16 @@ class Quote05 extends Component {
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Cloud APIs
+            {this.props.t('quote.05.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Cloud APIs are a way to connect to other services
-              (e.i. weather, stocks, currency, etc).<br /><br />
-              Choose how many of these APIs you will like to integrate with your app.
+              {this.props.t('quote.05.dialog.content.0')}<br /><br />
+              {this.props.t('quote.05.dialog.content.1')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.05.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -137,4 +137,4 @@ class Quote05 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote05);
+export default translate(['common'])(withStyles(styleSheet)(Quote05));

@@ -9,7 +9,8 @@ import Grid from 'material-ui/Grid';
 import { transparent, fullWhite } from 'material-ui/styles/colors';
 import Scrollspy from 'react-scrollspy';
 import { gql, graphql } from 'react-apollo';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Header', {
   root: {
@@ -43,7 +44,7 @@ const styleSheet = createStyleSheet('Header', {
 
 function Header(props) {
   const handleClick = (action) => {
-    if (!this.props.data.loading) {
+    if (!props.data.loading) {
       logEvent('click', action);
     }
   };
@@ -56,12 +57,12 @@ function Header(props) {
             <Grid item xs={12} sm={12} style={{ padding: 0, marginTop: 20 }}>
               <Hidden xsDown>
                 <Scrollspy className={props.classes.scrollspy}>
-                  <a href="#services" className={props.classes.anchor} onClick={() => handleClick('header_services')}><Button className={props.classes.button}>WHAT WE DO</Button></a>
-                  <a href="#how" className={props.classes.anchor} onClick={() => handleClick('header_how')}><Button className={props.classes.button}>HOW</Button></a>
-                  <a href="#pricing" className={props.classes.anchor} onClick={() => handleClick('header_pricing')}><Button className={props.classes.button}>PRICING</Button></a>
-                  <a href="#quote" className={props.classes.anchor} onClick={() => handleClick('header_quote')}><Button className={props.classes.button}>QUOTE</Button></a>
-                  <a href="#faq" className={props.classes.anchor} onClick={() => handleClick('header_faq')}><Button className={props.classes.button}>FAQ</Button></a>
-                  <a href="#contact" className={props.classes.anchor} onClick={() => handleClick('header_contact')}><Button className={props.classes.button}>CONTACT</Button></a>
+                  <a href="#services" className={props.classes.anchor} onClick={() => handleClick('header_services')}><Button className={props.classes.button}>{props.t('header.what')}</Button></a>
+                  <a href="#how" className={props.classes.anchor} onClick={() => handleClick('header_how')}><Button className={props.classes.button}>{props.t('header.how')}</Button></a>
+                  <a href="#pricing" className={props.classes.anchor} onClick={() => handleClick('header_pricing')}><Button className={props.classes.button}>{props.t('header.pricing')}</Button></a>
+                  <a href="#quote" className={props.classes.anchor} onClick={() => handleClick('header_quote')}><Button className={props.classes.button}>{props.t('header.quote')}</Button></a>
+                  <a href="#faq" className={props.classes.anchor} onClick={() => handleClick('header_faq')}><Button className={props.classes.button}>{props.t('header.faq')}</Button></a>
+                  <a href="#contact" className={props.classes.anchor} onClick={() => handleClick('header_contact')}><Button className={props.classes.button}>{props.t('header.contact')}</Button></a>
                 </Scrollspy>
               </Hidden>
             </Grid>
@@ -84,4 +85,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Header));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Header)));

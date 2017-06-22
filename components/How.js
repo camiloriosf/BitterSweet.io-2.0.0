@@ -6,7 +6,8 @@ import { fullWhite, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('How', {
   section: {
@@ -60,11 +61,10 @@ class How extends Component {
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              How we do it
+              {this.props.t('how.title')}
             </Typography>
             <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              Introducing a modern, modular approach to building
-              fast, responsive and scalable web apps.
+              {this.props.t('how.subtitle')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
@@ -73,51 +73,20 @@ class How extends Component {
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
               <Typography type="title" align="center">
-                Goodbye old way, welcome BitterSweet.io
+                {this.props.t('how.features.0.title')}
               </Typography>
               <Typography type="body1" align="center">
-              In BitterSweet.io we have created a new way of developing apps.
-              With it we are able to lower costs, release times and add
-              all the features industrial grade softwares have.
+                {this.props.t('how.features.0.description')}
               </Typography>
             </div>
           </Grid>
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
               <Typography type="title" align="center">
-                Don&apos;t pay for our office. We don&apos;t have one.
+                {this.props.t('how.features.1.title')}
               </Typography>
               <Typography type="body1" align="center">
-                We are a fully Cloud Company, we use all the technologies available to
-                increase collaborative work, so we don&apos;t have to transfer these costs to you.
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            Imagen
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="center">
-                No templates, we build from the ground up
-              </Typography>
-              <Typography type="body1" align="center">
-                We believe each requeriment requires a different approach, that is why
-                we don&apos;t use pre made templates, we build everything ourselves.
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="center">
-                State-of-the-Art Technologies
-              </Typography>
-              <Typography type="body1" align="center">
-                In BitterSweet.io we only use the latest technologies, the same
-                big companies like Facebook, Airbnb or Netflix use.
+                {this.props.t('how.features.1.description')}
               </Typography>
             </div>
           </Grid>
@@ -130,13 +99,36 @@ class How extends Component {
           <Grid item xs={12} sm={6} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
               <Typography type="title" align="center">
-                We may not be the fit for you
+                {this.props.t('how.features.2.title')}
               </Typography>
               <Typography type="body1" align="center">
-                In BitterSweet.io we believe in transparency. This is why
-                we know our services are not for everyone. Nevertheless,
-                we invite you to send us a message, we are here to guide you even if
-                you don&apos;t hire our services.
+                {this.props.t('how.features.2.description')}
+              </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            <div className={this.props.classes.div}>
+              <Typography type="title" align="center">
+                {this.props.t('how.features.3.title')}
+              </Typography>
+              <Typography type="body1" align="center">
+                {this.props.t('how.features.3.description')}
+              </Typography>
+            </div>
+          </Grid>
+          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            Imagen
+          </Grid>
+          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            Imagen
+          </Grid>
+          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            <div className={this.props.classes.div}>
+              <Typography type="title" align="center">
+                {this.props.t('how.features.4.title')}
+              </Typography>
+              <Typography type="body1" align="center">
+                {this.props.t('how.features.4.description')}
               </Typography>
             </div>
           </Grid>
@@ -157,4 +149,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(How));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(How)));

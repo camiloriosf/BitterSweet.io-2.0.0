@@ -17,6 +17,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote06', {
   slide: {
@@ -71,7 +72,7 @@ class Quote06 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          E-Commerce
+          {this.props.t('quote.06.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -91,7 +92,7 @@ class Quote06 extends Component {
             >
               <ShoppingCartIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  1-Time Purchase
+                {this.props.t('quote.06.options.basicTransactions')}
               </Typography>
             </Paper>
           </Grid>
@@ -109,7 +110,7 @@ class Quote06 extends Component {
             >
               <ShoppingBasketIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Advanced Transactions
+                {this.props.t('quote.06.options.advancedTransactions')}
               </Typography>
             </Paper>
           </Grid>
@@ -129,7 +130,7 @@ class Quote06 extends Component {
             >
               <ContactMailIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Basic Subscription
+                {this.props.t('quote.06.options.basicSubscriptions')}
               </Typography>
             </Paper>
           </Grid>
@@ -147,30 +148,26 @@ class Quote06 extends Component {
             >
               <StoreIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Advanced Subscription
+                {this.props.t('quote.06.options.advancedSubscriptions')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            E-Commerce
+            {this.props.t('quote.06.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Choose if you will like to sell things through your app<br /><br />
-              1-Time Purchase: Typical for stores that
-              sell goods (e.i shoes, food, etc.) and
-              don&apos;t want to store the user information<br /><br />
-              Advanced Transactions: Choose this if you want to store the users
-              information for future purchases<br /><br />
-              Basic Subscription: Typical for companies that sell services and want to charge
-              a monthly fee<br /><br />
-              Advanced Subscription: Staff accounts, discount codes, gift cards, etc.
+              {this.props.t('quote.06.dialog.content.0')}<br /><br />
+              {this.props.t('quote.06.dialog.content.1')}<br /><br />
+              {this.props.t('quote.06.dialog.content.2')}<br /><br />
+              {this.props.t('quote.06.dialog.content.3')}<br /><br />
+              {this.props.t('quote.06.dialog.content.4')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.06.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -178,4 +175,4 @@ class Quote06 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote06);
+export default translate(['common'])(withStyles(styleSheet)(Quote06));

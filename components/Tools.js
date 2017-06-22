@@ -5,7 +5,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import Scrollspy from 'react-scrollspy';
 import { gql, graphql } from 'react-apollo';
-import { logEvent } from '../lib/analytics';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Tools', {
   section: {
@@ -13,6 +13,7 @@ const styleSheet = createStyleSheet('Tools', {
     bottom: 0,
     right: 0,
     padding: 20,
+    zIndex: 9999999999,
   },
   scrollspy: {
     textAlign: 'center',

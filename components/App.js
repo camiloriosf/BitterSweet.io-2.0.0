@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet, MuiThemeProvider } from 'material-ui/styles';
 import { getDefaultContext } from '../styles/createDefaultContext';
 import withData from '../lib/withData';
-import { initGA } from '../lib/analytics';
+import { initGA } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('App', theme => ({
   '@global': {

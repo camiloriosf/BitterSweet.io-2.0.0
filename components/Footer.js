@@ -9,7 +9,8 @@ import SettingsEthernetIcon from 'material-ui-icons/SettingsEthernet';
 import CallIcon from 'material-ui-icons/Call';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Footer', {
   section: {
@@ -95,7 +96,7 @@ class Footer extends Component {
         <Grid container justify="center" align="center">
           <Grid item xs={12} sm={12}>
             <div className={this.props.classes.div}>
-              <Typography type="display1" align="center" className={this.props.classes.title}>BitterSweet.io</Typography>
+              <Typography type="display1" align="center" className={this.props.classes.title}>{this.props.t('name')}</Typography>
             </div>
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -105,8 +106,8 @@ class Footer extends Component {
                   <div className={this.props.classes.contactDiv}>
                     <a href="mailto:contact@bittersweet.io?Subject=Hi!" target="_top" className={this.props.classes.anchor}>
                       <EmailIcon className={this.props.classes.icon} />
-                      <Typography type="button" align="center" className={this.props.classes.contact}>Mail</Typography>
-                      <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>contact@bittersweet.io</Typography>
+                      <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.mail.title')}</Typography>
+                      <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.mail.subtitle')}</Typography>
                     </a>
                   </div>
                 </Grid>
@@ -115,8 +116,8 @@ class Footer extends Component {
                     <div className={this.props.classes.contactDiv}>
                       <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
                         <SettingsEthernetIcon className={this.props.classes.icon} />
-                        <Typography type="button" align="center" className={this.props.classes.contact}>Quote</Typography>
-                        <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>your next app</Typography>
+                        <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.quote.title')}</Typography>
+                        <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.quote.subtitle')}</Typography>
                       </a>
                     </div>
                   </Scrollspy>
@@ -125,8 +126,8 @@ class Footer extends Component {
                   <div className={this.props.classes.contactDiv}>
                     <a href="tel:+56-2-22222222" className={this.props.classes.anchor}>
                       <CallIcon className={this.props.classes.icon} />
-                      <Typography type="button" align="center" className={this.props.classes.contact}>Call</Typography>
-                      <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>+56-2-22222222</Typography>
+                      <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.call.title')}</Typography>
+                      <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.call.subtitle')}</Typography>
                     </a>
                   </div>
                 </Grid>
@@ -153,4 +154,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Footer));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Footer)));

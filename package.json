@@ -1,5 +1,5 @@
 {
-  "name": "bittersweet.oi-2.0.0",
+  "name": "bittersweet.io-2.0.0",
   "version": "2.0.0",
   "description": "BitterSweet Website",
   "main": "index.js",
@@ -19,15 +19,11 @@
   },
   "homepage": "https://github.com/camiloriosf/BitterSweet.io-2.0.0#readme",
   "dependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.0.1",
-    "eslint-plugin-import": "^2.3.0",
-    "eslint-plugin-jsx-a11y": "^5.0.3",
-    "eslint-plugin-react": "^7.0.1",
     "graphql": "^0.10.1",
+    "i18next": "^8.4.2",
+    "i18next-browser-languagedetector": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
-    "material-ui": "^1.0.0-alpha.17",
+    "material-ui": "^1.0.0-alpha.19",
     "material-ui-icons": "^1.0.0-alpha.3",
     "next": "^2.4.3",
     "prop-types": "^15.5.10",
@@ -35,9 +31,19 @@
     "react-apollo": "^1.4.2",
     "react-dom": "^15.5.4",
     "react-ga": "^2.2.0",
+    "react-i18next": "^4.1.2",
+    "react-onclickoutside": "^6.1.1",
     "react-scrollspy": "^3.2.0",
     "react-swipeable-views": "^0.12.3",
     "react-visibility-sensor": "^3.10.0",
     "redux": "^3.7.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.0.1",
+    "eslint-plugin-import": "^2.3.0",
+    "eslint-plugin-jsx-a11y": "^5.0.3",
+    "eslint-plugin-react": "^7.1.0"
   }
 }

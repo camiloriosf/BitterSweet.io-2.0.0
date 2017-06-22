@@ -8,7 +8,8 @@ import MobileStepper from 'material-ui/MobileStepper';
 import SwipeableViews from 'react-swipeable-views';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 import { Quote01, Quote02, Quote03, Quote04, Quote05, Quote06, Quote07, Quote08, Quote09, Send } from './quote/';
 
 const styleSheet = createStyleSheet('Quote', {
@@ -92,11 +93,10 @@ class Quote extends Component {
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              Quote
+              {this.props.t('quote.title')}
             </Typography>
             <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              See how much your project will cost,
-              this is the final price, no surprises along the way.
+              {this.props.t('quote.subtitle')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -123,6 +123,8 @@ class Quote extends Component {
                 type="progress"
                 steps={this.state.steps}
                 position="static"
+                backButtonText={this.props.t('quote.back')}
+                nextButtonText={this.props.t('quote.next')}
                 activeStep={this.state.activeStep}
                 className={this.props.classes.stepper}
                 onBack={this.handleBack}
@@ -149,4 +151,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Quote));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Quote)));

@@ -8,7 +8,8 @@ import { grey, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Contact', {
   section: {
@@ -64,20 +65,20 @@ class Contact extends Component {
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              Get in touch
+              {this.props.t('contact.title')}
             </Typography>
             <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              We are here to help you.
+              {this.props.t('contact.subtitle')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
             <div className={this.props.classes.div}>
               <form>
-                <TextField label="Name" type="text" />
-                <TextField label="Email" type="email" />
-                <TextField label="About your company and project" rows="4" multiline type="text" />
+                <TextField label={this.props.t('contact.form.name')} type="text" />
+                <TextField label={this.props.t('contact.form.email')} type="email" />
+                <TextField label={this.props.t('contact.form.about')} rows="4" multiline type="text" />
                 <div className={this.props.classes.buttonDiv}>
-                  <Button raised type="submit">Send</Button>
+                  <Button raised type="submit">{this.props.t('contact.form.button')}</Button>
                 </div>
               </form>
             </div>
@@ -99,4 +100,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Contact));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Contact)));

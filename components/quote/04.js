@@ -16,6 +16,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote04', {
   slide: {
@@ -63,7 +64,7 @@ class Quote04 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          GeoLocation
+          {this.props.t('quote.04.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -83,7 +84,7 @@ class Quote04 extends Component {
             >
               <NotInterestedIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  None
+                {this.props.t('quote.04.options.none')}
               </Typography>
             </Paper>
           </Grid>
@@ -101,7 +102,7 @@ class Quote04 extends Component {
             >
               <PlaceIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Simple
+                {this.props.t('quote.04.options.simple')}
               </Typography>
             </Paper>
           </Grid>
@@ -119,25 +120,25 @@ class Quote04 extends Component {
             >
               <LayersIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Advanced
+                {this.props.t('quote.04.options.advanced')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            GeoLocation
+            {this.props.t('quote.04.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              GeoLocation can help you give a better experience to your users<br /><br />
-              None: No GeoLocation will be used<br /><br />
-              Simple: Simple location queries, see where your users are<br /><br />
-              Advanced: Geo Fencing, Location Queries, etc.
+              {this.props.t('quote.04.dialog.content.0')}<br /><br />
+              {this.props.t('quote.04.dialog.content.1')}<br /><br />
+              {this.props.t('quote.04.dialog.content.2')}<br /><br />
+              {this.props.t('quote.04.dialog.content.3')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.04.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -145,4 +146,4 @@ class Quote04 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote04);
+export default translate(['common'])(withStyles(styleSheet)(Quote04));

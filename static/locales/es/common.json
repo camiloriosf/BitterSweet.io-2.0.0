@@ -1,0 +1,367 @@
+{
+  "name": "BitterSweet.io",
+  "header":{
+    "what": "que hacemos",
+    "how": "como",
+    "pricing": "precios",
+    "quote": "cotizar",
+    "faq": "faq",
+    "contact": "contactanos"
+  },
+  "hero":{
+    "title": "SIMPLIFICA TU NEGOCIO",
+    "subtitle" : "BitterSweet.io simplifica el desarrollo de softwares, preocupandose de todo el ciclo de vida de tu proyecto.",
+    "button" : "COTIZAR"
+  },
+  "services":{
+    "title": "What we do",
+    "subtitle": "We offer a unique approach to software development, taking care from coding to the hosting and promotion of your site/app.",
+    "features":[
+      {
+        "title": "Multiplatform Dev",
+        "description": "We can develop your app for the Web, Android, iOS or Desktop."
+      },
+      {
+        "title": "Clear and Fair Price",
+        "description": "No hidden costs, we charge the same ammount every month, with no huge investments."
+      },
+      {
+        "title": "Zero Risk",
+        "description": "We only charge you when your app is up and running and you are happy with it."
+      },
+      {
+        "title": "No Contracts",
+        "description": "Stop the service whenever you like, there are no long-term contracts."
+      },
+      {
+        "title": "Relax",
+        "description": "We take care of everything. From development to SEO optimization and support. You just focus on your business."
+      },
+      {
+        "title": "Small and Big Companies alike",
+        "description": "We only use top of the line technologies, with integrated SSL certificates, load-balancing, auto scaling and CDN."
+      }
+    ]
+  },
+  "how":{
+    "title": "How we do it",
+    "subtitle": "Introducing a modern, modular approach to building fast, responsive and scalable web apps.",
+    "features":[
+      {
+        "title": "Goodbye old way, welcome BitterSweet.io",
+        "description": "In BitterSweet.io we have created a new way of developing apps. With it we are able to lower costs, release times and add all the features industrial grade softwares have."
+      },
+      {
+        "title": "Don't pay for our office. We don't have one",
+        "description": "We are a fully Cloud Company, we use all the technologies available to increase collaborative work, so we don&apos;t have to transfer these costs to you."
+      },
+      {
+        "title": "No templates, we build from the ground up",
+        "description": "We believe each requeriment requires a different approach, that is why we don't use pre made templates, we build everything ourselves."
+      },
+      {
+        "title": "State-of-the-Art Technologies",
+        "description": "In BitterSweet.io we only use the latest technologies, the same big companies like Facebook, Airbnb or Netflix use."
+      },
+      {
+        "title": "We may not be the fit for you",
+        "description": "In BitterSweet.io we believe in transparency. This is why we know our services are not for everyone. Nevertheless, we invite you to send us a message, we are here to guide you even if you don't hire our services."
+      }
+    ]
+  },
+  "pricing":{
+    "title": "Pricing",
+    "subtitle": "No hidden costs, no contracts, just pay as you go.",
+    "payg":{
+      "title":"Pay-as-you-Go",
+      "features":[
+        "Pay for as long (or little) as you want",
+        "All inclusive",
+        "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
+        "You own the intelectual property",
+        "We own the code"
+      ]
+    },
+    "fee":{
+      "title":"1-Time Fee",
+      "features":[
+       "Pay a (usually high) 1 time fee",
+       "3 months of All inclusive",
+       "(Hosting, support, Maintenance, auto-scale, load-balancing, CDN, SSL certificate)",
+       "You own the intelectual property",
+       "You own the code"
+      ]
+    },
+    "button": "QUOTE"
+  },
+  "quote":{
+    "title": "Quote",
+    "subtitle": "See how much your project will cost, this is the final price, no surprises along the way.",
+    "back": "back",
+    "next": "next",
+    "01": {
+      "title": "Choose platforms",
+      "dialog": {
+        "title": "Platforms",
+        "content": [
+          "Select the platforms you want your app to support. You can select as may as you want.",
+          "You can also select wheter you want us to take care of the design or not.",
+          "Please also select the number of pages/screens your app will have. For example, if the website has 8 pages and the mobile app has 5 screens, please select 8."
+        ],
+        "button": "Great!"
+      },
+      "platforms":{
+        "web": "Web",
+        "android": "Android",
+        "ios": "iOS",
+        "desktop": "desktop"
+      },
+      "pages": "Number of pages/screens",
+      "design": "Design Services"
+    },
+    "02": {
+      "title": "Authentication",
+      "dialog": {
+        "title": "Authentication",
+        "content": [
+          "Select if you want your users to sign in into your site",
+          "Email: Users will be asked for an email and a password to sign into your site.",
+          "Social: Users will be asked for a social account (Facebook, Google, etc.) to sign into your site."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "noLogin": "No Login",
+        "email": "Email",
+        "emailSocial": "Email + Social",
+        "social": "Social"
+      }
+    },
+    "03": {
+      "title": "Data",
+      "dialog": {
+        "title": "Data",
+        "content": [
+          "This is how your app can store data, like users accounts, usage information, etc.",
+          "None: No database will be used, this is perfect for sites that only want to show static (the same the whole time) information.",
+          "Database: We will set up a Full Database for you, that will grow with your application.",
+          "Database + Media: Along with the Database, we will also set up a special storage for all your documents, images and any kind of files that you want to store",
+          "Data Source: You already have a Database? No problem, we can integrate it with your new app."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "none": "None",
+        "database": "Database",
+        "databaseMedia": "Database + Media",
+        "source": "Data Source"
+      }
+    },
+    "04": {
+      "title": "GeoLocation",
+      "dialog": {
+        "title": "GeoLocation",
+        "content": [
+          "GeoLocation can help you give a better experience to your users.",
+          "None: No GeoLocation will be used.",
+          "Simple: Simple location queries, see where your users are.",
+          "Advanced: Geo Fencing, Location Queries, etc."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "none": "None",
+        "simple": "Simple",
+        "advanced": "Advanced"
+      }
+    },
+    "05": {
+      "title": "Cloud APIs",
+      "dialog": {
+        "title": "Cloud APIs",
+        "content": [
+          "Cloud APIs are a way to connect to other services (e.i. weather, stocks, currency, etc).",
+          "Choose how many of these APIs you will like to integrate with your app."
+        ],
+        "button": "Great!"
+      },
+      "apis": "Number of Cloud APIs"
+    },
+    "06": {
+      "title": "E-Commerce",
+      "dialog": {
+        "title": "E-Commerce",
+        "content": [
+          "Choose if you will like to sell things through your app.",
+          "1-Time Purchase: Typical for stores that sell goods (e.i shoes, food, etc.) and don't want to store the user information.",
+          "Advanced Transactions: Choose this if you want to store the users information for future purchases.",
+          "Basic Subscription: Typical for companies that sell services and want to charge a monthly fee.",
+          "Advanced Subscription: Staff accounts, discount codes, gift cards, etc."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "basicTransactions": "1-Time Purchase",
+        "advancedTransactions": "Advanced Transactions",
+        "basicSubscriptions": "Basic Subscriptions",
+        "advancedSubscriptions": "Advanced Subscriptions"
+      }
+    },
+    "07": {
+      "title": "Admin Console",
+      "dialog": {
+        "title": "Admin Console",
+        "content": [
+          "Admin consoles help you manage the different aspects of your app.",
+          "Reports: We will send you periodical pdf reports of the usage of your app.",
+          "Admin: You will be able to set the most important aspects of your site, like managing users, staff, access to the different areas, etc.",
+          "Dashboard: Full control of your app, charts and tables to show you every aspect of it."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "none": "None",
+        "admin": "Admin",
+        "dashboard": "Dashboard",
+        "reports": "Reports"
+      }
+    },
+    "08": {
+      "title": "Product",
+      "dialog": {
+        "title": "Product",
+        "content": [
+          "Select the polishing level of your app.",
+          "Prototype: Very basic app, mostly to show the user interface.",
+          "MVP: Minimum viable product. A product ready to be tested and launched.",
+          "Polished: Every aspect of the design and user interface has been addressed."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "prototype": "Prototype",
+        "mvp": "MVP",
+        "polished": "Polished"
+      }
+    },
+    "09": {
+      "title": "Delivery Time",
+      "dialog": {
+        "title": "Delivery Time",
+        "content": [
+          "Select how fast you want your app to be ready.",
+          "Normal: Normal time is about 3 months, but we will start your app as soon as an opening is available, this could be tomorrow or the next month, it depends on our work load.",
+          "Start ASAP: We will start your app immediately, with a delivery time of 3 months.",
+          "Deliverable in 3 months or less: We will start your app immediately, with a delivery time of less than 3 months."
+        ],
+        "button": "Great!"
+      },
+      "options":{
+        "normal": "Normal",
+        "asap": "Start ASAP",
+        "fast": "Deliverable in 3 months or less"
+      }
+    },
+    "send":{
+      "title": "Price",
+      "dialog": {
+        "title": "Price",
+        "content": [
+          "Remember that this is our final price.",
+          "We won't charge you extra if your app is more complex. As long as you mantain the modules you selected the price will remain the same."
+        ],
+        "button": "Great!"
+      },
+      "payg":{
+        "title" : "Pay-as-you-Go",
+        "month": "/month"
+      },
+      "fee":{
+        "title": "1-Time Fee"
+      },
+      "form":{
+        "name": "Name",
+        "email": "Email",
+        "button": "Send"
+      }
+    }
+  },
+  "faq":{
+    "title": "Frequently Asked Questions",
+    "subtitle" : "Got questions? We have answers.",
+    "questions":[
+      {
+        "question": "Do I have to pay anything in advance?",
+        "answer": "No, we want to reduce your risk so we can build a new awesome app. We won't charge you anything until we have finished and tested your app, and more importantly, you are happy with it."
+      },
+      {
+        "question": "I want to show you a sketch of my app, how can I do it?",
+        "answer": "That's great! The more information the faster we can develop your app. If you want to send information fell free to write us to contact@bittersweet.io. We can also arrange an Skype call to chat about your next project."
+      },
+      {
+        "question": "Do I have to worry about the maintenance of my app?",
+        "answer": "Absolutely not. With our Pay-as-you-Go service we take care of everything, and we really mean everything (maintenance, support, scaling, balancing, etc.)."
+      },
+      {
+        "question": "Is it possible to make changes after my app has been launched?",
+        "answer": "We understand that the initial idea of your app might need some adjustments. We can take care of that too, as long as it doesn&apos;t mean to re-do your app."
+      },
+      {
+        "question": "What if I need to add some features?",
+        "answer": "No problem, just requote and that's the new price you will have to pay when we add the new feature. This also goes if you need to remove some features."
+      },
+      {
+        "question": "Do I have to buy the domain?",
+        "answer": "We also can take care of that. However, we strongly recommend you to do it. The name of your Company should always be yours. Nevertheless, we can guide you with this important step."
+      },
+      {
+        "question": "Do I have access to the code?",
+        "answer": "In order to take care of everything we keep a close eye to the source code. Also, since our service is very cheap (compared to others), we can't give access to the source code."
+      },
+      {
+        "question": "Who owns the intellectual property of the app?",
+        "answer": "You, from day 0 until the end of times. We only own the code, but the idea behind it will always be yours."
+      },
+      {
+        "question": "Is my app secure?",
+        "answer": "You can count on that. We only use top of the line technologies. In top of that all of our apps comes with SSL certificates for secure connections. This means you can perform all kind of critical operations with the same standards as the big companies use."
+      },
+      {
+        "question": "If I want to end the service, How can I do it?",
+        "answer": "Just stop paying. We use the same models as companies like Spotify or Netflix, you only pay for as long as you want to keep the service."
+      },
+      {
+        "question": "If I decide to end the service, How can I keep the code?",
+        "answer": "You can stop the service whenever you like. However, if you want to keep the code you have to pay the 1-Time fee price."
+      },
+      {
+        "question": "Once I end the service, do I keep the domain?",
+        "answer": "Yes, the domain will always be yours."
+      }
+    ]
+  },
+  "contact":{
+    "title": "Get in touch",
+    "subtitle": "We are here to help you.",
+    "form":{
+      "name": "Name",
+      "email": "Email",
+      "about": "About your company and project",
+      "button": "Send"
+    }
+  },
+  "footer":{
+    "mail": {
+      "title": "MAIL",
+      "subtitle": "contact@bittersweet.io"
+    },
+    "quote": {
+      "title": "QUOTE",
+      "subtitle": "your next app"
+    },
+    "call": {
+      "title": "CALL",
+      "subtitle": "+56-2-22222222"
+    }
+  }
+}

@@ -17,6 +17,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote07', {
   slide: {
@@ -64,7 +65,7 @@ class Quote07 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Admin Console
+          {this.props.t('quote.07.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -84,7 +85,7 @@ class Quote07 extends Component {
             >
               <NotInterestedIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  None
+                {this.props.t('quote.07.options.none')}
               </Typography>
             </Paper>
           </Grid>
@@ -102,7 +103,7 @@ class Quote07 extends Component {
             >
               <BuildIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Admin
+                {this.props.t('quote.07.options.admin')}
               </Typography>
             </Paper>
           </Grid>
@@ -120,7 +121,7 @@ class Quote07 extends Component {
             >
               <DashboardIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Dashboard
+                {this.props.t('quote.07.options.dashboard')}
               </Typography>
             </Paper>
           </Grid>
@@ -138,27 +139,25 @@ class Quote07 extends Component {
             >
               <TimelineIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Reports
+                {this.props.t('quote.07.options.reports')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Admin Console
+            {this.props.t('quote.07.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Admin consoles help you manage the different aspects of your app<br /><br />
-              Reports: We will send you periodical pdf reports of the usage of your app<br /><br />
-              Admin: You will be able to set the most important aspects of your site, like
-              managing users, staff, access to the different areas, etc<br /><br />
-              Dashboard: Full control of your app,
-              charts and tables to show you every aspect of it.
+              {this.props.t('quote.07.dialog.content.0')}<br /><br />
+              {this.props.t('quote.07.dialog.content.1')}<br /><br />
+              {this.props.t('quote.07.dialog.content.2')}<br /><br />
+              {this.props.t('quote.07.dialog.content.3')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.07.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -166,4 +165,4 @@ class Quote07 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote07);
+export default translate(['common'])(withStyles(styleSheet)(Quote07));

@@ -17,6 +17,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote03', {
   slide: {
@@ -64,7 +65,7 @@ class Quote03 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Data
+          {this.props.t('quote.03.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -84,7 +85,7 @@ class Quote03 extends Component {
             >
               <NotInterestedIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  None
+                {this.props.t('quote.03.options.none')}
               </Typography>
             </Paper>
           </Grid>
@@ -102,7 +103,7 @@ class Quote03 extends Component {
             >
               <StorageIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Database
+                {this.props.t('quote.03.options.database')}
               </Typography>
             </Paper>
           </Grid>
@@ -120,7 +121,7 @@ class Quote03 extends Component {
             >
               <PermMediaIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Database + Media
+                {this.props.t('quote.03.options.databaseMedia')}
               </Typography>
             </Paper>
           </Grid>
@@ -138,32 +139,26 @@ class Quote03 extends Component {
             >
               <DeviceHubIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Data Source
+                {this.props.t('quote.03.options.source')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Data
+            {this.props.t('quote.03.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              This is how your app can store data,
-              like users accounts, usage information, etc.<br /><br />
-              None: No database will be used, this is perfect for sites that
-              only want to show static (the same the whole time) information<br /><br />
-              Database: We will set up a Full Database for you,
-              that will grow with your application<br /><br />
-              Database + Media: Along with the Database, we will also set up a
-              special storage for all your documents, images and any kind of
-              files that you want to store<br /><br />
-              Data Source: You already have a Database? No problem,
-              we can integrate it with your new app.
+              {this.props.t('quote.03.dialog.content.0')}<br /><br />
+              {this.props.t('quote.03.dialog.content.1')}<br /><br />
+              {this.props.t('quote.03.dialog.content.2')}<br /><br />
+              {this.props.t('quote.03.dialog.content.3')}<br /><br />
+              {this.props.t('quote.03.dialog.content.4')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.03.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -171,4 +166,4 @@ class Quote03 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote03);
+export default translate(['common'])(withStyles(styleSheet)(Quote03));

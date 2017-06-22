@@ -16,6 +16,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote02', {
   slide: {
@@ -63,7 +64,7 @@ class Quote02 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Authentication
+          {this.props.t('quote.02.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -83,7 +84,7 @@ class Quote02 extends Component {
             >
               <NotInterestedIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  No Login
+                {this.props.t('quote.02.options.noLogin')}
               </Typography>
             </Paper>
           </Grid>
@@ -101,7 +102,7 @@ class Quote02 extends Component {
             >
               <EmailIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Email
+                {this.props.t('quote.02.options.email')}
               </Typography>
             </Paper>
           </Grid>
@@ -122,7 +123,7 @@ class Quote02 extends Component {
                 <ShareIcon className={this.props.classes.icon} />
               </div>
               <Typography type="subheading" align="center">
-                  Email + Social
+                {this.props.t('quote.02.options.emailSocial')}
               </Typography>
             </Paper>
           </Grid>
@@ -140,26 +141,24 @@ class Quote02 extends Component {
             >
               <ShareIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Social
+                {this.props.t('quote.02.options.social')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Authentication
+            {this.props.t('quote.02.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Select if you want your users to sign in into your site<br /><br />
-              Email: Users will be asked for an email and a
-              password to sign into your site.<br /><br />
-              Social: Users will be asked for a
-              social account (Facebook, Google, etc.) to sign into your site.
+              {this.props.t('quote.02.dialog.content.0')}<br /><br />
+              {this.props.t('quote.02.dialog.content.1')}<br /><br />
+              {this.props.t('quote.02.dialog.content.2')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.02.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -167,4 +166,4 @@ class Quote02 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote02);
+export default translate(['common'])(withStyles(styleSheet)(Quote02));

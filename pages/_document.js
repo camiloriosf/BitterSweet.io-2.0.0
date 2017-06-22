@@ -7,6 +7,7 @@ export default class MyDocument extends Document {
     setDefaultContext();
     const page = ctx.renderPage();
     const styleContext = getDefaultContext();
+
     return {
       ...page,
       styles: <style id="jss-server-side" dangerouslySetInnerHTML={{ __html: styleContext.styleManager.sheetsToString() }} />,

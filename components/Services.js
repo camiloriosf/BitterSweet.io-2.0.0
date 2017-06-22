@@ -13,7 +13,8 @@ import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Services', {
   section: {
@@ -77,21 +78,20 @@ class Services extends Component {
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              What we do
+              {this.props.t('services.title')}
             </Typography>
             <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              We offer a unique approach to software development,
-              taking care from coding to the hosting and promotion of your site/app.
+              {this.props.t('services.subtitle')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4} md={3}>
             <Paper className={this.props.classes.paper} elevation={24}>
               <PhonelinkIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
-                  Multiplatform Dev
+                {this.props.t('services.features.0.title')}
               </Typography>
               <Typography type="body1" align="left">
-                  We can develop your app for the Web, Android, iOS or Desktop.
+                {this.props.t('services.features.0.description')}
               </Typography>
             </Paper>
           </Grid>
@@ -99,11 +99,10 @@ class Services extends Component {
             <Paper className={this.props.classes.paper} square elevation={24}>
               <FavoriteBorderIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
-                Clear and Fair Price
+                {this.props.t('services.features.1.title')}
               </Typography>
               <Typography type="body1" align="left">
-                No hidden costs, we charge the same ammount every month, with
-                no huge investments.
+                {this.props.t('services.features.1.description')}
               </Typography>
             </Paper>
           </Grid>
@@ -111,11 +110,10 @@ class Services extends Component {
             <Paper className={this.props.classes.paper} square elevation={24}>
               <MoneyOffIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
-                Zero Risk
+                {this.props.t('services.features.2.title')}
               </Typography>
               <Typography type="body1" align="left">
-                We only charge you when your app is up and running
-                and you are happy with it.
+                {this.props.t('services.features.2.description')}
               </Typography>
             </Paper>
           </Grid>
@@ -125,11 +123,10 @@ class Services extends Component {
             <Paper className={this.props.classes.paper} square elevation={24}>
               <AssignmentIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
-                No Contracts
+                {this.props.t('services.features.3.title')}
               </Typography>
               <Typography type="body1" align="left">
-                Stop the service whenever you like, there are no long-term
-                contracts.
+                {this.props.t('services.features.3.description')}
               </Typography>
             </Paper>
           </Grid>
@@ -137,11 +134,10 @@ class Services extends Component {
             <Paper className={this.props.classes.paper} square elevation={24}>
               <WeekendIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
-                Relax
+                {this.props.t('services.features.4.title')}
               </Typography>
               <Typography type="body1" align="left">
-                We take care of everything. From development to
-                SEO optimization and support. You just focus on your business.
+                {this.props.t('services.features.4.description')}
               </Typography>
             </Paper>
           </Grid>
@@ -149,11 +145,10 @@ class Services extends Component {
             <Paper className={this.props.classes.paper} elevation={24}>
               <SecurityIcon className={this.props.classes.icon} />
               <Typography type="title" align="left">
-                  Small and Big Companies alike
+                {this.props.t('services.features.5.title')}
               </Typography>
               <Typography type="body1" align="left">
-                  We only use top of the line technologies, with
-                  integrated SSL certificates, load-balancing, auto scaling and CDN.
+                {this.props.t('services.features.5.description')}
               </Typography>
             </Paper>
           </Grid>
@@ -174,4 +169,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Services));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Services)));

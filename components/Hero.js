@@ -8,7 +8,8 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Scrollspy from 'react-scrollspy';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logPageView, setUser, logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logPageView, setUser, logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Hero', {
   section: {
@@ -94,10 +95,14 @@ const styleSheet = createStyleSheet('Hero', {
 });
 
 class Hero extends Component {
-  state = {
-    isVisible: null,
-    user: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isVisible: null,
+      user: false,
+    };
+  }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.data.user && !this.state.user) {
@@ -131,15 +136,14 @@ class Hero extends Component {
             <Hidden smUp><div className={this.props.classes.padXS1} /></Hidden>
             <Hidden xsDown><div className={this.props.classes.pad1} /></Hidden>
             <Typography type="display3" align="center" className={this.props.classes.title}>
-              MAKE YOUR BUSINESS EASIER
+              {this.props.t('hero.title')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
             <Hidden smUp><div className={this.props.classes.padXS2} /></Hidden>
             <Hidden xsDown><div className={this.props.classes.pad2} /></Hidden>
             <Typography type="headline" align="center" className={this.props.classes.subTitle}>
-              BitterSweet.io simplifies software development,
-              taking care of the whole life cycle of your project.
+              {this.props.t('hero.subtitle')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={12}>
@@ -149,7 +153,7 @@ class Hero extends Component {
               <Scrollspy className={this.props.classes.scrollspy}>
                 <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
                   <Button raised color="accent" className={this.props.classes.button}>
-                    <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                    <Typography type="title" align="center" color="inherit">{this.props.t('hero.button')}</Typography>
                   </Button>
                 </a>
               </Scrollspy>
@@ -186,5 +190,5 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Hero));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Hero)));
 

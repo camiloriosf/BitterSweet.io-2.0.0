@@ -14,6 +14,7 @@ import Dialog, {
   DialogTitle,
 } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Send', {
   slide: {
@@ -55,7 +56,7 @@ class Send extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Price
+          {this.props.t('quote.send.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -66,13 +67,13 @@ class Send extends Component {
               <Grid container justify="center" align="center">
                 <Grid item xs={12}>
                   <Typography type="subheading" align="center">
-                    Pay as you Go
+                    {this.props.t('quote.send.payg.title')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
                   <div>
                     <Typography type="display1" align="center">
-                      ${this.state.service}/month
+                      ${this.state.service}{this.props.t('quote.send.payg.month')}
                     </Typography>
                   </div>
                 </Grid>
@@ -84,7 +85,7 @@ class Send extends Component {
               <Grid container justify="center" align="center">
                 <Grid item xs={12}>
                   <Typography type="subheading" align="center">
-                    1-Time Fee
+                    {this.props.t('quote.send.fee.title')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -104,14 +105,14 @@ class Send extends Component {
               <form>
                 <Grid container justify="center" align="flex-start">
                   <Grid item xs={12} sm={4}>
-                    <TextField label="Name" type="text" />
+                    <TextField label={this.props.t('quote.send.form.name')} type="text" />
                   </Grid>
                   <Grid item xs={12} sm={4}>
-                    <TextField label="Email" type="email" />
+                    <TextField label={this.props.t('quote.send.form.email')} type="email" />
                   </Grid>
                 </Grid>
                 <div className={this.props.classes.buttonDiv}>
-                  <Button raised type="submit">Send</Button>
+                  <Button raised type="submit">{this.props.t('quote.send.form.button')}</Button>
                 </div>
               </form>
             </Paper>
@@ -119,18 +120,16 @@ class Send extends Component {
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Price
+            {this.props.t('quote.send.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Remember that this is our final price.<br /><br />
-              We won&apos;t charge you extra if your app is more complex.
-              As long as you mantain the modules you selected the price
-              will remain the same
+              {this.props.t('quote.send.dialog.content.0')}<br /><br />
+              {this.props.t('quote.send.dialog.content.1')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.send.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -138,4 +137,4 @@ class Send extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Send);
+export default translate(['common'])(withStyles(styleSheet)(Send));

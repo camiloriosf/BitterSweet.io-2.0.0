@@ -19,6 +19,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote01', {
   slide: {
@@ -89,7 +90,7 @@ class Quote01 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Choose platforms
+          {this.props.t('quote.01.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -109,7 +110,7 @@ class Quote01 extends Component {
             >
               <WebIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Web
+                {this.props.t('quote.01.platforms.web')}
               </Typography>
             </Paper>
           </Grid>
@@ -127,7 +128,7 @@ class Quote01 extends Component {
             >
               <AndroidIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Android
+                {this.props.t('quote.01.platforms.android')}
               </Typography>
             </Paper>
           </Grid>
@@ -145,7 +146,7 @@ class Quote01 extends Component {
             >
               <TabletMacIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  iOS
+                {this.props.t('quote.01.platforms.ios')}
               </Typography>
             </Paper>
           </Grid>
@@ -163,7 +164,7 @@ class Quote01 extends Component {
             >
               <DesktopMacIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Desktop
+                {this.props.t('quote.01.platforms.desktop')}
               </Typography>
             </Paper>
           </Grid>
@@ -174,7 +175,7 @@ class Quote01 extends Component {
               <Grid container justify="center" align="center">
                 <Grid item xs={12}>
                   <Typography type="subheading" align="center">
-                    Number of pages/screens
+                    {this.props.t('quote.01.pages')}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
@@ -208,26 +209,24 @@ class Quote01 extends Component {
               onClick={() => this.setState({ design: !this.state.design })}
             >
               <Typography type="subheading" align="center">
-                Design Services
+                {this.props.t('quote.01.design')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Platforms
+            {this.props.t('quote.01.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Select the platforms you want your
-              app to support. You can select as may as you want.<br /><br />
-              You can also select wheter you want us to take care of the design or not.<br /><br />
-              Please also select the number of pages/screens your app will have. For example,
-              if the website has 8 pages and the mobile app has 5 screens, please select 8.
+              {this.props.t('quote.01.dialog.content.0')}<br /><br />
+              {this.props.t('quote.01.dialog.content.1')}<br /><br />
+              {this.props.t('quote.01.dialog.content.2')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.01.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -235,4 +234,4 @@ class Quote01 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote01);
+export default translate(['common'])(withStyles(styleSheet)(Quote01));

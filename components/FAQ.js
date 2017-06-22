@@ -6,7 +6,8 @@ import { fullWhite, indigo, grey } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('FAQ', {
   section: {
@@ -63,137 +64,118 @@ class FAQ extends Component {
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              Frequently Asked Questions
+              {this.props.t('faq.title')}
             </Typography>
             <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              Got questions? We have answers.
+              {this.props.t('faq.subtitle')}
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Do I have to pay anything in advance?
+              {this.props.t('faq.questions.0.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              No, we want to reduce your risk so we can build a new awesome app.
-              We won&apos;t charge you anything until we have finished and tested your
-              app, and more importantly, you are happy with it.
+              {this.props.t('faq.questions.0.answer')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              I want to show you a sketch of my app, how can I do it?
+              {this.props.t('faq.questions.1.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              That&apos;s great! The more information the faster we
-              can develop your app. If you want to send information fell free to write us to
-              contact@bittersweet.io. We can also arrange an Skype call to chat about your next
-              project.
+              {this.props.t('faq.questions.1.answer')}
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Do I have to worry about the maintenance of my app?
+              {this.props.t('faq.questions.2.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              Absolutely not. With our Pay-as-you-Go service we take care of everything,
-              and we really mean everything (maintenance, support, scaling, balancing, etc.).
+              {this.props.t('faq.questions.2.answer')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Is it possible to make changes after my app has been launched?
+              {this.props.t('faq.questions.3.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              We understand that the initial idea of your app might need some adjustments.
-              We can take care of that too, as long as it doesn&apos;t mean to re-do your app.
+              {this.props.t('faq.questions.3.answer')}
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              What if I need to add some features?
+              {this.props.t('faq.questions.4.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              No problem, just requote and that&apos;s the new price you will have to pay when
-              we add the new feature. This also goes if you need to remove some features.
+              {this.props.t('faq.questions.4.answer')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Do I have to buy the domain?
+              {this.props.t('faq.questions.5.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              We also can take care of that. However, we strongly recommend you to do it.
-              The name of your Company should always be yours. Nevertheless, we can
-              guide you with this important step.
+              {this.props.t('faq.questions.5.answer')}
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Do I have access to the code?
+              {this.props.t('faq.questions.6.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              In order to take care of everything we keep a close eye to the source code. Also,
-              since our service is very cheap (compared to others),
-              we can&apos;t give access to the source code.
+              {this.props.t('faq.questions.6.answer')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Who owns the intellectual property of the app?
+              {this.props.t('faq.questions.7.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              You, from day 0 until the end of times. We only own the code, but the idea behind it
-              will always be yours.
+              {this.props.t('faq.questions.7.answer')}
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Is my app secure?
+              {this.props.t('faq.questions.8.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              You can count on that. We only use top of the line technologies. In top of that
-              all of our apps comes with SSL certificates for secure connections. This means you
-              can perform all kind of critical operations with the same standards as the big
-              companies use.
+              {this.props.t('faq.questions.8.answer')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              If I want to end the service, How can I do it?
+              {this.props.t('faq.questions.9.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              Just stop paying. We use the same models as companies
-              like Spotify or Netflix, you only
-              pay for as long as you want to keep the service.
+              {this.props.t('faq.questions.9.answer')}
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              If I decide to end the service, How can I keep the code?
+              {this.props.t('faq.questions.10.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              You can stop the service whenever you like. However, if you want to keep the code
-              you have to pay the 1-Time fee price.
+              {this.props.t('faq.questions.10.answer')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={5}>
             <Typography type="subheading" align="left" className={this.props.classes.question}>
-              Once I end the service, do I keep the domain?
+              {this.props.t('faq.questions.11.question')}
             </Typography>
             <Typography type="body1" align="left" className={this.props.classes.answer}>
-              Yes, the domain will always be yours.
+              {this.props.t('faq.questions.11.answer')}
             </Typography>
           </Grid>
         </Grid>
@@ -211,4 +193,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(FAQ));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(FAQ)));

@@ -16,6 +16,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote09', {
   slide: {
@@ -63,7 +64,7 @@ class Quote09 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Delivery Time
+          {this.props.t('quote.09.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -83,7 +84,7 @@ class Quote09 extends Component {
             >
               <ScheduleIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Normal
+                {this.props.t('quote.09.options.normal')}
               </Typography>
             </Paper>
           </Grid>
@@ -101,7 +102,7 @@ class Quote09 extends Component {
             >
               <AlarmIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Start ASAP
+                {this.props.t('quote.09.options.asap')}
               </Typography>
             </Paper>
           </Grid>
@@ -119,29 +120,25 @@ class Quote09 extends Component {
             >
               <UpdateIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Deliverable in 3 months or less
+                {this.props.t('quote.09.options.fast')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Delivery Time
+            {this.props.t('quote.09.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Select how fast you want your app to be ready<br /><br />
-              Normal: Normal time is about 3 months, but we will
-              start your app as soon as an opening is available,
-              this could be tomorrow or the next month, it depends on our work load.<br /><br />
-              Start ASAP: We will start your app immediately,
-              with a delivery time of 3 months.<br /><br />
-              Deliverable in 3 months or less: We will start your app immediately,
-              with a delivery time of less than 3 months.
+              {this.props.t('quote.09.dialog.content.0')}<br /><br />
+              {this.props.t('quote.09.dialog.content.1')}<br /><br />
+              {this.props.t('quote.09.dialog.content.2')}<br /><br />
+              {this.props.t('quote.09.dialog.content.3')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.09.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -149,4 +146,4 @@ class Quote09 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote09);
+export default translate(['common'])(withStyles(styleSheet)(Quote09));

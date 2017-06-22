@@ -16,6 +16,7 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Quote08', {
   slide: {
@@ -63,7 +64,7 @@ class Quote08 extends Component {
     return (
       <div className={this.props.classes.slide}>
         <Typography type="title" align="center" className={this.props.classes.title1}>
-          Product
+          {this.props.t('quote.08.title')}
           <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
             <HelpIcon className={this.props.classes.helpIcon} />
           </IconButton>
@@ -83,7 +84,7 @@ class Quote08 extends Component {
             >
               <ViewColumnIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Prototype
+                {this.props.t('quote.08.options.prototype')}
               </Typography>
             </Paper>
           </Grid>
@@ -101,7 +102,7 @@ class Quote08 extends Component {
             >
               <ViewArrayIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  MVP
+                {this.props.t('quote.08.options.mvp')}
               </Typography>
             </Paper>
           </Grid>
@@ -119,25 +120,25 @@ class Quote08 extends Component {
             >
               <ViewCarouselIcon className={this.props.classes.icon} />
               <Typography type="subheading" align="center">
-                  Polished
+                {this.props.t('quote.08.options.polished')}
               </Typography>
             </Paper>
           </Grid>
         </Grid>
         <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
           <DialogTitle>
-            Product
+            {this.props.t('quote.08.dialog.title')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Select the polishing level of your app<br /><br />
-              Prototype: Very basic app, mostly to show the user interface<br /><br />
-              MVP: Minimum viable product. A product ready to be tested and launched.<br /><br />
-              Polished: Every aspect of the design and user interface has been addressed.
+              {this.props.t('quote.08.dialog.content.0')}<br /><br />
+              {this.props.t('quote.08.dialog.content.1')}<br /><br />
+              {this.props.t('quote.08.dialog.content.2')}<br /><br />
+              {this.props.t('quote.08.dialog.content.3')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">Great!</Button>
+            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.08.dialog.button')}</Button>
           </DialogActions>
         </Dialog>
       </div>
@@ -145,4 +146,4 @@ class Quote08 extends Component {
   }
 }
 
-export default withStyles(styleSheet)(Quote08);
+export default translate(['common'])(withStyles(styleSheet)(Quote08));

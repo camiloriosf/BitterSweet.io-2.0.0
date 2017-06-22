@@ -12,7 +12,8 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Scrollspy from 'react-scrollspy';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
-import { logEvent } from '../lib/analytics';
+import { translate } from 'react-i18next';
+import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Pricing', {
   section: {
@@ -99,10 +100,10 @@ class Pricing extends Component {
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={12}>
             <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              Pricing
+              {this.props.t('pricing.title')}
             </Typography>
             <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              No hidden costs, no contracts, just pay as you go.
+              {this.props.t('pricing.subtitle')}
             </Typography>
           </Grid>
           <Grid item xs={12} sm={4}>
@@ -111,25 +112,25 @@ class Pricing extends Component {
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <FlightTakeoffIcon className={this.props.classes.icon} />
                   <Typography type="subheading" align="center" className={this.props.classes.service}>
-                    Pay-as-you-Go
+                    {this.props.t('pricing.payg.title')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    Pay for as long (or little) as you want
+                    {this.props.t('pricing.payg.features.0')}
                   </Typography>
                   <Divider light className={this.props.classes.dividerFeature} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    All inclusive<br /><br />
-                    (Hosting, support, Maintenance, auto-scale,
-                    load-balancing, CDN, SSL certificate)
+                    {this.props.t('pricing.payg.features.1')}
+                    <br /><br />
+                    {this.props.t('pricing.payg.features.2')}
                   </Typography>
                   <Divider light className={this.props.classes.dividerFeature} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    You own the intelectual property
+                    {this.props.t('pricing.payg.features.3')}
                   </Typography>
                   <Divider light className={this.props.classes.dividerFeature} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    We own the code
+                    {this.props.t('pricing.payg.features.4')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
                 </Grid>
@@ -151,25 +152,25 @@ class Pricing extends Component {
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <FlightIcon className={this.props.classes.icon} />
                   <Typography type="subheading" align="center" className={this.props.classes.service}>
-                    1-Time Fee
+                    {this.props.t('pricing.fee.title')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    Pay a (usually high) 1 time fee
+                    {this.props.t('pricing.fee.features.0')}
                   </Typography>
                   <Divider light className={this.props.classes.dividerFeature} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    3 months of All inclusive<br /><br />
-                    (Hosting, support, Maintenance, auto-scale,
-                    load-balancing, CDN, SSL certificate)
+                    {this.props.t('pricing.fee.features.1')}
+                    <br /><br />
+                    {this.props.t('pricing.fee.features.2')}
                   </Typography>
                   <Divider light className={this.props.classes.dividerFeature} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    You own the intelectual property
+                    {this.props.t('pricing.fee.features.3')}
                   </Typography>
                   <Divider light className={this.props.classes.dividerFeature} />
                   <Typography type="caption" align="center" className={this.props.classes.features}>
-                    You own the code
+                    {this.props.t('pricing.fee.features.4')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
                 </Grid>
@@ -177,7 +178,7 @@ class Pricing extends Component {
                   <Scrollspy className={this.props.classes.scrollspy}>
                     <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('pricing_quote_fee')}>
                       <Button color="primary">
-                        <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                        <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
                       </Button>
                     </a>
                   </Scrollspy>
@@ -202,4 +203,4 @@ const user = gql`
   }
 `;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Pricing));
+export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Pricing)));
