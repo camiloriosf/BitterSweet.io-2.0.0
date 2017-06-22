@@ -9,7 +9,6 @@ import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button';
 import { grey, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Scrollspy from 'react-scrollspy';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
@@ -58,7 +57,7 @@ const styleSheet = createStyleSheet('Pricing', {
     marginRight: 40,
     marginLeft: 40,
   },
-  scrollspy: {
+  quote: {
     textAlign: 'center',
     margin: 0,
     padding: 0,
@@ -135,13 +134,13 @@ class Pricing extends Component {
                   <Divider light className={this.props.classes.divider} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <Scrollspy className={this.props.classes.scrollspy}>
+                  <div className={this.props.classes.quote}>
                     <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('pricing_quote_payg')}>
                       <Button color="primary">
                         <Typography type="title" align="center" color="inherit">QUOTE</Typography>
                       </Button>
                     </a>
-                  </Scrollspy>
+                  </div>
                 </Grid>
               </Grid>
             </Paper>
@@ -175,13 +174,13 @@ class Pricing extends Component {
                   <Divider light className={this.props.classes.divider} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
-                  <Scrollspy className={this.props.classes.scrollspy}>
+                  <div className={this.props.classes.quote}>
                     <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('pricing_quote_fee')}>
                       <Button color="primary">
                         <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
                       </Button>
                     </a>
-                  </Scrollspy>
+                  </div>
                 </Grid>
               </Grid>
             </Paper>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { I18nextProvider } from 'react-i18next';
+import Hidden from 'material-ui/Hidden';
 import startI18n from '../tools/startI18n';
 import { getTranslation, getLanguage } from '../tools/translationHelpers';
 import App from '../components/App';
@@ -13,8 +14,9 @@ import Quote from '../components/Quote';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import Tools from '../components/Tools';
+import Up from '../components/Up';
 import Languages from '../components/Languages';
+import Nav from '../components/Nav';
 
 const styles = {
   root: {
@@ -75,7 +77,8 @@ class Index extends Component {
             <Contact />
             <Footer />
             <Languages />
-            {this.state.show ? <Tools /> : null}
+            <Hidden smUp><Nav /></Hidden>
+            {this.state.show ? <Up /> : null}
           </div>
         </I18nextProvider>
       </App>

@@ -5,7 +5,6 @@ import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
 import { indigo, fullWhite } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import Scrollspy from 'react-scrollspy';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
@@ -14,7 +13,7 @@ import { logPageView, setUser, logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('Hero', {
   section: {
     background: indigo[500],
-    padding: '10px 10px 0px 10px',
+    padding: '0px 10px 0px 10px',
   },
   pad1: {
     marginTop: '7%',
@@ -29,13 +28,13 @@ const styleSheet = createStyleSheet('Hero', {
     marginTop: '3%',
   },
   padXS1: {
-    marginTop: '10%',
+    marginTop: '7%',
   },
   padXS2: {
-    marginTop: '10%',
+    marginTop: '1%',
   },
   padXS3: {
-    marginTop: '10%',
+    marginTop: '3%',
   },
   padXS4: {
     marginTop: '20%',
@@ -84,7 +83,7 @@ const styleSheet = createStyleSheet('Hero', {
     position: 'absolute',
     zIndex: 700000,
   },
-  scrollspy: {
+  quote: {
     textAlign: 'center',
     margin: 0,
     padding: 0,
@@ -150,13 +149,13 @@ class Hero extends Component {
             <Hidden smUp><div className={this.props.classes.padXS3} /></Hidden>
             <Hidden xsDown><div className={this.props.classes.pad3} /></Hidden>
             <Grid container justify="center" align="center" >
-              <Scrollspy className={this.props.classes.scrollspy}>
+              <div className={this.props.classes.quote}>
                 <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
                   <Button raised color="accent" className={this.props.classes.button}>
                     <Typography type="title" align="center" color="inherit">{this.props.t('hero.button')}</Typography>
                   </Button>
                 </a>
-              </Scrollspy>
+              </div>
             </Grid>
             <Hidden smUp><div className={this.props.classes.padXS4} /></Hidden>
             <Hidden xsDown><div className={this.props.classes.pad4} /></Hidden>

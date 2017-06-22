@@ -3,7 +3,6 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { grey } from 'material-ui/styles/colors';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Scrollspy from 'react-scrollspy';
 import EmailIcon from 'material-ui-icons/Email';
 import SettingsEthernetIcon from 'material-ui-icons/SettingsEthernet';
 import CallIcon from 'material-ui-icons/Call';
@@ -56,7 +55,7 @@ const styleSheet = createStyleSheet('Footer', {
   buttonTypo: {
     color: grey[900],
   },
-  scrollspy: {
+  quote: {
     textAlign: 'center',
     margin: 0,
     padding: 0,
@@ -112,7 +111,7 @@ class Footer extends Component {
                   </div>
                 </Grid>
                 <Grid item xs={12} sm={3}>
-                  <Scrollspy className={this.props.classes.scrollspy}>
+                  <div className={this.props.classes.quote}>
                     <div className={this.props.classes.contactDiv}>
                       <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
                         <SettingsEthernetIcon className={this.props.classes.icon} />
@@ -120,7 +119,7 @@ class Footer extends Component {
                         <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.quote.subtitle')}</Typography>
                       </a>
                     </div>
-                  </Scrollspy>
+                  </div>
                 </Grid>
                 <Grid item xs={12} sm={3}>
                   <div className={this.props.classes.contactDiv}>

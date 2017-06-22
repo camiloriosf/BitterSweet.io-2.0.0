@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import LanguageIcon from 'material-ui-icons/Language';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
+import IconButton from 'material-ui/IconButton';
 import { gql, graphql } from 'react-apollo';
 import Fade from 'material-ui/transitions/Fade';
 import onClickOutside from 'react-onclickoutside';
@@ -10,23 +11,23 @@ import { translate } from 'react-i18next';
 const styleSheet = createStyleSheet('Languages', {
   section: {
     position: 'fixed',
-    bottom: 0,
+    top: 0,
     left: 0,
-    padding: 20,
+    padding: 5,
     zIndex: 9999999999,
   },
   languageES: {
     position: 'fixed',
-    bottom: 70,
-    left: 0,
-    margin: 20,
+    top: 0,
+    left: 70,
+    margin: 5,
     zIndex: 9999999999,
   },
   languageEN: {
     position: 'fixed',
-    bottom: 0,
-    left: 70,
-    margin: 20,
+    top: 0,
+    left: 140,
+    margin: 5,
     zIndex: 9999999999,
   },
 });
@@ -60,9 +61,9 @@ class Languages extends Component {
   render() {
     return (
       <div className={this.props.classes.section} >
-        <Button fab color="accent" onClick={this.handleClick}>
+        <IconButton color="accent" onClick={this.handleClick}>
           <LanguageIcon />
-        </Button>
+        </IconButton>
         { this.state.open ?
           <div>
             <Fade
