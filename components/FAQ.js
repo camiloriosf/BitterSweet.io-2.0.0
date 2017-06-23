@@ -3,6 +3,7 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { fullWhite, indigo, grey } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Fade from 'material-ui/transitions/Fade';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
@@ -25,6 +26,7 @@ const styleSheet = createStyleSheet('FAQ', {
   },
   question: {
     color: indigo[400],
+    cursor: 'pointer',
   },
   answer: {
     color: grey[500],
@@ -34,12 +36,14 @@ const styleSheet = createStyleSheet('FAQ', {
 class FAQ extends Component {
   state = {
     isVisible: null,
+    question: 0,
   };
 
-  handleClick = (action) => {
-    if (!this.props.data.loading) {
+  handleClick = (question) => {
+    /* if (!this.props.data.loading) {
       logEvent('click', action);
-    }
+    }*/
+    this.setState({ question });
   };
 
   handleChange = (isVisible) => {
@@ -50,6 +54,32 @@ class FAQ extends Component {
       }
     }
   };
+
+  renderQuestions = (start, finish) => {
+    if (this.props.i18n.store.data.en.common.faq.questions) {
+      const questions = this.props.i18n.store.data.en.common.faq.questions;
+      return questions.map((question, index) => {
+        if (index >= start && index <= finish) {
+          return (
+            <Grid item xs={12} sm={12} key={question.question}>
+              <Typography type="subheading" align="left" className={this.props.classes.question} onClick={() => this.handleClick(index)}>
+                {this.props.t(`faq.questions.${index}.question`)}
+              </Typography>
+              {this.state.question === index ?
+                <Fade enterTransitionDuration={500} in >
+                  <Typography type="body1" align="left" className={this.props.classes.answer}>
+                    {this.props.t(`faq.questions.${index}.answer`)}
+                  </Typography>
+                </Fade>
+                : null}
+            </Grid>
+          );
+        }
+        return null;
+      });
+    }
+    return null;
+  }
 
   render() {
     return (
@@ -67,110 +97,14 @@ class FAQ extends Component {
         </Grid>
         <Grid container justify="center" align="flex-start">
           <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.0.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.0.answer')}
-            </Typography>
+            <Grid container justify="center" align="flex-start">
+              {this.renderQuestions(0, 5)}
+            </Grid>
           </Grid>
           <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.1.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.1.answer')}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.2.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.2.answer')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.3.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.3.answer')}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.4.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.4.answer')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.5.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.5.answer')}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.6.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.6.answer')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.7.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.7.answer')}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.8.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.8.answer')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.9.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.9.answer')}
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.10.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.10.answer')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={5}>
-            <Typography type="subheading" align="left" className={this.props.classes.question}>
-              {this.props.t('faq.questions.11.question')}
-            </Typography>
-            <Typography type="body1" align="left" className={this.props.classes.answer}>
-              {this.props.t('faq.questions.11.answer')}
-            </Typography>
+            <Grid container justify="center" align="flex-start">
+              {this.renderQuestions(6, 11)}
+            </Grid>
           </Grid>
         </Grid>
       </div>
