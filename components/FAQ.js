@@ -40,9 +40,9 @@ class FAQ extends Component {
   };
 
   handleClick = (question) => {
-    /* if (!this.props.data.loading) {
-      logEvent('click', action);
-    }*/
+    if (!this.props.data.loading) {
+      logEvent('click', `faq_question_${question}`);
+    }
     this.setState({ question });
   };
 

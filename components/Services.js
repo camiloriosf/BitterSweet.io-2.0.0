@@ -65,6 +65,50 @@ class Services extends Component {
     }
   };
 
+  renderIcon = (index) => {
+    switch (index) {
+      case 0:
+        return <PhonelinkIcon className={this.props.classes.icon} />;
+      case 1:
+        return <FavoriteBorderIcon className={this.props.classes.icon} />;
+      case 2:
+        return <MoneyOffIcon className={this.props.classes.icon} />;
+      case 3:
+        return <AssignmentIcon className={this.props.classes.icon} />;
+      case 4:
+        return <WeekendIcon className={this.props.classes.icon} />;
+      case 5:
+        return <SecurityIcon className={this.props.classes.icon} />;
+      default:
+        return null;
+    }
+  }
+
+  renderFeatures = (start, finish) => {
+    if (this.props.i18n.store.data.en.common.services.features) {
+      const features = this.props.i18n.store.data.en.common.services.features;
+      return features.map((feature, index) => {
+        if (index >= start && index <= finish) {
+          return (
+            <Grid item xs={12} sm={4} md={3} key={feature.title}>
+              <Paper className={this.props.classes.paper} elevation={10}>
+                {this.renderIcon(index)}
+                <Typography type="title" align="left">
+                  {this.props.t(`services.features.${index}.title`)}
+                </Typography>
+                <Typography type="body1" align="left">
+                  {this.props.t(`services.features.${index}.description`)}
+                </Typography>
+              </Paper>
+            </Grid>
+          );
+        }
+        return null;
+      });
+    }
+    return null;
+  }
+
   render() {
     return (
       <div className={this.props.classes.section}>
@@ -78,74 +122,10 @@ class Services extends Component {
               {this.props.t('services.subtitle')}
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={10}>
-              <PhonelinkIcon className={this.props.classes.icon} />
-              <Typography type="title" align="left">
-                {this.props.t('services.features.0.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('services.features.0.description')}
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={10}>
-              <FavoriteBorderIcon className={this.props.classes.icon} />
-              <Typography type="title" align="left">
-                {this.props.t('services.features.1.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('services.features.1.description')}
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={10}>
-              <MoneyOffIcon className={this.props.classes.icon} />
-              <Typography type="title" align="left">
-                {this.props.t('services.features.2.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('services.features.2.description')}
-              </Typography>
-            </Paper>
-          </Grid>
+          {this.renderFeatures(0, 2)}
         </Grid>
         <Grid container justify="center" align="flex-start" className={this.props.classes.secondRow}>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={10}>
-              <AssignmentIcon className={this.props.classes.icon} />
-              <Typography type="title" align="left">
-                {this.props.t('services.features.3.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('services.features.3.description')}
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={10}>
-              <WeekendIcon className={this.props.classes.icon} />
-              <Typography type="title" align="left">
-                {this.props.t('services.features.4.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('services.features.4.description')}
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={4} md={3}>
-            <Paper className={this.props.classes.paper} elevation={10}>
-              <SecurityIcon className={this.props.classes.icon} />
-              <Typography type="title" align="left">
-                {this.props.t('services.features.5.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('services.features.5.description')}
-              </Typography>
-            </Paper>
-          </Grid>
+          {this.renderFeatures(3, 5)}
         </Grid>
       </div>
     );

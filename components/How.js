@@ -54,6 +54,46 @@ class How extends Component {
     }
   };
 
+  renderFeatures = () => {
+    if (this.props.i18n.store.data.en.common.how.features) {
+      const features = this.props.i18n.store.data.en.common.how.features;
+      return features.map((feature, index) => {
+        const array = [];
+        if ((index + 1) % 2 === 0) {
+          array.push(
+            <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
+              <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+            </Grid>);
+        } else {
+          array.push(<Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+          </Grid>);
+        }
+
+        array.push(<Grid item xs={12} sm={6} className={this.props.classes.grid}>
+          <div className={this.props.classes.div}>
+            <Typography type="title" align="left" paragraph>
+              {this.props.t(`how.features.${index}.title`)}
+            </Typography>
+            <Typography type="body1" align="left">
+              {this.props.t(`how.features.${index}.description`)}
+            </Typography>
+          </div>
+        </Grid>);
+
+        if ((index + 1) % 2 === 0) {
+          array.push(
+            <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
+              <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+            </Grid>);
+        }
+
+        return array;
+      });
+    }
+    return null;
+  }
+
   render() {
     return (
       <div className={this.props.classes.section}>
@@ -67,77 +107,7 @@ class How extends Component {
               {this.props.t('how.subtitle')}
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <img src="/static/compass-mock-up.png" alt="imagen 1" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="left" paragraph>
-                {this.props.t('how.features.0.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('how.features.0.description')}
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
-            <img src="/static/compass-mock-up.png" alt="imagen 2" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="left" paragraph>
-                {this.props.t('how.features.1.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('how.features.1.description')}
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
-            <img src="/static/compass-mock-up.png" alt="imagen 2" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <img src="/static/compass-mock-up.png" alt="imagen 3" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="left" paragraph>
-                {this.props.t('how.features.2.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('how.features.2.description')}
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
-            <img src="/static/compass-mock-up.png" alt="imagen 4" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="left" paragraph>
-                {this.props.t('how.features.3.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('how.features.3.description')}
-              </Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
-            <img src="/static/compass-mock-up.png" alt="imagen 4" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <img src="/static/compass-mock-up.png" alt="imagen 5" className={this.props.classes.img} />
-          </Grid>
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <div className={this.props.classes.div}>
-              <Typography type="title" align="left" paragraph>
-                {this.props.t('how.features.4.title')}
-              </Typography>
-              <Typography type="body1" align="left">
-                {this.props.t('how.features.4.description')}
-              </Typography>
-            </div>
-          </Grid>
+          {this.renderFeatures()}
         </Grid>
       </div>
     );
