@@ -96,7 +96,7 @@ class Pricing extends Component {
               {this.props.t('pricing.subtitle')}
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <Paper square elevation={10} className={this.props.classes.paper}>
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -132,7 +132,7 @@ class Pricing extends Component {
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={3}>
             <Paper square elevation={10} className={this.props.classes.paper}>
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
