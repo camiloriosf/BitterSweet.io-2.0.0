@@ -3,6 +3,7 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import { fullWhite, indigo } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
+import Fade from 'material-ui/transitions/Fade';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
@@ -62,30 +63,41 @@ class How extends Component {
         if ((index + 1) % 2 === 0) {
           array.push(
             <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
-              <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+              <Fade in enterTransitionDuration={2000}>
+                <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+              </Fade>
             </Grid>);
         } else {
-          array.push(<Grid item xs={12} sm={6} className={this.props.classes.grid}>
-            <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
-          </Grid>);
+          array.push(
+            <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+              <Fade in enterTransitionDuration={2000}>
+                <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+              </Fade>
+            </Grid>,
+          );
         }
 
-        array.push(<Grid item xs={12} sm={6} className={this.props.classes.grid}>
-          <div className={this.props.classes.div}>
-            <Typography type="title" align="left" paragraph>
-              {this.props.t(`how.features.${index}.title`)}
-            </Typography>
-            <Typography type="body1" align="left">
-              {this.props.t(`how.features.${index}.description`)}
-            </Typography>
-          </div>
-        </Grid>);
+        array.push(
+          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            <div className={this.props.classes.div}>
+              <Typography type="title" align="left" paragraph>
+                {this.props.t(`how.features.${index}.title`)}
+              </Typography>
+              <Typography type="body1" align="left">
+                {this.props.t(`how.features.${index}.description`)}
+              </Typography>
+            </div>
+          </Grid>,
+        );
 
         if ((index + 1) % 2 === 0) {
           array.push(
             <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
-              <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
-            </Grid>);
+              <Fade in enterTransitionDuration={2000}>
+                <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+              </Fade>
+            </Grid>,
+          );
         }
 
         return array;
