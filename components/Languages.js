@@ -45,7 +45,7 @@ class Languages extends Component {
   };
 
   handleRequest = (lang) => {
-    this.setState({ transition: false, count: 0 });
+    this.setState({ transition: false });
     this.props.i18n.changeLanguage(lang);
   };
 
@@ -55,7 +55,7 @@ class Languages extends Component {
   }
 
   handleClickOutside = () => {
-    this.setState({ transition: false, count: 0 });
+    this.setState({ transition: false });
   }
 
   render() {

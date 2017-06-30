@@ -1,5 +1,8 @@
+// Import React Components
 import React, { Component } from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+// Import Material-UI components
+import { createStyleSheet } from 'material-ui/styles';
+import withStyles from 'material-ui/styles/withStyles';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
@@ -7,10 +10,12 @@ import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
 import Grid from 'material-ui/Grid';
 import { transparent, fullWhite } from 'material-ui/styles/colors';
+// Import Extra Libraries
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
+// Import Local Files
 import { logEvent } from '../tools/analytics';
-
+// Create Component StyleSheet
 const styleSheet = createStyleSheet('Header', {
   root: {
     position: 'relative',
@@ -40,7 +45,7 @@ const styleSheet = createStyleSheet('Header', {
     color: fullWhite,
   },
 });
-
+// Create Class
 class Header extends Component {
 
   handleClick = (action) => {
@@ -79,7 +84,7 @@ class Header extends Component {
     );
   }
 }
-
+// Create GraphQL queries mutations
 const user = gql`
   query User {
     user {
@@ -88,5 +93,5 @@ const user = gql`
     }
   }
 `;
-
+// Export Class
 export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Header)));

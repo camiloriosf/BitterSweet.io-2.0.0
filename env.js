@@ -3,9 +3,11 @@
 const envConfig = {
   production: {
     console: false,
+    imageURI: 'https://1021379388.rsc.cdn77.org/static/',
   },
   development: {
     console: true,
+    imageURI: 'static/',
   },
 };
 

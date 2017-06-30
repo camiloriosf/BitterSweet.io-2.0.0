@@ -9,6 +9,7 @@ import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logPageView, setUser, logEvent } from '../tools/analytics';
+import env from '../env';
 
 const styleSheet = createStyleSheet('Hero', {
   section: {
@@ -143,7 +144,7 @@ class Hero extends Component {
           <Grid item xs={12} sm={12} className={this.props.classes.pad4}>
             <Hidden smDown>
               <div className={this.props.classes.crop1}>
-                <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup1} />
+                <img src={`${env.imageURI}home_mockups_1.png`} alt="WebSite Mockup 1" className={this.props.classes.mockup1} />
                 <img src="static/home_mockups_2.png" alt="WebSite Mockup 2" className={this.props.classes.mockup2} />
                 <img src="static/home_mockups_3.png" alt="WebSite Mockup 3" className={this.props.classes.mockup3} />
               </div>
