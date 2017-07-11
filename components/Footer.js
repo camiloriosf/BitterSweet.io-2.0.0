@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { grey } from 'material-ui/styles/colors';
+import grey from 'material-ui/colors/grey';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import EmailIcon from 'material-ui-icons/Email';
@@ -9,6 +9,7 @@ import CallIcon from 'material-ui-icons/Call';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
+import Router from 'next/router';
 import { logEvent } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Footer', {
@@ -62,6 +63,7 @@ const styleSheet = createStyleSheet('Footer', {
   },
   anchor: {
     textDecoration: 'none',
+    cursor: 'pointer',
   },
   icon: {
     fill: grey[600],
@@ -77,6 +79,7 @@ class Footer extends Component {
     if (!this.props.data.loading) {
       logEvent('click', action);
     }
+    Router.push('/quote');
   };
 
   handleChange = (isVisible) => {
@@ -112,12 +115,12 @@ class Footer extends Component {
                 </Grid>
                 <Grid item xs={12} sm={3}>
                   <div className={this.props.classes.quote}>
-                    <div className={this.props.classes.contactDiv}>
-                      <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
+                    <div className={this.props.classes.contactDiv} >
+                      <span role="presentation" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
                         <SettingsEthernetIcon className={this.props.classes.icon} />
                         <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.quote.title')}</Typography>
                         <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.quote.subtitle')}</Typography>
-                      </a>
+                      </span>
                     </div>
                   </div>
                 </Grid>

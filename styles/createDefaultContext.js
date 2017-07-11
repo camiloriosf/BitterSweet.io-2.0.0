@@ -1,14 +1,14 @@
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createPalette from 'material-ui/styles/palette';
 import createMuiTheme from 'material-ui/styles/theme';
-import { indigo, red } from 'material-ui/styles/colors';
+import blue from 'material-ui/colors/blue';
 
 const createDefaultContext = () =>
   MuiThemeProvider.createDefaultContext({
     theme: createMuiTheme({
       palette: createPalette({
-        primary: indigo,
-        accent: red,
+        primary: blue,
+        accent: blue,
       }),
     }),
   });

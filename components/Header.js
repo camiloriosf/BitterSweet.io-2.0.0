@@ -8,11 +8,11 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
-import Grid from 'material-ui/Grid';
-import { transparent, fullWhite } from 'material-ui/styles/colors';
 // Import Extra Libraries
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
+import Router from 'next/router';
+import Link from 'next/link';
 // Import Local Files
 import { logEvent } from '../tools/analytics';
 // Create Component StyleSheet
@@ -20,18 +20,16 @@ const styleSheet = createStyleSheet('Header', {
   root: {
     position: 'relative',
     width: '100%',
-    background: transparent,
   },
   appBar: {
     position: 'relative',
     boxShadow: 'none',
-    height: 100,
     border: 0,
   },
   title: {
-    padding: 0,
-    marginTop: 20,
-    color: fullWhite,
+    flex: 1,
+    textAlign: 'left',
+    marginLeft: 30,
   },
   buttons: {
     textAlign: 'center',
@@ -40,9 +38,6 @@ const styleSheet = createStyleSheet('Header', {
   },
   anchor: {
     textDecoration: 'none',
-  },
-  button: {
-    color: fullWhite,
   },
 });
 // Create Class
@@ -54,30 +49,50 @@ class Header extends Component {
     }
   };
 
+  handleQuoteClick = (action) => {
+    if (!this.props.data.loading) {
+      logEvent('click', action);
+    }
+
+    Router.push('/quote');
+  };
+
+  renderLinks = () => {
+    if (this.props.url.pathname !== '/') {
+      return (
+        <div className={this.props.classes.buttons}>
+          <Link href="/#services"><Button>{this.props.t('header.what')}</Button></Link>
+          <Link href="/#how"><Button>{this.props.t('header.how')}</Button></Link>
+          <Link href="/#pricing"><Button>{this.props.t('header.pricing')}</Button></Link>
+          <Link href="/quote"><Button>{this.props.t('header.quote')}</Button></Link>
+          <Link href="/#faq"><Button>{this.props.t('header.faq')}</Button></Link>
+          <Link href="/#contact"><Button>{this.props.t('header.contact')}</Button></Link>
+        </div>
+      );
+    }
+    return (
+      <div className={this.props.classes.buttons}>
+        <a href="#services" className={this.props.classes.anchor} onClick={() => this.handleClick('header_services')}><Button>{this.props.t('header.what')}</Button></a>
+        <a href="#how" className={this.props.classes.anchor} onClick={() => this.handleClick('header_how')}><Button>{this.props.t('header.how')}</Button></a>
+        <a href="#pricing" className={this.props.classes.anchor} onClick={() => this.handleClick('header_pricing')}><Button>{this.props.t('header.pricing')}</Button></a>
+        <Button className={this.props.classes.button} onClick={() => this.handleQuoteClick('header_quote')}>{this.props.t('header.quote')}</Button>
+        <a href="#faq" className={this.props.classes.anchor} onClick={() => this.handleClick('header_faq')}><Button>{this.props.t('header.faq')}</Button></a>
+        <a href="#contact" className={this.props.classes.anchor} onClick={() => this.handleClick('header_contact')}><Button>{this.props.t('header.contact')}</Button></a>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className={this.props.classes.root}>
-        <AppBar className={this.props.classes.appBar} >
+        <AppBar className={this.props.classes.appBar} color="inherit" >
           <Toolbar>
-            <Grid container justify="center" align="center">
-              <Grid item xs={12} sm={12} style={{ padding: 0, marginTop: 20 }}>
-                <Hidden xsDown>
-                  <div className={this.props.classes.buttons}>
-                    <a href="#services" className={this.props.classes.anchor} onClick={() => this.handleClick('header_services')}><Button className={this.props.classes.button}>{this.props.t('header.what')}</Button></a>
-                    <a href="#how" className={this.props.classes.anchor} onClick={() => this.handleClick('header_how')}><Button className={this.props.classes.button}>{this.props.t('header.how')}</Button></a>
-                    <a href="#pricing" className={this.props.classes.anchor} onClick={() => this.handleClick('header_pricing')}><Button className={this.props.classes.button}>{this.props.t('header.pricing')}</Button></a>
-                    <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('header_quote')}><Button className={this.props.classes.button}>{this.props.t('header.quote')}</Button></a>
-                    <a href="#faq" className={this.props.classes.anchor} onClick={() => this.handleClick('header_faq')}><Button className={this.props.classes.button}>{this.props.t('header.faq')}</Button></a>
-                    <a href="#contact" className={this.props.classes.anchor} onClick={() => this.handleClick('header_contact')}><Button className={this.props.classes.button}>{this.props.t('header.contact')}</Button></a>
-                  </div>
-                </Hidden>
-              </Grid>
-              <Grid item xs={12} sm={12} style={{ padding: 0, margin: 0 }}>
-                <Typography type="display1" align="center" className={this.props.classes.title}>
-                  {this.props.t('name')}
-                </Typography>
-              </Grid>
-            </Grid>
+            <Typography type="title" align="center" className={this.props.classes.title}>
+              {this.props.t('name')}
+            </Typography>
+            <Hidden xsDown>
+              {this.renderLinks()}
+            </Hidden>
           </Toolbar>
         </AppBar>
       </div>

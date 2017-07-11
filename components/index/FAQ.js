@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import { fullWhite, indigo, grey } from 'material-ui/styles/colors';
+import blue from 'material-ui/colors/blue';
+import grey from 'material-ui/colors/grey';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
-import { logEvent } from '../tools/analytics';
+import { logEvent } from '../../tools/analytics';
 
 const styleSheet = createStyleSheet('FAQ', {
   section: {
-    background: fullWhite,
-    padding: '10px 10px 30px 10px',
+    background: grey[50],
+    padding: '50px 10px 100px 10px',
   },
   padSections: {
     marginTop: 10,
   },
   sectionTitle: {
-    color: indigo[500],
+    color: blue[500],
   },
   sectionSubTitle: {
     marginTop: 10,
     marginBottom: 10,
   },
   question: {
-    color: indigo[400],
+    color: blue[400],
     cursor: 'pointer',
   },
   answer: {

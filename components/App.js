@@ -8,7 +8,6 @@ import { initGA } from '../tools/analytics';
 const styleSheet = createStyleSheet('App', theme => ({
   '@global': {
     html: {
-      background: theme.palette.background.default,
       fontFamily: theme.typography.fontFamily,
       WebkitFontSmoothing: 'antialiased', // Antialiasing.
       MozOsxFontSmoothing: 'grayscale', // Antialiasing.

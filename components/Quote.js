@@ -1,147 +1,89 @@
 import React, { Component } from 'react';
-import Grid from 'material-ui/Grid';
-import Typography from 'material-ui/Typography';
-import { indigo, fullWhite } from 'material-ui/styles/colors';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import MobileStepper from 'material-ui/MobileStepper';
-import SwipeableViews from 'react-swipeable-views';
-import { gql, graphql } from 'react-apollo';
-import VisibilitySensor from 'react-visibility-sensor';
+import { graphql, compose } from 'react-apollo';
 import { translate } from 'react-i18next';
-import { logEvent } from '../tools/analytics';
-import { Quote01, Quote02, Quote03, Quote04, Quote05, Quote06, Quote07, Quote08, Quote09, Send } from './quote/';
+import Header from './Header';
+import Footer from './Footer';
+import Hero from './quote/Hero';
+import Prices from './quote/Prices';
+import Comments from './quote/Comments';
+import Send from './quote/Send';
+import NDA from './quote/01_NDA';
+import Platforms from './quote/02_Platforms';
+import Pages from './quote/03_Pages';
+import Design from './quote/04_Design';
+import Authentication from './quote/05_Authentication';
+import Data from './quote/06_Data';
+import GeoLocation from './quote/07_GeoLocation';
+import Communication from './quote/08_Communication';
+import APIs from './quote/09_APIs';
+import Commerce from './quote/10_Commerce';
+import Admin from './quote/11_Admin';
+import Product from './quote/12_Product';
+import Time from './quote/13_Time';
+import fetchUser from '../lib/queries/fetchUser';
+import fetchQuote from '../lib/queries/fetchQuote';
 
 const styleSheet = createStyleSheet('Quote', {
-  section: {
-    background: indigo[500],
-    padding: '10px 10px 30px 10px',
-  },
-  padSections: {
-    marginTop: 10,
-  },
-  sectionTitle: {
-    color: fullWhite,
-  },
-  sectionSubTitle: {
-    marginTop: 10,
-    marginBottom: 0,
-    color: fullWhite,
-  },
-  stepperDiv: {
-    padding: 5,
-  },
-  stepper: {
-    flexGrow: 1,
-    margin: '0 auto',
-  },
-  swipeableViews: {
-    padding: 0,
-  },
+
 });
 
 class Quote extends Component {
   state = {
-    steps: 10,
-    activeStep: 0,
-    isVisible: null,
+    loaded: false,
   };
 
-  handleClick = (action) => {
-    if (!this.props.data.loading) {
-      logEvent('click', action);
-    }
-  };
-
-  handleLogChange = (isVisible) => {
-    if (!this.props.data.loading) {
-      if (isVisible !== this.state.isVisible) {
-        if (isVisible) logEvent('section', 'quote');
-        this.setState({ isVisible });
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.quote) {
+      if (nextProps.quote.quote) {
+        if (nextProps.quote.quote.id) {
+          this.setState({ loaded: true });
+        }
       }
     }
-  };
+  }
 
-  handleChange = (index) => {
-    this.setState({
-      activeStep: index,
-    });
-  };
+  checkQuote = () => {
+    if (!this.state.loaded) {
+      return ('Loading ...');
+    }
 
-  handleNext = () => {
-    this.setState({
-      activeStep: this.state.activeStep + 1,
-    });
-  };
-
-  handleBack = () => {
-    this.setState({
-      activeStep: this.state.activeStep - 1,
-    });
-  };
+    return (
+      <span>
+        <NDA NDA={this.props.quote.quote.NDA} id={this.props.quote.quote.id} />
+        <Platforms />
+        <Pages />
+        <Design />
+        <Authentication />
+        <Data />
+        <GeoLocation />
+        <Communication />
+        <APIs />
+        <Commerce />
+        <Admin />
+        <Product />
+        <Time />
+        <Prices />
+        <Comments />
+        <Send />
+        <Footer />
+      </span>
+    );
+  }
 
   render() {
     return (
-      <div className={this.props.classes.section}>
-        <VisibilitySensor onChange={this.handleLogChange} />
-        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
-          <Grid item xs={12} sm={12}>
-            <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              {this.props.t('quote.title')}
-            </Typography>
-            <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              {this.props.t('quote.subtitle')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <div className={this.props.classes.swipeableViews}>
-              <SwipeableViews
-                enableMouseEvents
-                index={this.state.activeStep}
-                onChangeIndex={this.handleChange}
-              >
-                <Quote01 />
-                <Quote02 />
-                <Quote03 />
-                <Quote04 />
-                <Quote05 />
-                <Quote06 />
-                <Quote07 />
-                <Quote08 />
-                <Quote09 />
-                <Send />
-              </SwipeableViews>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={8}>
-            <div className={this.props.classes.stepperDiv}>
-              <MobileStepper
-                type="progress"
-                steps={this.state.steps}
-                position="static"
-                backButtonText={this.props.t('quote.back')}
-                nextButtonText={this.props.t('quote.next')}
-                activeStep={this.state.activeStep}
-                className={this.props.classes.stepper}
-                onBack={this.handleBack}
-                onNext={this.handleNext}
-                disableBack={this.state.activeStep === 0}
-                disableNext={this.state.activeStep === (this.state.steps - 1)}
-              />
-            </div>
-          </Grid>
-        </Grid>
+      <div >
+        <Header url={this.props.url} />
+        <Hero />
+        {this.checkQuote()}
       </div>
     );
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
-
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Quote)));
+export default
+  translate(['common'])(compose(
+      graphql(fetchUser, { props: data => data, name: 'user' }),
+      graphql(fetchQuote, { props: data => data, options: props => ({ variables: { token: props.user.user.token } }), skip: props => !props.user || props.user.loading, name: 'quote' }),
+    )(withStyles(styleSheet)(Quote)));

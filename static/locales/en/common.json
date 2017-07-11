@@ -57,7 +57,7 @@
       },
       {
         "title": "No templates, we build from the ground up",
-        "description": "We believe each requeriment requires a different approach, that is why we don't use pre made templates, we build everything ourselves."
+        "description": "We believe each project requires a different approach, that is why we don't use pre made templates, we build everything ourselves."
       },
       {
         "title": "State-of-the-Art Technologies",
@@ -75,7 +75,7 @@
     "payg":{
       "title":"Pay-as-you-Go",
       "features":[
-        "Pay for as long (or little) as you want",
+        "Pay for as long as you want",
         "All inclusive",
         "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
         "You own the intelectual property",
@@ -95,10 +95,128 @@
     "button": "QUOTE"
   },
   "quote":{
-    "title": "Quote",
+    "title": "Quote my project",
     "subtitle": "See how much your project will cost, this is the final price, no surprises along the way.",
-    "back": "back",
-    "next": "next",
+    "start": "start",
+    "prices": {
+      "title": "Choose the plan that fits you best",
+      "subtitle": "You can change it later.",
+      "payg":{
+        "title":"Pay-as-you-Go",
+        "features":[
+          "Pay for as long as you want",
+          "All inclusive",
+          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
+          "You own the intelectual property",
+          "We own the code"
+        ]
+      },
+      "installments":{
+        "title":"Fixed Installments",
+        "features":[
+          "Pay a fixed price for 12 months",
+          "All inclusive",
+          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
+          "You own the intelectual property",
+          "We own the code",
+          "After the 12 month you own the code"
+        ]
+      },
+      "fee":{
+        "title":"1-Time Fee",
+        "features":[
+        "Pay a 1 time fee",
+        "3 months of All inclusive",
+        "(Hosting, support, Maintenance, auto-scale, load-balancing, CDN, SSL certificate)",
+        "You own the intelectual property",
+        "You own the code"
+        ]
+      }
+    },
+    "comments": {
+      "title": "Comments",
+      "subtitle": "Tell us more about your project",
+      "textField": "comments"
+    },
+    "send": {
+      "title": "Submit Quote",
+      "subtitle": "We will get in touch shortly",
+      "name": "name",
+      "email": "email",
+      "submit": "send"
+    },
+    "sections": {
+      "NDA": {
+        "title": "Need an NDA?",
+        "content": "NDA"
+      },
+      "Platforms": {
+        "title": "Choose Platforms",
+        "web": "Web",
+        "android": "Android",
+        "ios": "iOS",
+        "desktop": "Desktop"
+      },
+      "Pages": {
+        "title": "N° of Pages/Screens"
+      },
+      "Design": {
+        "title": "Need Design Services?",
+        "content": "Design"
+      },
+      "Authentication": {
+        "title": "Authentication",
+        "email": "Email",
+        "social": "Social"
+      },
+      "Data": {
+        "title": "Data",
+        "database": "Database",
+        "media": "Media",
+        "datasource": "Data Source"
+      },
+      "GeoLocation": {
+        "title": "GeoLocation",
+        "simple": "Simple",
+        "advanced": "Advanced"
+      },
+      "Communication": {
+        "title": "Communication",
+        "chat": "Chat",
+        "email": "Email",
+        "push": "Push",
+        "sms": "SMS"
+      },
+      "APIs": {
+        "title": "Number of Cloud APIs"
+      },
+      "Commerce": {
+        "title": "E-Commerce",
+        "basicTransactions": "1-Time Purchase",
+        "advancedTransactions": "Advanced Transactions",
+        "basicSubscriptions": "Basic Subscriptions",
+        "advancedSubscriptions": "Advanced Subscriptions"
+      },
+      "Admin": {
+        "title": "Admin Console",
+        "admin": "Admin",
+        "dashboard": "Dashboard",
+        "reports": "Reports"
+      },
+      "Product": {
+        "title": "Product",
+        "prototype": "Prototype",
+        "mvp": "MVP",
+        "polished": "Polished"
+      }
+      ,
+      "Time": {
+        "title": "Delivery Time",
+        "normal": "Normal",
+        "asap": "Start ASAP",
+        "now": "3 months or less"
+      }
+    },
     "01": {
       "title": "Choose platforms",
       "dialog": {
@@ -262,10 +380,10 @@
         "fast": "Deliverable in 3 months or less"
       }
     },
-    "send":{
-      "title": "Price",
+    "send1":{
+      "title": "Send us you're quote",
       "dialog": {
-        "title": "Price",
+        "title": "Quote",
         "content": [
           "Remember that this is our final price.",
           "We won't charge you extra if your app is more complex. As long as you mantain the modules you selected the price will remain the same."
@@ -283,6 +401,29 @@
         "name": "Name",
         "email": "Email",
         "button": "Send"
+      }
+    },
+    "summary":{
+      "title": "Summary",
+      "dialog": {
+        "title": "Quote",
+        "content": [
+          "Remember that this is our final price.",
+          "We won't charge you extra if your app is more complex. As long as you mantain the modules you selected the price will remain the same."
+        ],
+        "button": "Great!"
+      },
+      "payg":{
+        "title" : "Pay-as-you-Go",
+        "month": "/month"
+      },
+      "fee":{
+        "title": "1-Time Fee"
+      },
+      "form":{
+        "name": "Name",
+        "email": "Email",
+        "button": "Send Quote"
       }
     }
   },
