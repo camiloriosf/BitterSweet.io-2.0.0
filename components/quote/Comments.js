@@ -6,6 +6,8 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
 
+let interval;
+
 const styleSheet = createStyleSheet('Comments', {
   section: {
     padding: 20,
@@ -19,10 +21,22 @@ const styleSheet = createStyleSheet('Comments', {
 
 class Comments extends Component {
   state = {
-    payg: true,
-    installments: false,
-    fee: false,
+    comments: this.props.quote.comments,
   };
+
+  handleChange = ({ value }) => {
+    this.setState({ comments: value });
+    clearInterval(interval);
+    interval = setInterval(() => {
+      clearInterval(interval);
+      this.props.mutate({
+        variables: {
+          id: this.props.quote.id,
+          key: JSON.stringify({ comments: { value } }),
+        },
+      });
+    }, 500);
+  }
 
   render() {
     return (
@@ -37,7 +51,15 @@ class Comments extends Component {
             </Typography>
           </Grid>
           <Grid item xs={12} sm={9}>
-            <TextField label={this.props.t('quote.comments.textField')} rows="4" multiline type="text" className={this.props.classes.comments} />
+            <TextField
+              label={this.props.t('quote.comments.textField')}
+              rows="4"
+              multiline
+              type="text"
+              className={this.props.classes.comments}
+              value={this.state.comments}
+              onChange={event => this.handleChange({ value: event.target.value })}
+            />
           </Grid>
         </Grid>
       </div>
@@ -45,13 +67,13 @@ class Comments extends Component {
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
       id
+      comments
     }
   }
 `;
 
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Comments)));
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Comments)));

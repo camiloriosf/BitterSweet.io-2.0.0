@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -19,22 +20,41 @@ const styleSheet = createStyleSheet('APIs', {
 });
 
 class APIs extends Component {
-  state = {
-    apis: 0,
-  };
 
   handleRequestClose = () => this.setState({ open: false });
 
   handleUp = () => {
-    this.setState({
-      apis: this.state.apis + 1,
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ apis: { value: this.props.quote.apis + 1 } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          apis: this.props.quote.apis + 1,
+          __typename: 'QuoteType',
+        },
+      },
     });
   };
 
   handleDown = () => {
-    if (this.state.apis > 0) {
-      this.setState({
-        apis: this.state.apis - 1,
+    if (this.props.quote.apis > 0) {
+      this.props.mutate({
+        variables: {
+          id: this.props.quote.id,
+          key: JSON.stringify({ apis: { value: this.props.quote.apis - 1 } }),
+        },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          updateQuote: {
+            id: this.props.quote.id,
+            apis: this.props.quote.apis - 1,
+            __typename: 'QuoteType',
+          },
+        },
       });
     }
   };
@@ -66,7 +86,7 @@ class APIs extends Component {
                     <Grid item xs={4}>
                       <div>
                         <Typography type="display1" align="center">
-                          {this.state.apis}
+                          {this.props.quote.apis}
                         </Typography>
                       </div>
                     </Grid>
@@ -86,4 +106,13 @@ class APIs extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(APIs));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      apis
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(APIs)));

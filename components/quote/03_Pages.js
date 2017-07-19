@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -19,22 +20,41 @@ const styleSheet = createStyleSheet('Pages', {
 });
 
 class Pages extends Component {
-  state = {
-    pages: 1,
-  };
 
   handleRequestClose = () => this.setState({ open: false });
 
   handleUp = () => {
-    this.setState({
-      pages: this.state.pages + 1,
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ pages: { value: this.props.quote.pages + 1 } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          pages: this.props.quote.pages + 1,
+          __typename: 'QuoteType',
+        },
+      },
     });
   };
 
   handleDown = () => {
-    if (this.state.pages > 1) {
-      this.setState({
-        pages: this.state.pages - 1,
+    if (this.props.quote.pages > 1) {
+      this.props.mutate({
+        variables: {
+          id: this.props.quote.id,
+          key: JSON.stringify({ pages: { value: this.props.quote.pages - 1 } }),
+        },
+        optimisticResponse: {
+          __typename: 'Mutation',
+          updateQuote: {
+            id: this.props.quote.id,
+            pages: this.props.quote.pages - 1,
+            __typename: 'QuoteType',
+          },
+        },
       });
     }
   };
@@ -66,7 +86,7 @@ class Pages extends Component {
                     <Grid item xs={4}>
                       <div>
                         <Typography type="display1" align="center">
-                          {this.state.pages}
+                          {this.props.quote.pages}
                         </Typography>
                       </div>
                     </Grid>
@@ -86,4 +106,13 @@ class Pages extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Pages));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      pages
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Pages)));

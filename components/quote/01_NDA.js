@@ -49,14 +49,13 @@ const styleSheet = createStyleSheet('NDA', {
 
 class NDA extends Component {
   state = {
-    NDA: false,
     hover: false,
   };
 
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = () => {
-    if (this.props.NDA) {
+    if (this.props.quote.NDA) {
       return this.props.classes.paperSelected;
     } else if (this.state.hover) {
       return this.props.classes.paperHover;
@@ -64,16 +63,21 @@ class NDA extends Component {
     return this.props.classes.paperUnSelected;
   }
 
-  submit = () => {
-    // this.setState({ NDA: !this.state.NDA })
+  handleSubmit = () => {
     this.props.mutate({
       variables: {
-        id: this.props.id,
-        key1: 'NDA',
-        key2: '',
-        value: !this.props.NDA,
+        id: this.props.quote.id,
+        key: JSON.stringify({ NDA: { value: !this.props.quote.NDA } }),
       },
-    }).then(() => console.log(this.props.id));
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          NDA: !this.props.quote.NDA,
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -98,13 +102,13 @@ class NDA extends Component {
                     this.handlePaperState()
                   }
                   elevation={
-                    this.props.NDA ? 12 : 1
+                    this.props.quote.NDA ? 12 : 1
                   }
-                  onClick={() => this.submit()}
+                  onClick={() => this.handleSubmit()}
                   onMouseEnter={() => this.setState({ hover: true })}
                   onMouseLeave={() => this.setState({ hover: false })}
                 >
-                  {this.props.NDA ?
+                  {this.props.quote.NDA ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -123,9 +127,10 @@ class NDA extends Component {
 }
 
 const mutation = gql`
-  mutation UpdateQuote($id: String!, $key1: String, $key2: String, $value: String) {
-    updateQuote(id: $id, key1: $key1, key2: $key2, value: $value) {
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
       id
+      NDA
     }
   }
 `;

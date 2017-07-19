@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -49,8 +50,6 @@ const styleSheet = createStyleSheet('GeoLocation', {
 
 class GeoLocation extends Component {
   state = {
-    simple: false,
-    advanced: false,
     simpleHover: false,
     advancedHover: false,
   };
@@ -58,12 +57,32 @@ class GeoLocation extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.state[paper]) {
+    if (this.props.quote.geolocation[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = (paper, value, state) => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ geolocation: { sub: paper, value } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          geolocation: {
+            ...state,
+            __typename: 'DataType',
+          },
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -88,13 +107,20 @@ class GeoLocation extends Component {
                     this.handlePaperState('simple')
                   }
                   elevation={
-                    this.state.simple ? 12 : 1
+                    this.props.quote.geolocation.simple ? 12 : 1
                   }
-                  onClick={() => this.setState({ simple: !this.state.simple, advanced: false })}
+                  onClick={() => this.handleSubmit(
+                      'simple',
+                      !this.props.quote.geolocation.simple,
+                    {
+                      simple: !this.props.quote.geolocation.simple,
+                      advanced: false,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ simpleHover: true })}
                   onMouseLeave={() => this.setState({ simpleHover: false })}
                 >
-                  {this.state.simple ?
+                  {this.props.quote.geolocation.simple ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -110,13 +136,20 @@ class GeoLocation extends Component {
                     this.handlePaperState('advanced')
                   }
                   elevation={
-                    this.state.advanced ? 12 : 1
+                    this.props.quote.geolocation.advanced ? 12 : 1
                   }
-                  onClick={() => this.setState({ advanced: !this.state.advanced, simple: false })}
+                  onClick={() => this.handleSubmit(
+                      'advanced',
+                      !this.props.quote.geolocation.advanced,
+                    {
+                      simple: false,
+                      advanced: !this.props.quote.geolocation.advanced,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ advancedHover: true })}
                   onMouseLeave={() => this.setState({ advancedHover: false })}
                 >
-                  {this.state.advanced ?
+                  {this.props.quote.geolocation.advanced ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -134,4 +167,16 @@ class GeoLocation extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(GeoLocation));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      geolocation {
+        simple
+        advanced
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(GeoLocation)));

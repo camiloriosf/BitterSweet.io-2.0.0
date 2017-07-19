@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -51,10 +52,6 @@ const styleSheet = createStyleSheet('Commerce', {
 
 class Commerce extends Component {
   state = {
-    basicTransactions: false,
-    advancedTransactions: false,
-    basicSubscriptions: false,
-    advancedSubscriptions: false,
     basicTransactionsHover: false,
     advancedTransactionsHover: false,
     basicSubscriptionsHover: false,
@@ -64,12 +61,32 @@ class Commerce extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.state[paper]) {
+    if (this.props.quote.commerce[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = (paper, value, state) => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ commerce: { sub: paper, value } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          commerce: {
+            ...state,
+            __typename: 'CommerceType',
+          },
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -94,16 +111,22 @@ class Commerce extends Component {
                     this.handlePaperState('basicTransactions')
                   }
                   elevation={
-                    this.state.basicTransactions ? 12 : 1
+                    this.props.quote.commerce.basicTransactions ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    basicTransactions: !this.state.basicTransactions,
-                    advancedTransactions: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'basicTransactions',
+                      !this.props.quote.commerce.basicTransactions,
+                    {
+                      basicTransactions: !this.props.quote.commerce.basicTransactions,
+                      advancedTransactions: false,
+                      basicSubscriptions: this.props.quote.commerce.basicSubscriptions,
+                      advancedSubscriptions: this.props.quote.commerce.advancedSubscriptions,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ basicTransactionsHover: true })}
                   onMouseLeave={() => this.setState({ basicTransactionsHover: false })}
                 >
-                  {this.state.basicTransactions ?
+                  {this.props.quote.commerce.basicTransactions ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -119,16 +142,22 @@ class Commerce extends Component {
                     this.handlePaperState('advancedTransactions')
                   }
                   elevation={
-                    this.state.advancedTransactions ? 12 : 1
+                    this.props.quote.commerce.advancedTransactions ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    advancedTransactions: !this.state.advancedTransactions,
-                    basicTransactions: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'advancedTransactions',
+                      !this.props.quote.commerce.advancedTransactions,
+                    {
+                      basicTransactions: false,
+                      advancedTransactions: !this.props.quote.commerce.advancedTransactions,
+                      basicSubscriptions: this.props.quote.commerce.basicSubscriptions,
+                      advancedSubscriptions: this.props.quote.commerce.advancedSubscriptions,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ advancedTransactionsHover: true })}
                   onMouseLeave={() => this.setState({ advancedTransactionsHover: false })}
                 >
-                  {this.state.advancedTransactions ?
+                  {this.props.quote.commerce.advancedTransactions ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -146,16 +175,22 @@ class Commerce extends Component {
                     this.handlePaperState('basicSubscriptions')
                   }
                   elevation={
-                    this.state.basicSubscriptions ? 12 : 1
+                    this.props.quote.commerce.basicSubscriptions ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    basicSubscriptions: !this.state.basicSubscriptions,
-                    advancedSubscriptions: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'basicSubscriptions',
+                      !this.props.quote.commerce.basicSubscriptions,
+                    {
+                      basicTransactions: this.props.quote.commerce.basicTransactions,
+                      advancedTransactions: this.props.quote.commerce.advancedTransactions,
+                      basicSubscriptions: !this.props.quote.commerce.basicSubscriptions,
+                      advancedSubscriptions: false,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ basicSubscriptionsHover: true })}
                   onMouseLeave={() => this.setState({ basicSubscriptionsHover: false })}
                 >
-                  {this.state.basicSubscriptions ?
+                  {this.props.quote.commerce.basicSubscriptions ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -171,16 +206,22 @@ class Commerce extends Component {
                     this.handlePaperState('advancedSubscriptions')
                   }
                   elevation={
-                    this.state.advancedSubscriptions ? 12 : 1
+                    this.props.quote.commerce.advancedSubscriptions ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    advancedSubscriptions: !this.state.advancedSubscriptions,
-                    basicSubscriptions: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'advancedSubscriptions',
+                      !this.props.quote.commerce.advancedSubscriptions,
+                    {
+                      basicTransactions: this.props.quote.commerce.basicTransactions,
+                      advancedTransactions: this.props.quote.commerce.advancedTransactions,
+                      basicSubscriptions: false,
+                      advancedSubscriptions: !this.props.quote.commerce.advancedSubscriptions,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ advancedSubscriptionsHover: true })}
                   onMouseLeave={() => this.setState({ advancedSubscriptionsHover: false })}
                 >
-                  {this.state.advancedSubscriptions ?
+                  {this.props.quote.commerce.advancedSubscriptions ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -198,4 +239,18 @@ class Commerce extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Commerce));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      commerce {
+        basicTransactions
+        advancedTransactions
+        basicSubscriptions
+        advancedSubscriptions
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Commerce)));

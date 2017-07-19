@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -50,9 +51,6 @@ const styleSheet = createStyleSheet('Time', {
 
 class Time extends Component {
   state = {
-    normal: true,
-    asap: false,
-    now: false,
     normalHover: true,
     asapHover: false,
     nowHover: false,
@@ -61,12 +59,32 @@ class Time extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.state[paper]) {
+    if (this.props.quote.time[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = (paper, value, state) => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ time: { sub: paper, value } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          time: {
+            ...state,
+            __typename: 'TimeType',
+          },
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -91,15 +109,21 @@ class Time extends Component {
                     this.handlePaperState('normal')
                   }
                   elevation={
-                    this.state.normal ? 12 : 1
+                    this.props.quote.time.normal ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    normal: true, asap: false, now: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'normal',
+                      true,
+                    {
+                      normal: true,
+                      asap: false,
+                      now: false,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ normalHover: true })}
                   onMouseLeave={() => this.setState({ normalHover: false })}
                 >
-                  {this.state.normal ?
+                  {this.props.quote.time.normal ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -115,15 +139,21 @@ class Time extends Component {
                     this.handlePaperState('asap')
                   }
                   elevation={
-                    this.state.asap ? 12 : 1
+                    this.props.quote.time.asap ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    asap: true, normal: false, now: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'asap',
+                      true,
+                    {
+                      normal: false,
+                      asap: true,
+                      now: false,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ asapHover: true })}
                   onMouseLeave={() => this.setState({ asapHover: false })}
                 >
-                  {this.state.asap ?
+                  {this.props.quote.time.asap ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -139,15 +169,21 @@ class Time extends Component {
                     this.handlePaperState('now')
                   }
                   elevation={
-                    this.state.now ? 12 : 1
+                    this.props.quote.time.now ? 12 : 1
                   }
-                  onClick={() => this.setState({
-                    now: true, normal: false, asap: false,
-                  })}
+                  onClick={() => this.handleSubmit(
+                      'now',
+                      true,
+                    {
+                      normal: false,
+                      asap: false,
+                      now: true,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ nowHover: true })}
                   onMouseLeave={() => this.setState({ nowHover: false })}
                 >
-                  {this.state.now ?
+                  {this.props.quote.time.now ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -165,4 +201,17 @@ class Time extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Time));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      time {
+        normal
+        asap
+        now
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Time)));

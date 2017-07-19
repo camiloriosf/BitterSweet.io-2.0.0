@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -48,19 +49,35 @@ const styleSheet = createStyleSheet('Design', {
 
 class Design extends Component {
   state = {
-    design: false,
     hover: false,
   };
 
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = () => {
-    if (this.state.design) {
+    if (this.props.quote.design) {
       return this.props.classes.paperSelected;
     } else if (this.state.hover) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = () => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ design: { value: !this.props.quote.design } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          design: !this.props.quote.design,
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -85,13 +102,13 @@ class Design extends Component {
                     this.handlePaperState()
                   }
                   elevation={
-                    this.state.design ? 12 : 1
+                    this.props.quote.design ? 12 : 1
                   }
-                  onClick={() => this.setState({ design: !this.state.design })}
+                  onClick={() => this.handleSubmit()}
                   onMouseEnter={() => this.setState({ hover: true })}
                   onMouseLeave={() => this.setState({ hover: false })}
                 >
-                  {this.state.design ?
+                  {this.props.quote.design ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -109,4 +126,13 @@ class Design extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Design));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      design
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Design)));

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -49,8 +50,6 @@ const styleSheet = createStyleSheet('Authentication', {
 
 class Authentication extends Component {
   state = {
-    email: false,
-    social: false,
     emailHover: false,
     socialHover: false,
   };
@@ -58,12 +57,32 @@ class Authentication extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.state[paper]) {
+    if (this.props.quote.authentication[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = (paper, value, state) => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ authentication: { sub: paper, value } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          authentication: {
+            ...state,
+            __typename: 'AuthenticationType',
+          },
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -88,13 +107,20 @@ class Authentication extends Component {
                     this.handlePaperState('email')
                   }
                   elevation={
-                    this.state.email ? 12 : 1
+                    this.props.quote.authentication.email ? 12 : 1
                   }
-                  onClick={() => this.setState({ email: !this.state.email })}
+                  onClick={() => this.handleSubmit(
+                      'email',
+                      !this.props.quote.authentication.email,
+                    {
+                      email: !this.props.quote.authentication.email,
+                      social: this.props.quote.authentication.social,
+                    },
+                    )}
                   onMouseEnter={() => this.setState({ emailHover: true })}
                   onMouseLeave={() => this.setState({ emailHover: false })}
                 >
-                  {this.state.email ?
+                  {this.props.quote.authentication.email ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -110,13 +136,20 @@ class Authentication extends Component {
                     this.handlePaperState('social')
                   }
                   elevation={
-                    this.state.social ? 12 : 1
+                    this.props.quote.authentication.social ? 12 : 1
                   }
-                  onClick={() => this.setState({ social: !this.state.social })}
+                  onClick={() => this.handleSubmit(
+                      'social',
+                      !this.props.quote.authentication.social,
+                    {
+                      email: this.props.quote.authentication.email,
+                      social: !this.props.quote.authentication.social,
+                    },
+                    )}
                   onMouseEnter={() => this.setState({ socialHover: true })}
                   onMouseLeave={() => this.setState({ socialHover: false })}
                 >
-                  {this.state.social ?
+                  {this.props.quote.authentication.social ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -134,4 +167,16 @@ class Authentication extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Authentication));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      authentication{
+        social
+        email
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Authentication)));

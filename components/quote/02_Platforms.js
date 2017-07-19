@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -51,10 +52,6 @@ const styleSheet = createStyleSheet('Platforms', {
 
 class Platforms extends Component {
   state = {
-    web: false,
-    android: false,
-    ios: false,
-    desktop: false,
     webHover: false,
     androidHover: false,
     iosHover: false,
@@ -64,12 +61,32 @@ class Platforms extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.state[paper]) {
+    if (this.props.quote.platforms[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = (paper, value, state) => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ platforms: { sub: paper, value } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          platforms: {
+            ...state,
+            __typename: 'PlatformsType',
+          },
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -94,13 +111,22 @@ class Platforms extends Component {
                     this.handlePaperState('web')
                   }
                   elevation={
-                    this.state.web ? 12 : 1
+                    this.props.quote.platforms.web ? 12 : 1
                   }
-                  onClick={() => this.setState({ web: !this.state.web })}
+                  onClick={() => this.handleSubmit(
+                      'web',
+                      !this.props.quote.platforms.web,
+                    {
+                      web: !this.props.quote.platforms.web,
+                      android: this.props.quote.platforms.android,
+                      ios: this.props.quote.platforms.ios,
+                      desktop: this.props.quote.platforms.desktop,
+                    },
+                    )}
                   onMouseEnter={() => this.setState({ webHover: true })}
                   onMouseLeave={() => this.setState({ webHover: false })}
                 >
-                  {this.state.web ?
+                  {this.props.quote.platforms.web ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -116,13 +142,22 @@ class Platforms extends Component {
                     this.handlePaperState('android')
                   }
                   elevation={
-                    this.state.android ? 12 : 1
+                    this.props.quote.platforms.android ? 12 : 1
                   }
-                  onClick={() => this.setState({ android: !this.state.android })}
+                  onClick={() => this.handleSubmit(
+                      'android',
+                      !this.props.quote.platforms.android,
+                    {
+                      web: this.props.quote.platforms.web,
+                      android: !this.props.quote.platforms.android,
+                      ios: this.props.quote.platforms.ios,
+                      desktop: this.props.quote.platforms.desktop,
+                    },
+                    )}
                   onMouseEnter={() => this.setState({ androidHover: true })}
                   onMouseLeave={() => this.setState({ androidHover: false })}
                 >
-                  {this.state.android ?
+                  {this.props.quote.platforms.android ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -138,13 +173,22 @@ class Platforms extends Component {
                     this.handlePaperState('ios')
                   }
                   elevation={
-                    this.state.ios ? 12 : 1
+                    this.props.quote.platforms.ios ? 12 : 1
                   }
-                  onClick={() => this.setState({ ios: !this.state.ios })}
+                  onClick={() => this.handleSubmit(
+                      'ios',
+                      !this.props.quote.platforms.ios,
+                    {
+                      web: this.props.quote.platforms.web,
+                      android: this.props.quote.platforms.android,
+                      ios: !this.props.quote.platforms.ios,
+                      desktop: this.props.quote.platforms.desktop,
+                    },
+                    )}
                   onMouseEnter={() => this.setState({ iosHover: true })}
                   onMouseLeave={() => this.setState({ iosHover: false })}
                 >
-                  {this.state.ios ?
+                  {this.props.quote.platforms.ios ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -160,13 +204,22 @@ class Platforms extends Component {
                     this.handlePaperState('desktop')
                   }
                   elevation={
-                    this.state.desktop ? 12 : 1
+                    this.props.quote.platforms.desktop ? 12 : 1
                   }
-                  onClick={() => this.setState({ desktop: !this.state.desktop })}
+                  onClick={() => this.handleSubmit(
+                      'desktop',
+                      !this.props.quote.platforms.desktop,
+                    {
+                      web: this.props.quote.platforms.web,
+                      android: this.props.quote.platforms.android,
+                      ios: this.props.quote.platforms.ios,
+                      desktop: !this.props.quote.platforms.desktop,
+                    },
+                    )}
                   onMouseEnter={() => this.setState({ desktopHover: true })}
                   onMouseLeave={() => this.setState({ desktopHover: false })}
                 >
-                  {this.state.desktop ?
+                  {this.props.quote.platforms.desktop ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -184,4 +237,18 @@ class Platforms extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Platforms));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      platforms{
+        web
+        ios
+        android
+        desktop
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Platforms)));

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -50,9 +51,6 @@ const styleSheet = createStyleSheet('Data', {
 
 class Data extends Component {
   state = {
-    database: false,
-    media: false,
-    datasource: false,
     databaseHover: false,
     mediaHover: false,
     datasourceHover: false,
@@ -61,12 +59,32 @@ class Data extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.state[paper]) {
+    if (this.props.quote.data[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
+  }
+
+  handleSubmit = (paper, value, state) => {
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({ data: { sub: paper, value } }),
+      },
+      optimisticResponse: {
+        __typename: 'Mutation',
+        updateQuote: {
+          id: this.props.quote.id,
+          data: {
+            ...state,
+            __typename: 'DataType',
+          },
+          __typename: 'QuoteType',
+        },
+      },
+    });
   }
 
   render() {
@@ -91,13 +109,21 @@ class Data extends Component {
                     this.handlePaperState('database')
                   }
                   elevation={
-                    this.state.database ? 12 : 1
+                    this.props.quote.data.database ? 12 : 1
                   }
-                  onClick={() => this.setState({ database: !this.state.database })}
+                  onClick={() => this.handleSubmit(
+                      'database',
+                      !this.props.quote.data.database,
+                    {
+                      database: !this.props.quote.data.database,
+                      media: this.props.quote.data.media,
+                      datasource: this.props.quote.data.datasource,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ databaseHover: true })}
                   onMouseLeave={() => this.setState({ databaseHover: false })}
                 >
-                  {this.state.database ?
+                  {this.props.quote.data.database ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -113,13 +139,21 @@ class Data extends Component {
                     this.handlePaperState('media')
                   }
                   elevation={
-                    this.state.media ? 12 : 1
+                    this.props.quote.data.media ? 12 : 1
                   }
-                  onClick={() => this.setState({ media: !this.state.media })}
+                  onClick={() => this.handleSubmit(
+                      'media',
+                      !this.props.quote.data.media,
+                    {
+                      database: this.props.quote.data.database,
+                      media: !this.props.quote.data.media,
+                      datasource: this.props.quote.data.datasource,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ mediaHover: true })}
                   onMouseLeave={() => this.setState({ mediaHover: false })}
                 >
-                  {this.state.media ?
+                  {this.props.quote.data.media ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -135,13 +169,21 @@ class Data extends Component {
                     this.handlePaperState('datasource')
                   }
                   elevation={
-                    this.state.datasource ? 12 : 1
+                    this.props.quote.data.datasource ? 12 : 1
                   }
-                  onClick={() => this.setState({ datasource: !this.state.datasource })}
+                  onClick={() => this.handleSubmit(
+                      'datasource',
+                      !this.props.quote.data.datasource,
+                    {
+                      database: this.props.quote.data.database,
+                      media: this.props.quote.data.media,
+                      datasource: !this.props.quote.data.datasource,
+                    },
+                  )}
                   onMouseEnter={() => this.setState({ datasourceHover: true })}
                   onMouseLeave={() => this.setState({ datasourceHover: false })}
                 >
-                  {this.state.datasource ?
+                  {this.props.quote.data.datasource ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -159,4 +201,17 @@ class Data extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Data));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      data{
+        datasource
+        media
+        database
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Data)));
