@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
-
-let interval;
+import * as actions from '../../lib/actions/quote';
+import fetchQuote from '../../lib/queries/fetchQuote';
 
 const styleSheet = createStyleSheet('Send', {
   section: {
@@ -22,9 +24,9 @@ const styleSheet = createStyleSheet('Send', {
 });
 
 class Send extends Component {
+
   state = {
-    name: this.props.quote.name,
-    email: this.props.quote.email,
+    loading: false,
   };
 
   validateEmail = (value) => {
@@ -35,18 +37,30 @@ class Send extends Component {
     return false;
   }
 
-  handleChange = ({ field, value }) => {
-    this.setState({ [field]: value });
-    clearInterval(interval);
-    interval = setInterval(() => {
-      clearInterval(interval);
-      this.props.mutate({
-        variables: {
-          id: this.props.quote.id,
-          key: JSON.stringify({ [field]: { value } }),
-        },
-      });
-    }, 500);
+  handleNameChange = ({ name }) => {
+    this.props.updateName({ name });
+  }
+
+  handleEmailChange = ({ email }) => {
+    this.props.updateEmail({ email });
+  }
+
+  handleSubmit = () => {
+    this.setState({ loading: true });
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({
+          comments: { value: this.props.comments },
+          name: { value: this.props.name },
+          email: { value: this.props.email },
+          saved: { value: true },
+        }),
+      },
+      refetchQueries: [{ query: fetchQuote, variables: { id: this.props.quote.id } }],
+    })
+      .then(() => this.props.clearForm())
+      .catch(() => this.setState({ loading: false }));
   }
 
   render() {
@@ -66,8 +80,8 @@ class Send extends Component {
               label={this.props.t('quote.send.name')}
               type="text"
               className={this.props.classes.field}
-              value={this.state.name}
-              onChange={event => this.handleChange({ field: 'name', value: event.target.value })}
+              value={this.props.name}
+              onChange={event => this.handleNameChange({ name: event.target.value })}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
@@ -75,12 +89,16 @@ class Send extends Component {
               label={this.props.t('quote.send.email')}
               type="text"
               className={this.props.classes.field}
-              value={this.state.email}
-              onChange={event => this.handleChange({ field: 'email', value: event.target.value })}
+              value={this.props.email}
+              onChange={event => this.handleEmailChange({ email: event.target.value })}
             />
           </Grid>
           <Grid item xs={12} sm={3}>
-            <Button raised disabled={this.validateEmail(this.state.email)} color="primary">{this.props.t('quote.send.submit')}</Button>
+            {
+              this.state.loading
+                ? <CircularProgress />
+                : <Button raised disabled={this.validateEmail(this.props.email)} color="primary" onClick={this.handleSubmit}>{this.props.t('quote.send.submit')}</Button>
+            }
           </Grid>
         </Grid>
       </div>
@@ -92,10 +110,19 @@ const mutation = gql`
   mutation UpdateQuote($id: String!, $key: JSON) {
     updateQuote(id: $id, key: $key) {
       id
-      name
-      email
+      saved
     }
   }
 `;
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Send)));
+function mapStateToProps(state) {
+  return {
+    comments: state.quote.comments,
+    name: state.quote.name,
+    email: state.quote.email,
+  };
+}
+
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(
+    graphql(mutation)(withStyles(styleSheet)(Send))));

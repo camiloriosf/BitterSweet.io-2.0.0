@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
-
-let interval;
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Comments', {
   section: {
@@ -20,22 +19,9 @@ const styleSheet = createStyleSheet('Comments', {
 });
 
 class Comments extends Component {
-  state = {
-    comments: this.props.quote.comments,
-  };
 
-  handleChange = ({ value }) => {
-    this.setState({ comments: value });
-    clearInterval(interval);
-    interval = setInterval(() => {
-      clearInterval(interval);
-      this.props.mutate({
-        variables: {
-          id: this.props.quote.id,
-          key: JSON.stringify({ comments: { value } }),
-        },
-      });
-    }, 500);
+  handleChange = ({ comments }) => {
+    this.props.updateComments({ comments });
   }
 
   render() {
@@ -57,8 +43,8 @@ class Comments extends Component {
               multiline
               type="text"
               className={this.props.classes.comments}
-              value={this.state.comments}
-              onChange={event => this.handleChange({ value: event.target.value })}
+              value={this.props.comments}
+              onChange={event => this.handleChange({ comments: event.target.value })}
             />
           </Grid>
         </Grid>
@@ -67,13 +53,11 @@ class Comments extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      comments
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    comments: state.quote.comments,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Comments)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Comments)));

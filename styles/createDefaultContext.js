@@ -13,7 +13,6 @@ const createDefaultContext = () =>
     }),
   });
 
-// Singleton hack as there is no way to pass variables from _document.js to pages yet.
 let context = null;
 
 export function setDefaultContext() {
@@ -21,13 +20,10 @@ export function setDefaultContext() {
 }
 
 export function getDefaultContext() {
-  // Make sure to create a new store for every server-side request so that data
-  // isn't shared between connections (which would be bad)
   if (!process.browser) {
     return context;
   }
 
-  // Reuse store on the client-side
   if (!context) {
     context = createDefaultContext();
   }

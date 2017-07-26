@@ -80,7 +80,12 @@ class Prices extends Component {
     });
   }
 
-  calcInstallments = () => 1
+  calcInstallments = () => {
+    if (this.props.quote.time.now) {
+      return 10;
+    }
+    return 0;
+  }
 
   calcPayg = () => 1
 

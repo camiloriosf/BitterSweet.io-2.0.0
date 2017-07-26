@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
+import Typography from 'material-ui/Typography';
 import { gql, graphql, compose } from 'react-apollo';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -67,7 +68,7 @@ class Quote extends Component {
       if (this.props.user.loading || this.state.fetching) {
         return (
           <div className={this.props.classes.startButton}>
-            <CircularProgress className={this.props.classes.progress} />
+            <CircularProgress />
           </div>
         );
       }
@@ -76,6 +77,32 @@ class Quote extends Component {
           <Button raised color="primary" onClick={this.handleClick}>Start</Button>
         </div>
       );
+    }
+
+    if (
+      this.props.quote.quote.saved &&
+      this.props.quote.quote.id === this.props.id &&
+      !this.state.fetching) {
+      return (
+        <div>
+          <Typography type="title" align="center" paragraph>
+            Great!
+          </Typography>
+          <Typography type="subheading" align="center" paragraph>
+            We have received your quotation, we will get in touch with you shortly.
+          </Typography>
+          <div className={this.props.classes.startButton}>
+            <Button raised color="primary" onClick={this.handleClick}>Quote again</Button>
+          </div>
+        </div>
+      );
+    }
+
+    if (this.props.quote.quote.saved) {
+      return (
+        <div className={this.props.classes.startButton}>
+          <CircularProgress />
+        </div>);
     }
 
     return (
