@@ -1,26 +1,26 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-import { getDefaultContext, setDefaultContext } from '../styles/createDefaultContext';
+import { getContext, setContext } from '../styles/context';
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
-    setDefaultContext();
+    // Reset the context for handling a new request.
+    setContext();
     const page = ctx.renderPage();
-    const styleContext = getDefaultContext();
-
+    // Get the context with the collected side effects.
+    const context = getContext();
     return {
       ...page,
-      styles: <style id="jss-server-side" dangerouslySetInnerHTML={{ __html: styleContext.styleManager.sheetsToString() }} />,
+      styles: <style id="jss-server-side" dangerouslySetInnerHTML={{ __html: context.sheetsRegistry.toString() }} />,
     };
   }
 
   render() {
-    const styleContext = getDefaultContext();
-    const script = `window.ENV = '${process.env.NODE_ENV || 'development'}';`;
+    const context = getContext();
     return (
       <html lang="en">
         <Head>
-          <title>BitterSweet.io</title>
+          <title>My page</title>
           <meta charSet="utf-8" />
           {/* Use minimum-scale=1 to enable GPU rasterization */}
           <meta
@@ -31,12 +31,11 @@ export default class MyDocument extends Document {
             }
           />
           {/* PWA primary color */}
-          <meta name="theme-color" content={styleContext.theme.palette.primary[500]} />
+          <meta name="theme-color" content={context.theme.palette.primary[500]} />
           <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
           />
-          <script dangerouslySetInnerHTML={{ __html: script }} />
         </Head>
         <body>
           <Main />
