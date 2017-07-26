@@ -3,9 +3,12 @@ import Button from 'material-ui/Button';
 import KeyboardArrowUpIcon from 'material-ui-icons/KeyboardArrowUp';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
-import { transparent, indigo } from 'material-ui/styles/colors';
+import common from 'material-ui/colors/common';
+import blue from 'material-ui/colors/blue';
 import { gql, graphql } from 'react-apollo';
-import { logEvent } from '../tools/analytics';
+import { logEvent } from '../../tools/analytics';
+
+const { transparent } = common;
 
 const styleSheet = createStyleSheet('Up', {
   section: {
@@ -27,7 +30,7 @@ const styleSheet = createStyleSheet('Up', {
     background: transparent,
   },
   icon: {
-    fill: indigo[500],
+    fill: blue[500],
   },
 });
 

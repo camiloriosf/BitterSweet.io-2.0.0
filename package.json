@@ -23,7 +23,8 @@
     "i18next": "^8.4.2",
     "i18next-browser-languagedetector": "^2.0.0",
     "isomorphic-fetch": "^2.2.1",
-    "material-ui": "^1.0.0-alpha.19",
+    "lodash": "^4.17.4",
+    "material-ui": "^1.0.0-alpha.22",
     "material-ui-icons": "^1.0.0-alpha.3",
     "next": "^2.4.3",
     "prop-types": "^15.5.10",
@@ -35,7 +36,8 @@
     "react-onclickoutside": "^6.1.1",
     "react-swipeable-views": "^0.12.3",
     "react-visibility-sensor": "^3.10.0",
-    "redux": "^3.7.0"
+    "redux": "^3.7.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

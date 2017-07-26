@@ -1,140 +1,128 @@
 import React, { Component } from 'react';
-import Typography from 'material-ui/Typography';
-import { fullWhite, indigo, blue } from 'material-ui/styles/colors';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
-import Paper from 'material-ui/Paper';
-import Button from 'material-ui/Button';
-import IconButton from 'material-ui/IconButton';
-import HelpIcon from 'material-ui-icons/Help';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
+import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
+import fetchQuote from '../../lib/queries/fetchQuote';
 
 const styleSheet = createStyleSheet('Send', {
-  slide: {
-    padding: 10,
-    color: '#fff',
+  section: {
+    padding: 20,
+    marginTop: 50,
+    marginBottom: 50,
   },
-  title1: {
-    color: fullWhite,
-    marginBottom: 10,
-  },
-  icon: {
-    width: 40,
-    height: 40,
-    fill: indigo[500],
-  },
-  helpIcon: {
-    fill: blue[200],
-  },
-  paper: {
+  field: {
     textAlign: 'center',
-    padding: 5,
-  },
-  buttonDiv: {
-    marginTop: 30,
-    textAlign: 'center',
+    width: '100%',
   },
 });
 
 class Send extends Component {
+
   state = {
-    service: 0,
-    fee: 0,
-    open: false,
+    loading: false,
   };
 
-  handleRequestClose = () => this.setState({ open: false });
+  validateEmail = (value) => {
+    const re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+    if (value === '' || !re.test(value)) {
+      return true;
+    }
+    return false;
+  }
+
+  handleNameChange = ({ name }) => {
+    this.props.updateName({ name });
+  }
+
+  handleEmailChange = ({ email }) => {
+    this.props.updateEmail({ email });
+  }
+
+  handleSubmit = () => {
+    this.setState({ loading: true });
+    this.props.mutate({
+      variables: {
+        id: this.props.quote.id,
+        key: JSON.stringify({
+          comments: { value: this.props.comments },
+          name: { value: this.props.name },
+          email: { value: this.props.email },
+          saved: { value: true },
+        }),
+      },
+      refetchQueries: [{ query: fetchQuote, variables: { id: this.props.quote.id } }],
+    })
+      .then(() => this.props.clearForm())
+      .catch(() => this.setState({ loading: false }));
+  }
 
   render() {
     return (
-      <div className={this.props.classes.slide}>
-        <Typography type="title" align="center" className={this.props.classes.title1}>
-          {this.props.t('quote.send.title')}
-          <IconButton aria-label="Help" onClick={() => this.setState({ open: true })}>
-            <HelpIcon className={this.props.classes.helpIcon} />
-          </IconButton>
-        </Typography>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={4}>
-            <Paper className={this.props.classes.paper} elevation={12} >
-              <Grid container justify="center" align="center">
-                <Grid item xs={12}>
-                  <Typography type="subheading" align="center">
-                    {this.props.t('quote.send.payg.title')}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <div>
-                    <Typography type="display1" align="center">
-                      ${this.state.service}{this.props.t('quote.send.payg.month')}
-                    </Typography>
-                  </div>
-                </Grid>
-              </Grid>
-            </Paper>
+      <div className={this.props.classes.section}>
+        <Grid container justify="center" align="center">
+          <Grid item xs={12} sm={12}>
+            <Typography type="display1" align="center" paragraph>
+              {this.props.t('quote.send.title')}
+            </Typography>
+            <Typography type="subheading" align="center" paragraph>
+              {this.props.t('quote.send.subtitle')}
+            </Typography>
           </Grid>
-          <Grid item xs={12} sm={4}>
-            <Paper className={this.props.classes.paper} elevation={12} >
-              <Grid container justify="center" align="center">
-                <Grid item xs={12}>
-                  <Typography type="subheading" align="center">
-                    {this.props.t('quote.send.fee.title')}
-                  </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                  <div>
-                    <Typography type="display1" align="center">
-                      ${this.state.fee}
-                    </Typography>
-                  </div>
-                </Grid>
-              </Grid>
-            </Paper>
+          <Grid item xs={12} sm={3}>
+            <TextField
+              label={this.props.t('quote.send.name')}
+              type="text"
+              className={this.props.classes.field}
+              value={this.props.name}
+              onChange={event => this.handleNameChange({ name: event.target.value })}
+            />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            <TextField
+              label={this.props.t('quote.send.email')}
+              type="text"
+              className={this.props.classes.field}
+              value={this.props.email}
+              onChange={event => this.handleEmailChange({ email: event.target.value })}
+            />
+          </Grid>
+          <Grid item xs={12} sm={3}>
+            {
+              this.state.loading
+                ? <CircularProgress />
+                : <Button raised disabled={this.validateEmail(this.props.email)} color="primary" onClick={this.handleSubmit}>{this.props.t('quote.send.submit')}</Button>
+            }
           </Grid>
         </Grid>
-        <Grid container justify="center" align="flex-start">
-          <Grid item xs={12} sm={8}>
-            <Paper className={this.props.classes.paper} elevation={12} >
-              <form>
-                <Grid container justify="center" align="flex-start">
-                  <Grid item xs={12} sm={4}>
-                    <TextField label={this.props.t('quote.send.form.name')} type="text" />
-                  </Grid>
-                  <Grid item xs={12} sm={4}>
-                    <TextField label={this.props.t('quote.send.form.email')} type="email" />
-                  </Grid>
-                </Grid>
-                <div className={this.props.classes.buttonDiv}>
-                  <Button raised type="submit">{this.props.t('quote.send.form.button')}</Button>
-                </div>
-              </form>
-            </Paper>
-          </Grid>
-        </Grid>
-        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
-          <DialogTitle>
-            {this.props.t('quote.send.dialog.title')}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              {this.props.t('quote.send.dialog.content.0')}<br /><br />
-              {this.props.t('quote.send.dialog.content.1')}
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleRequestClose} color="primary">{this.props.t('quote.send.dialog.button')}</Button>
-          </DialogActions>
-        </Dialog>
       </div>
     );
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Send));
+const mutation = gql`
+  mutation UpdateQuote($id: String!, $key: JSON) {
+    updateQuote(id: $id, key: $key) {
+      id
+      saved
+    }
+  }
+`;
+
+function mapStateToProps(state) {
+  return {
+    comments: state.quote.comments,
+    name: state.quote.name,
+    email: state.quote.email,
+  };
+}
+
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(
+    graphql(mutation)(withStyles(styleSheet)(Send))));

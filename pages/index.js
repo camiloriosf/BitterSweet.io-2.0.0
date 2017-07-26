@@ -6,17 +6,16 @@ import startI18n from '../tools/startI18n';
 import { getTranslation, getLanguage } from '../tools/translationHelpers';
 import App from '../components/App';
 import Header from '../components/Header';
-import HeroTest from '../components/Hero';
-import Services from '../components/Services';
-import How from '../components/How';
-import Pricing from '../components/Pricing';
-import Quote from '../components/Quote';
-import FAQ from '../components/FAQ';
-import Contact from '../components/Contact';
 import Footer from '../components/Footer';
-import Up from '../components/Up';
+import Hero from '../components/index/Hero';
+import Services from '../components/index/Services';
+import How from '../components/index/How';
+import Pricing from '../components/index/Pricing';
+import FAQ from '../components/index/FAQ';
+import Contact from '../components/index/Contact';
+import Up from '../components/index/Up';
+import Nav from '../components/index/Nav';
 import Languages from '../components/Languages';
-import Nav from '../components/Nav';
 
 const styles = {
   root: {
@@ -59,18 +58,16 @@ class Index extends Component {
         <I18nextProvider i18n={this.i18n}>
           <div style={styles.root}>
             <section id="home" />
-            <Header />
+            <Header url={this.props.url} />
             <VisibilitySensor onChange={this.onChange} />
             <section id="hero" />
-            <HeroTest />
+            <Hero />
             <section id="services" />
             <Services />
             <section id="how" />
             <How />
             <section id="pricing" />
             <Pricing />
-            <section id="quote" />
-            <Quote />
             <section id="faq" />
             <FAQ />
             <section id="contact" />

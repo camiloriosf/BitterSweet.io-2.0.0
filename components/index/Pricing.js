@@ -6,38 +6,32 @@ import FlightTakeoffIcon from 'material-ui-icons/FlightTakeoff';
 import FlightIcon from 'material-ui-icons/Flight';
 import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button';
-import { grey, indigo } from 'material-ui/styles/colors';
+import blue from 'material-ui/colors/blue';
+import grey from 'material-ui/colors/grey';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
-import { logEvent } from '../tools/analytics';
+import Router from 'next/router';
+import { logEvent } from '../../tools/analytics';
 
 const styleSheet = createStyleSheet('Pricing', {
   section: {
-    background: grey[100],
-    padding: '10px 10px 30px 10px',
+    background: grey[50],
+    padding: '50px 10px 100px 10px',
   },
   padSections: {
     marginTop: 10,
-  },
-  sectionTitle: {
-    color: indigo[500],
-  },
-  sectionSubTitle: {
-    marginTop: 10,
-    marginBottom: 10,
   },
   service: {
     color: grey[700],
   },
   features: {
-    color: indigo[200],
     paddingRight: 20,
     paddingLeft: 20,
   },
   icon: {
-    fill: indigo[100],
+    fill: blue[500],
     height: 80,
     width: 80,
   },
@@ -72,6 +66,7 @@ class Pricing extends Component {
     if (!this.props.data.loading) {
       logEvent('click', action);
     }
+    Router.push('/quote');
   };
 
   handleChange = (isVisible) => {
@@ -89,80 +84,107 @@ class Pricing extends Component {
         <VisibilitySensor onChange={this.handleChange} />
         <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
           <Grid item xs={12} sm={12}>
-            <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
+            <Typography type="display1" align="center" paragraph>
               {this.props.t('pricing.title')}
             </Typography>
-            <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
+            <Typography type="subheading" align="center" paragraph>
               {this.props.t('pricing.subtitle')}
             </Typography>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={12} md={3}>
             <Paper square elevation={10} className={this.props.classes.paper}>
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <FlightTakeoffIcon className={this.props.classes.icon} />
-                  <Typography type="subheading" align="center" className={this.props.classes.service}>
+                  <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
                     {this.props.t('pricing.payg.title')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.payg.features.0')}
                   </Typography>
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
-                    {this.props.t('pricing.payg.features.1')}<br />
-                    {this.props.t('pricing.payg.features.2')}
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.payg.features.1')}
                   </Typography>
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.payg.features.3')}
                   </Typography>
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.payg.features.4')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <div className={this.props.classes.quote}>
-                    <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('pricing_quote_payg')}>
-                      <Button color="primary">
-                        <Typography type="title" align="center" color="inherit">QUOTE</Typography>
-                      </Button>
-                    </a>
+                    <Button color="primary" onClick={() => this.handleClick('pricing_quote_payg')}>
+                      <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                    </Button>
                   </div>
                 </Grid>
               </Grid>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={4}>
+          <Grid item xs={12} sm={12} md={3}>
             <Paper square elevation={10} className={this.props.classes.paper}>
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <FlightIcon className={this.props.classes.icon} />
-                  <Typography type="subheading" align="center" className={this.props.classes.service}>
+                  <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
                     {this.props.t('pricing.fee.title')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.fee.features.0')}
                   </Typography>
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
-                    {this.props.t('pricing.fee.features.1')}<br />
-                    {this.props.t('pricing.fee.features.2')}
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.fee.features.1')}
                   </Typography>
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.fee.features.3')}
                   </Typography>
-                  <Typography type="body1" align="center" paragraph className={this.props.classes.features}>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
                     {this.props.t('pricing.fee.features.4')}
                   </Typography>
                   <Divider light className={this.props.classes.divider} />
                 </Grid>
                 <Grid item xs={12} sm={12}>
                   <div className={this.props.classes.quote}>
-                    <a href="#quote" className={this.props.classes.anchor} onClick={() => this.handleClick('pricing_quote_fee')}>
-                      <Button color="primary">
-                        <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
-                      </Button>
-                    </a>
+                    <Button color="primary" onClick={() => this.handleClick('pricing_quote_fee')}>
+                      <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
+                    </Button>
+                  </div>
+                </Grid>
+              </Grid>
+            </Paper>
+          </Grid>
+          <Grid item xs={12} sm={12} md={3}>
+            <Paper square elevation={10} className={this.props.classes.paper}>
+              <Grid container justify="center" align="flex-start">
+                <Grid item xs={12} sm={12} className={this.props.classes.grid}>
+                  <FlightIcon className={this.props.classes.icon} />
+                  <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
+                    {this.props.t('pricing.fee.title')}
+                  </Typography>
+                  <Divider light className={this.props.classes.divider} />
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.fee.features.0')}
+                  </Typography>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.fee.features.1')}
+                  </Typography>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.fee.features.3')}
+                  </Typography>
+                  <Typography component="p" align="center" paragraph className={this.props.classes.features}>
+                    {this.props.t('pricing.fee.features.4')}
+                  </Typography>
+                  <Divider light className={this.props.classes.divider} />
+                </Grid>
+                <Grid item xs={12} sm={12}>
+                  <div className={this.props.classes.quote}>
+                    <Button color="primary" onClick={() => this.handleClick('pricing_quote_fee')}>
+                      <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
+                    </Button>
                   </div>
                 </Grid>
               </Grid>

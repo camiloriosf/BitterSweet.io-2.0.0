@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import { fullWhite, indigo } from 'material-ui/styles/colors';
+import blue from 'material-ui/colors/blue';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
+import Slide from 'material-ui/transitions/Slide';
 import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
-import { logEvent } from '../tools/analytics';
+import { logEvent } from '../../tools/analytics';
 
 const styleSheet = createStyleSheet('How', {
   section: {
-    background: fullWhite,
-    padding: '10px 10px 30px 10px',
+    padding: '50px 10px 100px 10px',
   },
   padSections: {
     marginTop: 10,
   },
   sectionTitle: {
-    color: indigo[500],
+    color: blue[500],
   },
   sectionSubTitle: {
     marginTop: 10,
@@ -109,18 +109,21 @@ class How extends Component {
   render() {
     return (
       <div className={this.props.classes.section}>
-        <VisibilitySensor onChange={this.handleChange} />
-        <Grid container justify="center" align="center" className={this.props.classes.padSections}>
-          <Grid item xs={12} sm={12}>
-            <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-              {this.props.t('how.title')}
-            </Typography>
-            <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-              {this.props.t('how.subtitle')}
-            </Typography>
+        <VisibilitySensor onChange={this.handleChange} active={!this.state.isVisible} delayedCall>
+          <Grid container justify="center" align="center" className={this.props.classes.padSections}>
+            <Grid item xs={12} sm={12}>
+              <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
+                {this.props.t('how.title')}
+              </Typography>
+              <Slide direction="up" enterTransitionDuration={1000} in>
+                <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
+                  {this.props.t('how.subtitle')}
+                </Typography>
+              </Slide>
+            </Grid>
+            {this.renderFeatures()}
           </Grid>
-          {this.renderFeatures()}
-        </Grid>
+        </VisibilitySensor >
       </div>
     );
   }
