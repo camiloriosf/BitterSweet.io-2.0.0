@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
@@ -7,12 +8,12 @@ import grey from 'material-ui/colors/grey';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
-import fetchQuote from '../../lib/queries/fetchQuote';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Prices', {
   section: {
     padding: 20,
-    marginTop: 50,
+    marginTop: 20,
   },
   title: {
     color: blue[500],
@@ -51,6 +52,40 @@ class Prices extends Component {
     feeHover: false,
   };
 
+  componentWillReceiveProps = (nextProps) => {
+    this.props.updatePrice(nextProps.quote);
+    if (this.props.installments !== nextProps.installments) {
+      this.props.mutate({
+        variables: {
+          id: this.props.quote.id,
+          key: JSON.stringify({
+            prices: { sub: 'installments', value: nextProps.installments },
+          }),
+        },
+      });
+    }
+    if (this.props.payg !== nextProps.payg) {
+      this.props.mutate({
+        variables: {
+          id: this.props.quote.id,
+          key: JSON.stringify({
+            prices: { sub: 'payg', value: nextProps.payg },
+          }),
+        },
+      });
+    }
+    if (this.props.fee !== nextProps.fee) {
+      this.props.mutate({
+        variables: {
+          id: this.props.quote.id,
+          key: JSON.stringify({
+            prices: { sub: 'fee', value: nextProps.fee },
+          }),
+        },
+      });
+    }
+  }
+
   handlePaperState = (paper) => {
     if (this.props.quote.plan[paper]) {
       return this.props.classes.paperSelected;
@@ -80,16 +115,7 @@ class Prices extends Component {
     });
   }
 
-  calcInstallments = () => {
-    if (this.props.quote.time.now) {
-      return 10;
-    }
-    return 0;
-  }
-
-  calcPayg = () => 1
-
-  calcFee = () => 1
+  formatPrice = price => `$${price.toLocaleString()}`;
 
   render() {
     return (
@@ -126,7 +152,7 @@ class Prices extends Component {
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <Typography type="title" color="accent" component="h2" align="center" className={this.props.classes.title}>
-                    {this.calcInstallments()}
+                    {this.formatPrice(this.props.installments)}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -160,7 +186,7 @@ class Prices extends Component {
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <Typography type="title" component="h2" align="center" className={this.props.classes.title}>
-                    {this.calcPayg()}
+                    {this.formatPrice(this.props.payg)}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -194,7 +220,7 @@ class Prices extends Component {
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <Typography type="title" color="accent" component="h2" align="center" className={this.props.classes.title}>
-                    {this.calcFee()}
+                    {this.formatPrice(this.props.fee)}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -224,4 +250,13 @@ const mutation = gql`
   }
 `;
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Prices)));
+function mapStateToProps(state) {
+  return {
+    installments: state.quote.installments,
+    payg: state.quote.payg,
+    fee: state.quote.fee,
+  };
+}
+
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(graphql(mutation)(withStyles(styleSheet)(Prices))));

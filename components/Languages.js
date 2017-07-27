@@ -11,21 +11,21 @@ import { translate } from 'react-i18next';
 const styleSheet = createStyleSheet('Languages', {
   section: {
     position: 'fixed',
-    top: 0,
+    bottom: 0,
     left: 0,
     padding: 5,
     zIndex: 9999999999,
   },
   languageES: {
     position: 'fixed',
-    top: 50,
+    bottom: 50,
     left: 0,
     margin: 5,
     zIndex: 9999999999,
   },
   languageEN: {
     position: 'fixed',
-    top: 120,
+    bottom: 120,
     left: 0,
     margin: 5,
     zIndex: 9999999999,

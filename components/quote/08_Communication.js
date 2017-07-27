@@ -15,7 +15,7 @@ import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Communication', {
   slide: {
-    padding: 20,
+    padding: 30,
   },
   paperSelected: {
     textAlign: 'center',

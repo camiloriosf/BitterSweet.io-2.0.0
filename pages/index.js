@@ -43,6 +43,10 @@ class Index extends Component {
     this.i18n.addResourceBundle('es', 'common', props.translationES);
   }
 
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     if (this.state.show === nextState.show) return false;
     return true;

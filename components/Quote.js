@@ -12,19 +12,7 @@ import Hero from './quote/Hero';
 import Prices from './quote/Prices';
 import Comments from './quote/Comments';
 import Send from './quote/Send';
-import NDA from './quote/01_NDA';
-import Platforms from './quote/02_Platforms';
-import Pages from './quote/03_Pages';
-import Design from './quote/04_Design';
-import Authentication from './quote/05_Authentication';
-import Data from './quote/06_Data';
-import GeoLocation from './quote/07_GeoLocation';
-import Communication from './quote/08_Communication';
-import APIs from './quote/09_APIs';
-import Commerce from './quote/10_Commerce';
-import Admin from './quote/11_Admin';
-import Product from './quote/12_Product';
-import Time from './quote/13_Time';
+import Sections from './quote/Sections';
 import fetchUser from '../lib/queries/fetchUser';
 import fetchQuote from '../lib/queries/fetchQuote';
 import * as actions from '../lib/actions/quote';
@@ -107,19 +95,7 @@ class Quote extends Component {
 
     return (
       <span>
-        <NDA quote={this.props.quote.quote} />
-        <Platforms quote={this.props.quote.quote} />
-        <Pages quote={this.props.quote.quote} />
-        <Design quote={this.props.quote.quote} />
-        <Authentication quote={this.props.quote.quote} />
-        <Data quote={this.props.quote.quote} />
-        <GeoLocation quote={this.props.quote.quote} />
-        <Communication quote={this.props.quote.quote} />
-        <APIs quote={this.props.quote.quote} />
-        <Commerce quote={this.props.quote.quote} />
-        <Admin quote={this.props.quote.quote} />
-        <Product quote={this.props.quote.quote} />
-        <Time quote={this.props.quote.quote} />
+        <Sections quote={this.props.quote.quote} />
         <Prices quote={this.props.quote.quote} />
         <Comments quote={this.props.quote.quote} />
         <Send quote={this.props.quote.quote} />

@@ -14,7 +14,7 @@ import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Data', {
   slide: {
-    padding: 20,
+    padding: 30,
   },
   paperSelected: {
     textAlign: 'center',
