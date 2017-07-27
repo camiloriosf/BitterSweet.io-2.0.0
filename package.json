@@ -38,6 +38,7 @@
     "react-i18next": "^4.1.2",
     "react-jss": "^7.0.2",
     "react-onclickoutside": "^6.1.1",
+    "react-redux": "^5.0.5",
     "react-swipeable-views": "^0.12.3",
     "react-visibility-sensor": "^3.10.0",
     "redux": "^3.7.0",
