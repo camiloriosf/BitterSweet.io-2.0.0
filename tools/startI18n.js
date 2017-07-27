@@ -1,13 +1,14 @@
 import i18n from 'i18next';
+import XHR from 'i18next-xhr-backend';
 import LngDetector from 'i18next-browser-languagedetector';
 
-const startI18n = (file, lang) => i18n.use(LngDetector).init({
-  lng: lang,
+const startI18n = () => i18n.use(LngDetector).use(XHR).init({
   fallbackLng: 'en',
-  resources: file,
   detection: {
     order: ['navigator', 'htmlTag'],
   },
+  loadPath: '/static/locales/{{lng}}/{{ns}}.json',
+  addPath: '/static/locales/add/{{lng}}/{{ns}}',
   ns: ['common'],
   defaultNS: 'common',
   debug: false,
@@ -15,6 +16,7 @@ const startI18n = (file, lang) => i18n.use(LngDetector).init({
     escapeValue: false,
     formatSeparator: ',',
   },
+  saveMissing: true,
 });
 
 export default startI18n;
