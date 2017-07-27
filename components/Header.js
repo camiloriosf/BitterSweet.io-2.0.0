@@ -29,7 +29,7 @@ const styleSheet = createStyleSheet('Header', {
   title: {
     flex: 1,
     textAlign: 'left',
-    marginLeft: 30,
+    cursor: 'pointer',
   },
   buttons: {
     textAlign: 'center',
@@ -87,9 +87,11 @@ class Header extends Component {
       <div className={this.props.classes.root}>
         <AppBar className={this.props.classes.appBar} color="inherit" >
           <Toolbar>
-            <Typography type="title" align="center" className={this.props.classes.title}>
-              {this.props.t('name')}
-            </Typography>
+            <Link href="/">
+              <Typography type="title" align="center" className={this.props.classes.title}>
+                {this.props.t('name')}
+              </Typography>
+            </Link>
             <Hidden xsDown>
               {this.renderLinks()}
             </Hidden>

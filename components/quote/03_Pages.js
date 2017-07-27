@@ -11,11 +11,11 @@ import { translate } from 'react-i18next';
 
 const styleSheet = createStyleSheet('Pages', {
   slide: {
-    padding: 20,
+    padding: 30,
   },
   paper: {
     textAlign: 'center',
-    padding: 10,
+    padding: 20,
   },
 });
 
