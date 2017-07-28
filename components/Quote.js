@@ -9,12 +9,13 @@ import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
 import Header from './Header';
 import Footer from './Footer';
+import Nav from './Nav';
+import Languages from './Languages';
 import Hero from './quote/Hero';
 import Prices from './quote/Prices';
 import Comments from './quote/Comments';
 import Send from './quote/Send';
 import Sections from './quote/Sections';
-import Nav from './index/Nav';
 import fetchUser from '../lib/queries/fetchUser';
 import fetchQuote from '../lib/queries/fetchQuote';
 import * as actions from '../lib/actions/quote';
@@ -112,6 +113,7 @@ class Quote extends Component {
         <Hero />
         {this.checkQuote()}
         <Footer />
+        <Languages />
         <Hidden mdUp><Nav url={this.props.url} /></Hidden>
       </div>
     );

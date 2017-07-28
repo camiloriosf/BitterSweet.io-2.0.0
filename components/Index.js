@@ -3,6 +3,8 @@ import Hidden from 'material-ui/Hidden';
 import { translate } from 'react-i18next';
 import Header from './Header';
 import Footer from './Footer';
+import Nav from './Nav';
+import Languages from './Languages';
 import Hero from './index/Hero';
 import Services from './index/Services';
 import How from './index/How';
@@ -10,8 +12,6 @@ import Pricing from './index/Pricing';
 import FAQ from './index/FAQ';
 import Contact from './index/Contact';
 import Up from './index/Up';
-import Nav from './index/Nav';
-import Languages from './Languages';
 
 class Index extends Component {
   constructor(props) {
