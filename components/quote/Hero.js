@@ -81,7 +81,7 @@ class Hero extends Component {
       </Grid>
       <Grid item xs={12} sm={5}>
         <div className={this.props.classes.imageContainer}>
-          <img src={`${env.imageURI}imagen_01.png`} alt="imagen_01" className={this.props.classes.image} />
+          <img src="static/imagen_01.png" alt="imagen_01" className={this.props.classes.image} />
         </div>
       </Grid>
     </Grid>

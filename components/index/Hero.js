@@ -143,14 +143,14 @@ class Hero extends Component {
       <Grid item xs={12} sm={12} className={this.props.classes.pad4}>
         <Hidden smDown>
           <div className={this.props.classes.crop1}>
-            <Slide direction="up" enterTransitionDuration={500} in><img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup1} /></Slide>
+            <Slide direction="up" enterTransitionDuration={500} in><img src="/static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup1} /></Slide>
             <Slide direction="up" enterTransitionDuration={1000} in><img src="static/home_mockups_2.png" alt="WebSite Mockup 2" className={this.props.classes.mockup2} /></Slide>
             <Slide direction="up" enterTransitionDuration={1000} in><img src="static/home_mockups_3.png" alt="WebSite Mockup 3" className={this.props.classes.mockup3} /></Slide>
           </div>
         </Hidden>
         <Hidden mdUp xsDown>
           <div className={this.props.classes.crop2}>
-            <img src="static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup11} />
+            <img src="/static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup11} />
           </div>
         </Hidden>
       </Grid>
