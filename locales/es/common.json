@@ -1,366 +1,383 @@
 {
   "name": "BitterSweet.io",
-  "header":{
-    "what": "que hacemos",
-    "how": "como",
+  "header": {
+    "what": "qué hacemos",
+    "how": "cómo",
     "pricing": "precios",
     "quote": "cotizar",
     "faq": "faq",
-    "contact": "contactanos"
+    "contact": "contáctanos"
   },
-  "hero":{
+  "hero": {
     "title": "SIMPLIFICA TU NEGOCIO",
-    "subtitle" : "BitterSweet.io simplifica el desarrollo de softwares, preocupandose de todo el ciclo de vida de tu proyecto.",
-    "button" : "COTIZAR"
+    "subtitle": "BitterSweet.io simplifica el desarrollo de softwares, preocupándose de todo el ciclo de vida de tu proyecto.",
+    "button": "COTIZAR"
   },
-  "services":{
-    "title": "What we do",
-    "subtitle": "We offer a unique approach to software development, taking care from coding to the hosting and promotion of your site/app.",
-    "features":[
+  "services": {
+    "title": "Qué hacemos?",
+    "subtitle": "Ofrecemos un enfoque único para el desarrollo de softwares, haciéndonos cargo del código, hosting y de la promoción de tu sitio/aplicación.",
+    "features": [
       {
-        "title": "Multiplatform Dev",
-        "description": "We can develop your app for the Web, Android, iOS or Desktop."
+        "title": "Desarrollo multiplataforma",
+        "description": "Podemos desarrollar tu aplicación para la web, Android, iOS o escritorio."
       },
       {
-        "title": "Clear and Fair Price",
-        "description": "No hidden costs, we charge the same ammount every month, with no huge investments."
+        "title": "Precio transparente y justo",
+        "description": "Sin precios ocultos, cargaremos mensualmente a tu cuenta el mismo costo, sin hacer una gran inversión."
       },
       {
-        "title": "Zero Risk",
-        "description": "We only charge you when your app is up and running and you are happy with it."
+        "title": "Riesgo Cero",
+        "description": "Cargaremos el precio a tu cuenta solo cuando tu aplicación esté en la red, funcionando y estés feliz con ella."
       },
       {
-        "title": "No Contracts",
-        "description": "Stop the service whenever you like, there are no long-term contracts."
+        "title": "Sin Contratos",
+        "description": "Detén el servicio cuando quieras, no trabajamos con contratos a largo plazo."
       },
       {
-        "title": "Relax",
-        "description": "We take care of everything. From development to SEO optimization and support. You just focus on your business."
+        "title": "Relájate",
+        "description": "Nosotros nos ocupamos de todo, desde el desarrollo hasta el soporte y optimización de SEO. Mantén la atención solo en tu negocio."
       },
       {
-        "title": "Small and Big Companies alike",
-        "description": "We only use top of the line technologies, with integrated SSL certificates, load-balancing, auto scaling and CDN."
+        "title": "Como en pequeñas y grandes compañías",
+        "description": "Usamos lo último en tecnología, con certificados SSL integrados, load-balancing, auto-escalamiento y CDN."
       }
     ]
   },
   "how":{
-    "title": "How we do it",
-    "subtitle": "Introducing a modern, modular approach to building fast, responsive and scalable web apps.",
+    "title": "Cómo lo hacemos?",
+    "subtitle": "Introduciendo un enfoque moderno y modular para desarrollar aplicaciones rápidas, responsivas y escalables.",
     "features":[
       {
-        "title": "Goodbye old way, welcome BitterSweet.io",
-        "description": "In BitterSweet.io we have created a new way of developing apps. With it we are able to lower costs, release times and add all the features industrial grade softwares have."
+        "title": "Adiós al viejo estilo, bienvenido BitterSweet.io",
+        "description": "En BitterSweet.io hemos creado una nueva manera de desarrollar aplicaciones. Con esta, somos capaces de disminuir costos, tiempos de lanzamiento y agregamos todas las características que poseen los softwares industriales."
       },
       {
-        "title": "Don't pay for our office. We don't have one",
-        "description": "We are a fully Cloud Company, we use all the technologies available to increase collaborative work, so we don&apos;t have to transfer these costs to you."
+        "title": "No pagues por nuestra oficina, no tenemos una",
+        "description": "Somos una compañía totalmente virtual, usamos todas las tecnologías disponibles para aumentar el trabajo colaborativo, por lo tanto, no te transferimos esos costos."
       },
       {
-        "title": "No templates, we build from the ground up",
-        "description": "We believe each requeriment requires a different approach, that is why we don't use pre made templates, we build everything ourselves."
+        "title": "No utilizamos plantillas, construímos desde cero",
+        "description": "Creemos que cada requerimiento requiere un enfoque único, es por esto que no utilizamos plantillas pre-diseñadas, hacemos todo nosotros mismos."
       },
       {
-        "title": "State-of-the-Art Technologies",
-        "description": "In BitterSweet.io we only use the latest technologies, the same big companies like Facebook, Airbnb or Netflix use."
+        "title": "Estado del arte en Tecnología",
+        "description": "En BitterSweet.io solo usamos las últimas tecnologías, las mismas que utilizan compañías como Facebook, Airbnb o Netflix."
       },
       {
-        "title": "We may not be the fit for you",
-        "description": "In BitterSweet.io we believe in transparency. This is why we know our services are not for everyone. Nevertheless, we invite you to send us a message, we are here to guide you even if you don't hire our services."
+        "title": "Tal vez no somos lo que requieres",
+        "description": "En BitterSweet.io creemos en la transparencia. Es por esto, que sabemos que nuestros servicios no son para todos. No obstante, te invitamos a que nos envíes un mensaje, nosotros te podemos guiar, incluso si no contratas nuestros servicios."
       }
     ]
   },
   "pricing":{
-    "title": "Pricing",
-    "subtitle": "No hidden costs, no contracts, just pay as you go.",
+    "title": "Precio",
+    "subtitle": "Sin precios ocultos, sin contratos, just pay as you go.",
     "payg":{
       "title":"Pay-as-you-Go",
       "features":[
-        "Pay for as long (or little) as you want",
-        "All inclusive",
-        "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
-        "You own the intelectual property",
-        "We own the code"
+        "Paga por el tiempo que tu quieras",
+        "Todo incluido",
+        "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
+        "Tú eres el dueño de la propiedad intelectual",
+        "nosotros somos dueños del código"
       ]
     },
     "fee":{
       "title":"1-Time Fee",
       "features":[
-       "Pay a (usually high) 1 time fee",
-       "3 months of All inclusive",
-       "(Hosting, support, Maintenance, auto-scale, load-balancing, CDN, SSL certificate)",
-       "You own the intelectual property",
-       "You own the code"
+       "Paga una cuota única",
+       "3 meses con todo incluido",
+       "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
+        "Tú eres el dueño de la propiedad intelectual",
+       "Tú eres dueño del código"
       ]
     },
-    "button": "QUOTE"
+    "button": "Cotizar"
   },
-  "quote":{
-    "title": "Quote",
-    "subtitle": "See how much your project will cost, this is the final price, no surprises along the way.",
-    "back": "back",
-    "next": "next",
-    "01": {
-      "title": "Choose platforms",
-      "dialog": {
-        "title": "Platforms",
-        "content": [
-          "Select the platforms you want your app to support. You can select as may as you want.",
-          "You can also select wheter you want us to take care of the design or not.",
-          "Please also select the number of pages/screens your app will have. For example, if the website has 8 pages and the mobile app has 5 screens, please select 8."
-        ],
-        "button": "Great!"
+  "quote": {
+    "title": "Cotizar mi proyecto",
+    "subtitle": "Cotiza cuánto costará tu proyecto, este será el precio final, sin sorpresas.",
+    "start": "comenzar",
+    "prices": {
+      "title": "Choose the plan that fits you best",
+      "subtitle": "You can change it later.",
+      "payg": {
+        "title": "Pay-as-you-Go",
+        "features": [
+          "Pay for as long as you want",
+          "All inclusive",
+          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
+          "You own the intelectual property",
+          "We own the code"
+        ]
       },
-      "platforms":{
+      "installments": {
+        "title": "Fixed Installments",
+        "features": [
+          "Pay a fixed price for 12 months",
+          "All inclusive",
+          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
+          "You own the intelectual property",
+          "We own the code",
+          "After the 12 month you own the code"
+        ]
+      },
+      "fee": {
+        "title": "1-Time Fee",
+        "features": [
+          "Pay a 1 time fee",
+          "3 months of All inclusive",
+          "(Hosting, support, Maintenance, auto-scale, load-balancing, CDN, SSL certificate)",
+          "You own the intelectual property",
+          "You own the code"
+        ]
+      }
+    },
+    "comments": {
+      "title": "Comments",
+      "subtitle": "Tell us more about your project",
+      "textField": "comments"
+    },
+    "send": {
+      "title": "Submit Quote",
+      "subtitle": "We will get in touch shortly",
+      "name": "name",
+      "email": "email",
+      "submit": "send"
+    },
+    "sections": {
+      "NDA": {
+        "title": "¿Necesitas una NDA?",
+        "content": "NDA"
+      },
+      "Platforms": {
+        "title": "Selecciona la(s) plataforma(s)",
         "web": "Web",
         "android": "Android",
         "ios": "iOS",
-        "desktop": "desktop"
+        "desktop": "Escritorio",
+        "dialog": {
+          "title": "Plataformas",
+          "content": [
+            "Selecciona las plataformas que deseas para tu aplicación. Puedes seleccionar una o más.",
+            "Puedes seleccionar si deseas que nos preocupemos del diseño de tu aplicación o no.",
+            "Por favor, selecciona el número de páginas que tu aplicación tendrá. Por ejemplo, si tu aplicación tendrá 8 páginas web y la aplicación móvil tendrá 5 páginas, selecciona 8."
+          ],
+          "button": "Entendido!"
+        }
       },
-      "pages": "Number of pages/screens",
-      "design": "Design Services"
-    },
-    "02": {
-      "title": "Authentication",
-      "dialog": {
-        "title": "Authentication",
-        "content": [
-          "Select if you want your users to sign in into your site",
-          "Email: Users will be asked for an email and a password to sign into your site.",
-          "Social: Users will be asked for a social account (Facebook, Google, etc.) to sign into your site."
-        ],
-        "button": "Great!"
+      "Pages": {
+        "title": "Número de páginas/pantallas"
       },
-      "options":{
-        "noLogin": "No Login",
+      "Design": {
+        "title": "Servicio de diseño",
+        "content": "Diseño"
+      },
+      "Authentication": {
+        "title": "Autenticación",
         "email": "Email",
-        "emailSocial": "Email + Social",
-        "social": "Social"
-      }
-    },
-    "03": {
-      "title": "Data",
-      "dialog": {
-        "title": "Data",
-        "content": [
-          "This is how your app can store data, like users accounts, usage information, etc.",
-          "None: No database will be used, this is perfect for sites that only want to show static (the same the whole time) information.",
-          "Database: We will set up a Full Database for you, that will grow with your application.",
-          "Database + Media: Along with the Database, we will also set up a special storage for all your documents, images and any kind of files that you want to store",
-          "Data Source: You already have a Database? No problem, we can integrate it with your new app."
-        ],
-        "button": "Great!"
+        "social": "Social",
+        "dialog": {
+          "title": "Autenticación",
+          "content": [
+            "Selecciona si quieres que tus usuarios se registren en tu sitio",
+            "Correo: Los usuarios deberán ingresar un correo y contraseña para registrarse en tu sitio.",
+            "Social: Los usuarios deberán ingresar una cuenta de red social (Facebook, Google, etc.) para registrarse en tu sitio."
+          ],
+          "button": "Entendido!"
+        }
       },
-      "options":{
-        "none": "None",
-        "database": "Database",
-        "databaseMedia": "Database + Media",
-        "source": "Data Source"
-      }
-    },
-    "04": {
-      "title": "GeoLocation",
-      "dialog": {
-        "title": "GeoLocation",
-        "content": [
-          "GeoLocation can help you give a better experience to your users.",
-          "None: No GeoLocation will be used.",
-          "Simple: Simple location queries, see where your users are.",
-          "Advanced: Geo Fencing, Location Queries, etc."
-        ],
-        "button": "Great!"
+      "Data": {
+        "title": "Datos",
+        "database": "Base de Datos",
+        "media": "Media",
+        "datasource": "Fuente de Datos",
+        "dialog": {
+          "title": "Datos",
+          "content": [
+            "Esto corresponde a como tu aplicación puede almacenar datos como cuentas de usuario, información de uso, etc.",
+            "Base de datos: Configuraremos una base de datos para ti, la cual crecerá junto con tu aplicación.",
+            "Media: Junto con la base de datos, configuraremos un lugar de almacenamiento para tus documentos, imágenes y cualquier tipo de archivo que quieras almacenar",
+            "Fuente de Datos: Ya tienes una base de datos? No hay problema, podemos integrarla a tu nueva aplicación."
+          ],
+          "button": "Entendido!"
+        }
       },
-      "options":{
-        "none": "None",
+      "GeoLocation": {
+        "title": "Geo Localización",
         "simple": "Simple",
-        "advanced": "Advanced"
-      }
-    },
-    "05": {
-      "title": "Cloud APIs",
-      "dialog": {
-        "title": "Cloud APIs",
-        "content": [
-          "Cloud APIs are a way to connect to other services (e.i. weather, stocks, currency, etc).",
-          "Choose how many of these APIs you will like to integrate with your app."
-        ],
-        "button": "Great!"
+        "advanced": "Avanzada",
+        "dialog": {
+          "title": "Geo Localización",
+          "content": [
+            "Geo-Localización puede ayudar a mejorar la experiencia de cada usuario de tu aplicación.",
+            "Simple: Consultas simple de localización, como ver donde se localizan tus usuarios.",
+            "Avanzada: Geo Fencing, Location Queries, etc."
+          ],
+          "button": "Entendido!"
+        }
       },
-      "apis": "Number of Cloud APIs"
-    },
-    "06": {
-      "title": "E-Commerce",
-      "dialog": {
-        "title": "E-Commerce",
-        "content": [
-          "Choose if you will like to sell things through your app.",
-          "1-Time Purchase: Typical for stores that sell goods (e.i shoes, food, etc.) and don't want to store the user information.",
-          "Advanced Transactions: Choose this if you want to store the users information for future purchases.",
-          "Basic Subscription: Typical for companies that sell services and want to charge a monthly fee.",
-          "Advanced Subscription: Staff accounts, discount codes, gift cards, etc."
-        ],
-        "button": "Great!"
-      },
-      "options":{
-        "basicTransactions": "1-Time Purchase",
-        "advancedTransactions": "Advanced Transactions",
-        "basicSubscriptions": "Basic Subscriptions",
-        "advancedSubscriptions": "Advanced Subscriptions"
-      }
-    },
-    "07": {
-      "title": "Admin Console",
-      "dialog": {
-        "title": "Admin Console",
-        "content": [
-          "Admin consoles help you manage the different aspects of your app.",
-          "Reports: We will send you periodical pdf reports of the usage of your app.",
-          "Admin: You will be able to set the most important aspects of your site, like managing users, staff, access to the different areas, etc.",
-          "Dashboard: Full control of your app, charts and tables to show you every aspect of it."
-        ],
-        "button": "Great!"
-      },
-      "options":{
-        "none": "None",
-        "admin": "Admin",
-        "dashboard": "Dashboard",
-        "reports": "Reports"
-      }
-    },
-    "08": {
-      "title": "Product",
-      "dialog": {
-        "title": "Product",
-        "content": [
-          "Select the polishing level of your app.",
-          "Prototype: Very basic app, mostly to show the user interface.",
-          "MVP: Minimum viable product. A product ready to be tested and launched.",
-          "Polished: Every aspect of the design and user interface has been addressed."
-        ],
-        "button": "Great!"
-      },
-      "options":{
-        "prototype": "Prototype",
-        "mvp": "MVP",
-        "polished": "Polished"
-      }
-    },
-    "09": {
-      "title": "Delivery Time",
-      "dialog": {
-        "title": "Delivery Time",
-        "content": [
-          "Select how fast you want your app to be ready.",
-          "Normal: Normal time is about 3 months, but we will start your app as soon as an opening is available, this could be tomorrow or the next month, it depends on our work load.",
-          "Start ASAP: We will start your app immediately, with a delivery time of 3 months.",
-          "Deliverable in 3 months or less: We will start your app immediately, with a delivery time of less than 3 months."
-        ],
-        "button": "Great!"
-      },
-      "options":{
-        "normal": "Normal",
-        "asap": "Start ASAP",
-        "fast": "Deliverable in 3 months or less"
-      }
-    },
-    "send":{
-      "title": "Price",
-      "dialog": {
-        "title": "Price",
-        "content": [
-          "Remember that this is our final price.",
-          "We won't charge you extra if your app is more complex. As long as you mantain the modules you selected the price will remain the same."
-        ],
-        "button": "Great!"
-      },
-      "payg":{
-        "title" : "Pay-as-you-Go",
-        "month": "/month"
-      },
-      "fee":{
-        "title": "1-Time Fee"
-      },
-      "form":{
-        "name": "Name",
+      "Communication": {
+        "title": "Comunicación",
+        "chat": "Chat",
         "email": "Email",
-        "button": "Send"
+        "push": "Push",
+        "sms": "SMS"
+      },
+      "APIs": {
+        "title": "Número de APIs externas",
+        "dialog": {
+          "title": "APIs externas",
+          "content": [
+            "APIs externas son una manera de conectarte con otros servicios (por ejemplo el tiempo, bolsa de comercio, cambio de monedas, etc).",
+            "Selecciona cuantas de estas APIs te gustaría integrar a tu aplicación."
+          ],
+          "button": "Entendido!"
+        }
+      },
+      "Commerce": {
+        "title": "Comercio Electrónico",
+        "basicTransactions": "Transacciones simples",
+        "advancedTransactions": "Transacciones avanzadas",
+        "basicSubscriptions": "Suscripción básica",
+        "advancedSubscriptions": "Suscripción avanzada",
+        "dialog": {
+          "title": "Comercio Electrónico",
+          "content": [
+            "Escoge si quieres vender productos/servicios a través de tu aplicación.",
+            "Transacciones simples: Elección típica para tiendas que venden productos (zapatos, comida, ropa) y no es necesario almacenar información del usuario.",
+            "Transacciones avanzadas: Selecciona esto si deseas almacenar información de usuarios para compras futuras.",
+            "Suscripción básica: Elección típica para compañías que venden servicios y realizan un cargo mensual.",
+            "Suscripción avanzada: Cuentas del personal, códigos de descuento, gift cards, etc."
+          ],
+          "button": "Entendido!"
+        }
+      },
+      "Admin": {
+        "title": "Consola de Administración",
+        "admin": "Administrador",
+        "dashboard": "Dashboard",
+        "reports": "Reportes",
+        "dialog": {
+          "title": "Consola de Administración",
+          "content": [
+            "La consola de administración te ayudará a gestionar los diferentes aspectos de tu aplicación.",
+            "Reportes: Te enviaremos, periódicamente, reportes en formato pdf sobre el uso de tu aplicación.",
+            "Administrador: Podrás configurar aspectos importantes de tu sitio, como administrar usuarios, personal, accesos a diferentes áreas, etc.",
+            "Dashboard: Control total de tu aplicación, Gráficos y tablas para mostrarte cada aspecto."
+          ],
+          "button": "Entendido!"
+        }
+      },
+      "Product": {
+        "title": "Producto",
+        "prototype": "Prototipo",
+        "mvp": "PMV",
+        "polished": "Pulido",
+        "dialog": {
+          "title": "Producto",
+          "content": [
+            "Selecciona el grado de terminación de tu aplicación.",
+            "Prototipo: Aplicación muy básica, principalmente para mostrarte la interfaz usuario.",
+            "PMV: Producto mínimo viable. Producto listo para ser testeado y lanzado.",
+            "Pulido: Todos los aspectos de diseño y de la interfaz de usuario serán abordados."
+          ],
+          "button": "Entendido!"
+        }
+      },
+      "Time": {
+        "title": "Tiempos de entrega",
+        "normal": "Normal",
+        "asap": "ASAP",
+        "now": "Para ayer",
+        "dialog": {
+          "title": "Tiempos de entrega",
+          "content": [
+            "Selecciona que tan rápido quieres que tu aplicación esté lista.",
+            "Normal: Normal time is about 3 months, but we will start your app as soon as an opening is available, this could be tomorrow or the next month, it depends on our work load.",
+            "ASAP: Comenzaremos tu aplicación lo más pronto posible, con un tiempo de entrega de 3 meses.",
+            "Para ayer: Comenzaremos tu aplicación lo más pronto posible, con un tiempo de entrega menor a 3 meses."
+          ],
+          "button": "Entendido!"
+        }
       }
     }
   },
   "faq":{
-    "title": "Frequently Asked Questions",
-    "subtitle" : "Got questions? We have answers.",
+    "title": "Preguntas frecuentes",
+    "subtitle" : "Tienes preguntas? Nosotros tenemos respuestas.",
     "questions":[
       {
-        "question": "Do I have to pay anything in advance?",
-        "answer": "No, we want to reduce your risk so we can build a new awesome app. We won't charge you anything until we have finished and tested your app, and more importantly, you are happy with it."
+        "question": "Debo pagar por avanzado antes de comenzar el trabajo?",
+        "answer": "No, queremos minimizar el riesgo y, al mismo tiempo, hacer una aplicación asombrosa. No te cargaremos nada hasta que hayamos probado y terminado tu aplicación y aún más importante, que te encuentres feliz con ella."
       },
       {
-        "question": "I want to show you a sketch of my app, how can I do it?",
-        "answer": "That's great! The more information the faster we can develop your app. If you want to send information fell free to write us to contact@bittersweet.io. We can also arrange an Skype call to chat about your next project."
+        "question": "Deseo mostrar un diagrama/sketch de mi aplicación, cómo lo hago?",
+        "answer": "Grandioso! Entre más información tengamos, más rápido podremos desarrollar tu aplicación. Si deseas comunicarte con nosotros, envíanos un correo a contact@bittersweet.io. También podemos arreglar una video-llamada a través de Skype y conversamos sobre tu proyecto."
       },
       {
-        "question": "Do I have to worry about the maintenance of my app?",
-        "answer": "Absolutely not. With our Pay-as-you-Go service we take care of everything, and we really mean everything (maintenance, support, scaling, balancing, etc.)."
+        "question": "Debo preocuparme por la mantención de mi aplicación?",
+        "answer": "De ninguna manera. Con nuestro servicio Pay-as-you-Go nosotros nos preocupamos de todo, y con esto nos referimos a todo (mantenimiento, soporte, escalamiento, balancing, etc.)."
       },
       {
-        "question": "Is it possible to make changes after my app has been launched?",
-        "answer": "We understand that the initial idea of your app might need some adjustments. We can take care of that too, as long as it doesn&apos;t mean to re-do your app."
+        "question": "Es posible modificar mi aplicación si ya ha sido lanzada?",
+        "answer": "Entendemos que la idea inicial de tu aplicación pueda necesitar ciertos ajustes. También podemos ocuparnos de eso, mientras esto no signifique rehacer tu aplicación."
       },
       {
-        "question": "What if I need to add some features?",
-        "answer": "No problem, just requote and that's the new price you will have to pay when we add the new feature. This also goes if you need to remove some features."
+        "question": "Qué pasa si quiero agregar otras nuevas características?",
+        "answer": "No hay problema, solo debes cotizar nuevamente y ese será el nuevo precio a pagar cuando agreguemos estas nuevas características. Esto también aplica si necesitas remover otras características."
       },
       {
-        "question": "Do I have to buy the domain?",
-        "answer": "We also can take care of that. However, we strongly recommend you to do it. The name of your Company should always be yours. Nevertheless, we can guide you with this important step."
+        "question": "Es mi responsabilidad comprar el dominio?",
+        "answer": "Podemos hacernos cargo de eso. Sin embargo, nuestra recomendación es que lo hagas tú. The name of your Company should always be yours. Nevertheless, we can guide you with this important step."
       },
       {
-        "question": "Do I have access to the code?",
-        "answer": "In order to take care of everything we keep a close eye to the source code. Also, since our service is very cheap (compared to others), we can't give access to the source code."
+        "question": "Tengo acceso al código de mi aplicación?",
+        "answer": "A fin de preocuparnos de todo, mantenemos el código fuente cerrado a tu acceso. Dado que nuestros servicios son más baratos que los ofrecidos por otras compañías, no podemos darte acceso al código fuente."
       },
       {
-        "question": "Who owns the intellectual property of the app?",
-        "answer": "You, from day 0 until the end of times. We only own the code, but the idea behind it will always be yours."
+        "question": "Quién es el dueño de la propiedad intelectual de la aplicación?",
+        "answer": "Tú, desde el día 0 hasta el final de los tiempos. Nosotros solo somos dueños del código fuente, pero la idea detrás de la aplicación siempre será tuya."
       },
       {
-        "question": "Is my app secure?",
-        "answer": "You can count on that. We only use top of the line technologies. In top of that all of our apps comes with SSL certificates for secure connections. This means you can perform all kind of critical operations with the same standards as the big companies use."
+        "question": "Es mi aplicación segura?",
+        "answer": "Puedes contar con esto. Solo utilizamos la última tecnología existentes. Todas nuestras aplicaciones vienen con certificados SSL para conexiones seguras. Esto quiere decir que puedes realizar todo tipo de operación crítica con los mismos estándares que utilizan grandes compañías."
       },
       {
-        "question": "If I want to end the service, How can I do it?",
-        "answer": "Just stop paying. We use the same models as companies like Spotify or Netflix, you only pay for as long as you want to keep the service."
+        "question": "Si deseo terminar el servicio, cómo lo hago?",
+        "answer": "Sencillamente, debes dejar de pagar. Usamos el mismo modelo de pago de compañías como Spotify o Netflix, solo pagas mientras deseas mantener el servicio."
       },
       {
-        "question": "If I decide to end the service, How can I keep the code?",
-        "answer": "You can stop the service whenever you like. However, if you want to keep the code you have to pay the 1-Time fee price."
+        "question": "Si deseo terminar el servicio, cómo puedo obtener el código fuente?",
+        "answer": "Puedes detener el servicio cuando quieras. Sin embargo, si deseas obtener el código fuente deberás pagar como si fuera una aplicación 1-Time fee."
       },
       {
-        "question": "Once I end the service, do I keep the domain?",
-        "answer": "Yes, the domain will always be yours."
+        "question": "Una vez finalizado el servicio, sigo siendo el dueño del dominio?",
+        "answer": "Sí, el dominio siempre será tuyo."
       }
     ]
   },
   "contact":{
-    "title": "Get in touch",
-    "subtitle": "We are here to help you.",
+    "title": "Conversemos!",
+    "subtitle": "Estamos aquí para ayudarte.",
     "form":{
-      "name": "Name",
-      "email": "Email",
-      "about": "About your company and project",
-      "button": "Send"
+      "name": "Nombre",
+      "email": "Correo",
+      "about": "Cuéntanos sobre tu compañía y tu proyecto",
+      "button": "Enviar"
     }
   },
   "footer":{
     "mail": {
-      "title": "MAIL",
+      "title": "Correo",
       "subtitle": "contact@bittersweet.io"
     },
     "quote": {
-      "title": "QUOTE",
-      "subtitle": "your next app"
+      "title": "Cotizar",
+      "subtitle": "tu próxima aplicación"
     },
     "call": {
-      "title": "CALL",
+      "title": "Llámanos",
       "subtitle": "+56-2-22222222"
     }
   }
