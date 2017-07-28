@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 // Import Material-UI components
 import { createStyleSheet } from 'material-ui/styles';
 import withStyles from 'material-ui/styles/withStyles';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
