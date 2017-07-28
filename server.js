@@ -30,6 +30,7 @@ i18n
 
         // serve locales for client
         server.use('/locales', express.static(`${__dirname}/locales`));
+        server.use('/static', express.static(`${__dirname}/static`));
 
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18n));
@@ -37,7 +38,7 @@ i18n
         // use next.js
         server.get('*', (req, res) => handle(req, res));
 
-        server.listen(3000, (err) => {
+        server.listen(process.env.PORT || 3000, (err) => {
           if (err) throw err;
           console.log('> Ready on http://localhost:3000');
         });

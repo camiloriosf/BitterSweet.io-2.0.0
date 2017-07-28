@@ -18,26 +18,32 @@ import { logEvent } from '../tools/analytics';
 // Create Component StyleSheet
 const styleSheet = createStyleSheet('Header', {
   root: {
-    position: 'relative',
     width: '100%',
   },
   appBar: {
-    position: 'relative',
     boxShadow: 'none',
+    position: 'absolute',
+    top: 0,
+    right: 0,
     border: 0,
   },
   title: {
     flex: 1,
     textAlign: 'left',
     cursor: 'pointer',
+    position: 'absolute',
+    padding: 10,
   },
   buttons: {
-    textAlign: 'center',
+    textAlign: 'right',
     margin: 0,
     padding: 0,
   },
   anchor: {
     textDecoration: 'none',
+  },
+  links: {
+    textAlign: 'right',
   },
 });
 // Create Class
@@ -85,18 +91,14 @@ class Header extends Component {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <AppBar className={this.props.classes.appBar} color="inherit" >
-          <Toolbar>
-            <Link href="/">
-              <Typography type="title" align="center" className={this.props.classes.title}>
-                {this.props.t('name')}
-              </Typography>
-            </Link>
-            <Hidden xsDown>
-              {this.renderLinks()}
-            </Hidden>
-          </Toolbar>
-        </AppBar>
+        <Link href="/">
+          <Typography type="title" align="center" className={this.props.classes.title}>
+            {this.props.t('name')}
+          </Typography>
+        </Link>
+        <Hidden smDown>
+          {this.renderLinks()}
+        </Hidden>
       </div>
     );
   }

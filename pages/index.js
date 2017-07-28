@@ -62,7 +62,7 @@ class Index extends Component {
             <Contact />
             <Footer />
             <Languages />
-            <Hidden smUp><Nav /></Hidden>
+            <Hidden mdUp><Nav url={this.props.url} /></Hidden>
             {this.state.show ? <Up /> : null}
           </div>
         </App>

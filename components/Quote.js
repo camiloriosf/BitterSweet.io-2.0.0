@@ -3,6 +3,7 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
+import Hidden from 'material-ui/Hidden';
 import { gql, graphql, compose } from 'react-apollo';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
@@ -13,6 +14,7 @@ import Prices from './quote/Prices';
 import Comments from './quote/Comments';
 import Send from './quote/Send';
 import Sections from './quote/Sections';
+import Nav from './index/Nav';
 import fetchUser from '../lib/queries/fetchUser';
 import fetchQuote from '../lib/queries/fetchQuote';
 import * as actions from '../lib/actions/quote';
@@ -110,6 +112,7 @@ class Quote extends Component {
         <Hero />
         {this.checkQuote()}
         <Footer />
+        <Hidden mdUp><Nav url={this.props.url} /></Hidden>
       </div>
     );
   }
