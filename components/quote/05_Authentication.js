@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -10,6 +10,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Authentication', {
   slide: {
@@ -57,32 +58,12 @@ class Authentication extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.authentication[paper]) {
+    if (this.props.authentication[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ authentication: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          authentication: {
-            ...state,
-            __typename: 'AuthenticationType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -107,20 +88,19 @@ class Authentication extends Component {
                     this.handlePaperState('email')
                   }
                   elevation={
-                    this.props.quote.authentication.email ? 12 : 1
+                    this.props.authentication.email ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'email',
-                      !this.props.quote.authentication.email,
-                    {
-                      email: !this.props.quote.authentication.email,
-                      social: this.props.quote.authentication.social,
-                    },
-                    )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { authentication: {
+                        email: !this.props.authentication.email,
+                        social: this.props.authentication.social,
+                      } } })}
                   onMouseEnter={() => this.setState({ emailHover: true })}
                   onMouseLeave={() => this.setState({ emailHover: false })}
                 >
-                  {this.props.quote.authentication.email ?
+                  {this.props.authentication.email ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -136,20 +116,19 @@ class Authentication extends Component {
                     this.handlePaperState('social')
                   }
                   elevation={
-                    this.props.quote.authentication.social ? 12 : 1
+                    this.props.authentication.social ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'social',
-                      !this.props.quote.authentication.social,
-                    {
-                      email: this.props.quote.authentication.email,
-                      social: !this.props.quote.authentication.social,
-                    },
-                    )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { authentication: {
+                        email: this.props.authentication.email,
+                        social: !this.props.authentication.social,
+                      } } })}
                   onMouseEnter={() => this.setState({ socialHover: true })}
                   onMouseLeave={() => this.setState({ socialHover: false })}
                 >
-                  {this.props.quote.authentication.social ?
+                  {this.props.authentication.social ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -167,16 +146,11 @@ class Authentication extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      authentication{
-        social
-        email
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    authentication: state.quote.authentication,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Authentication)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Authentication)));

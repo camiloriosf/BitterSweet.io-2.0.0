@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -11,6 +11,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Admin', {
   slide: {
@@ -59,32 +60,12 @@ class Admin extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.admin[paper]) {
+    if (this.props.admin[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ admin: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          admin: {
-            ...state,
-            __typename: 'AdminType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -109,21 +90,23 @@ class Admin extends Component {
                     this.handlePaperState('admin')
                   }
                   elevation={
-                    this.props.quote.admin.admin ? 12 : 1
+                    this.props.admin.admin ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'admin',
-                      !this.props.quote.admin.admin,
-                    {
-                      admin: !this.props.quote.admin.admin,
-                      dashboard: this.props.quote.admin.dashboard,
-                      reports: this.props.quote.admin.reports,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        admin: {
+                          admin: !this.props.admin.admin,
+                          dashboard: this.props.admin.dashboard,
+                          reports: this.props.admin.reports,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ adminHover: true })}
                   onMouseLeave={() => this.setState({ adminHover: false })}
                 >
-                  {this.props.quote.admin.admin ?
+                  {this.props.admin.admin ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -139,21 +122,23 @@ class Admin extends Component {
                     this.handlePaperState('dashboard')
                   }
                   elevation={
-                    this.props.quote.admin.dashboard ? 12 : 1
+                    this.props.admin.dashboard ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'dashboard',
-                      !this.props.quote.admin.dashboard,
-                    {
-                      admin: this.props.quote.admin.admin,
-                      dashboard: !this.props.quote.admin.dashboard,
-                      reports: this.props.quote.admin.reports,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        admin: {
+                          admin: this.props.admin.admin,
+                          dashboard: !this.props.admin.dashboard,
+                          reports: this.props.admin.reports,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ dashboardHover: true })}
                   onMouseLeave={() => this.setState({ dashboardHover: false })}
                 >
-                  {this.props.quote.admin.dashboard ?
+                  {this.props.admin.dashboard ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -169,21 +154,23 @@ class Admin extends Component {
                     this.handlePaperState('reports')
                   }
                   elevation={
-                    this.props.quote.admin.reports ? 12 : 1
+                    this.props.admin.reports ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'reports',
-                      !this.props.quote.admin.reports,
-                    {
-                      admin: this.props.quote.admin.admin,
-                      dashboard: this.props.quote.admin.dashboard,
-                      reports: !this.props.quote.admin.reports,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        admin: {
+                          admin: this.props.admin.admin,
+                          dashboard: this.props.admin.dashboard,
+                          reports: !this.props.admin.reports,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ reportsHover: true })}
                   onMouseLeave={() => this.setState({ reportsHover: false })}
                 >
-                  {this.props.quote.admin.reports ?
+                  {this.props.admin.reports ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -201,17 +188,12 @@ class Admin extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      admin{
-        admin
-        dashboard
-        reports
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    admin: state.quote.admin,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Admin)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Admin)));
+

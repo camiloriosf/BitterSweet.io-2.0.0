@@ -7,7 +7,6 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
 // Import Extra Libraries
-import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
 import Router from 'next/router';
 import Link from 'next/link';
@@ -48,13 +47,13 @@ const styleSheet = createStyleSheet('Header', {
 class Header extends Component {
 
   handleClick = (action) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       logEvent('click', action);
     }
   };
 
   handleQuoteClick = (action) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       logEvent('click', action);
     }
 
@@ -101,14 +100,6 @@ class Header extends Component {
     );
   }
 }
-// Create GraphQL queries mutations
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
+
 // Export Class
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Header)));
+export default translate(['common'])(withStyles(styleSheet)(Header));

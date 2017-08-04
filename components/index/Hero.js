@@ -4,14 +4,12 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import Slide from 'material-ui/transitions/Slide';
 import Fade from 'material-ui/transitions/Fade';
 import Router from 'next/router';
-import { logPageView, setUser, logEvent } from '../../tools/analytics';
-import env from '../../env';
+import { logEvent } from '../../tools/analytics';
 
 const styleSheet = createStyleSheet('Hero', {
   section: {
@@ -85,28 +83,19 @@ class Hero extends Component {
 
     this.state = {
       isVisible: false,
-      user: false,
     };
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data.user && !this.state.user) {
-      setUser(nextProps.data.user.id);
-      logPageView();
-      this.setState({ user: true });
-    }
-  }
-
   handleClick = (action) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       logEvent('click', action);
     }
     Router.push('/quote');
   };
 
   handleChange = (isVisible) => {
-    if (!this.props.data.loading) {
-      if (isVisible !== this.state.isVisible && this.state.user) {
+    if (this.props.id) {
+      if (isVisible !== this.state.isVisible && this.props.id) {
         if (isVisible) logEvent('section', 'hero');
         this.setState({ isVisible });
       }
@@ -168,14 +157,6 @@ class Hero extends Component {
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
 
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Hero)));
+export default translate(['common'])(withStyles(styleSheet)(Hero));
 

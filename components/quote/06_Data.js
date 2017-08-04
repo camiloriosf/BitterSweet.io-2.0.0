@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -11,6 +11,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Data', {
   slide: {
@@ -59,32 +60,12 @@ class Data extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.data[paper]) {
+    if (this.props.data[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ data: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          data: {
-            ...state,
-            __typename: 'DataType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -109,21 +90,23 @@ class Data extends Component {
                     this.handlePaperState('database')
                   }
                   elevation={
-                    this.props.quote.data.database ? 12 : 1
+                    this.props.data.database ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'database',
-                      !this.props.quote.data.database,
-                    {
-                      database: !this.props.quote.data.database,
-                      media: this.props.quote.data.media,
-                      datasource: this.props.quote.data.datasource,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        data: {
+                          database: !this.props.data.database,
+                          media: this.props.data.media,
+                          datasource: this.props.data.datasource,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ databaseHover: true })}
                   onMouseLeave={() => this.setState({ databaseHover: false })}
                 >
-                  {this.props.quote.data.database ?
+                  {this.props.data.database ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -139,21 +122,23 @@ class Data extends Component {
                     this.handlePaperState('media')
                   }
                   elevation={
-                    this.props.quote.data.media ? 12 : 1
+                    this.props.data.media ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'media',
-                      !this.props.quote.data.media,
-                    {
-                      database: this.props.quote.data.database,
-                      media: !this.props.quote.data.media,
-                      datasource: this.props.quote.data.datasource,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        data: {
+                          database: this.props.data.database,
+                          media: !this.props.data.media,
+                          datasource: this.props.data.datasource,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ mediaHover: true })}
                   onMouseLeave={() => this.setState({ mediaHover: false })}
                 >
-                  {this.props.quote.data.media ?
+                  {this.props.data.media ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -169,21 +154,23 @@ class Data extends Component {
                     this.handlePaperState('datasource')
                   }
                   elevation={
-                    this.props.quote.data.datasource ? 12 : 1
+                    this.props.data.datasource ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'datasource',
-                      !this.props.quote.data.datasource,
-                    {
-                      database: this.props.quote.data.database,
-                      media: this.props.quote.data.media,
-                      datasource: !this.props.quote.data.datasource,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        data: {
+                          database: this.props.data.database,
+                          media: this.props.data.media,
+                          datasource: !this.props.data.datasource,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ datasourceHover: true })}
                   onMouseLeave={() => this.setState({ datasourceHover: false })}
                 >
-                  {this.props.quote.data.datasource ?
+                  {this.props.data.datasource ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -201,17 +188,12 @@ class Data extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      data{
-        datasource
-        media
-        database
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    data: state.quote.data,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Data)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Data)));
+

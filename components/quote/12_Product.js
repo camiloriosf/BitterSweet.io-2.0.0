@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -11,6 +11,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Product', {
   slide: {
@@ -59,32 +60,12 @@ class Product extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.product[paper]) {
+    if (this.props.product[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ product: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          product: {
-            ...state,
-            __typename: 'ProductType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -109,21 +90,20 @@ class Product extends Component {
                     this.handlePaperState('prototype')
                   }
                   elevation={
-                    this.props.quote.product.prototype ? 12 : 1
+                    this.props.product.prototype ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'prototype',
-                      true,
-                    {
-                      prototype: true,
-                      mvp: false,
-                      polished: false,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { product: {
+                        prototype: true,
+                        mvp: false,
+                        polished: false,
+                      } } })}
                   onMouseEnter={() => this.setState({ prototypeHover: true })}
                   onMouseLeave={() => this.setState({ prototypeHover: false })}
                 >
-                  {this.props.quote.product.prototype ?
+                  {this.props.product.prototype ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -139,21 +119,20 @@ class Product extends Component {
                     this.handlePaperState('mvp')
                   }
                   elevation={
-                    this.props.quote.product.mvp ? 12 : 1
+                    this.props.product.mvp ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'mvp',
-                      true,
-                    {
-                      prototype: false,
-                      mvp: true,
-                      polished: false,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { product: {
+                        prototype: false,
+                        mvp: true,
+                        polished: false,
+                      } } })}
                   onMouseEnter={() => this.setState({ mvpHover: true })}
                   onMouseLeave={() => this.setState({ mvpHover: false })}
                 >
-                  {this.props.quote.product.mvp ?
+                  {this.props.product.mvp ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -169,21 +148,20 @@ class Product extends Component {
                     this.handlePaperState('polished')
                   }
                   elevation={
-                    this.props.quote.product.polished ? 12 : 1
+                    this.props.product.polished ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'polished',
-                      true,
-                    {
-                      prototype: false,
-                      mvp: false,
-                      polished: true,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { product: {
+                        prototype: false,
+                        mvp: false,
+                        polished: true,
+                      } } })}
                   onMouseEnter={() => this.setState({ polishedHover: true })}
                   onMouseLeave={() => this.setState({ polishedHover: false })}
                 >
-                  {this.props.quote.product.polished ?
+                  {this.props.product.polished ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -201,17 +179,12 @@ class Product extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      product{
-        prototype
-        mvp
-        polished
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    product: state.quote.product,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Product)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Product)));
+

@@ -9,7 +9,6 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
-import fetchQuote from '../../lib/queries/fetchQuote';
 
 const styleSheet = createStyleSheet('Send', {
   section: {
@@ -38,28 +37,32 @@ class Send extends Component {
   }
 
   handleNameChange = ({ name }) => {
-    this.props.updateName({ name });
+    this.props.updateValue({
+      value:
+      {
+        name,
+      },
+    });
   }
 
   handleEmailChange = ({ email }) => {
-    this.props.updateEmail({ email });
+    this.props.updateValue({
+      value:
+      {
+        email,
+      },
+    });
   }
 
   handleSubmit = () => {
     this.setState({ loading: true });
     this.props.mutate({
       variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({
-          comments: { value: this.props.comments },
-          name: { value: this.props.name },
-          email: { value: this.props.email },
-          saved: { value: true },
-        }),
+        quote: { ...this.props.quote, saved: true },
       },
-      refetchQueries: [{ query: fetchQuote, variables: { id: this.props.quote.id } }],
     })
-      .then(() => this.props.clearForm())
+      .then(data =>
+        this.props.updateValue({ value: { saved: data.data.updateQuote.changedQuote.saved } }))
       .catch(() => this.setState({ loading: false }));
   }
 
@@ -80,7 +83,7 @@ class Send extends Component {
               label={this.props.t('quote.send.name')}
               type="text"
               className={this.props.classes.field}
-              value={this.props.name}
+              value={this.props.quote.name}
               onChange={event => this.handleNameChange({ name: event.target.value })}
             />
           </Grid>
@@ -89,7 +92,7 @@ class Send extends Component {
               label={this.props.t('quote.send.email')}
               type="text"
               className={this.props.classes.field}
-              value={this.props.email}
+              value={this.props.quote.email}
               onChange={event => this.handleEmailChange({ email: event.target.value })}
             />
           </Grid>
@@ -97,7 +100,7 @@ class Send extends Component {
             {
               this.state.loading
                 ? <CircularProgress />
-                : <Button raised disabled={this.validateEmail(this.props.email)} color="primary" onClick={this.handleSubmit}>{this.props.t('quote.send.submit')}</Button>
+                : <Button raised disabled={this.validateEmail(this.props.quote.email)} color="primary" onClick={this.handleSubmit}>{this.props.t('quote.send.submit')}</Button>
             }
           </Grid>
         </Grid>
@@ -107,19 +110,18 @@ class Send extends Component {
 }
 
 const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      saved
+  mutation updateQuote($quote:UpdateQuoteInput!){
+    updateQuote(input:$quote){
+      changedQuote{
+        saved
+      }
     }
   }
 `;
 
 function mapStateToProps(state) {
   return {
-    comments: state.quote.comments,
-    name: state.quote.name,
-    email: state.quote.email,
+    quote: state.quote,
   };
 }
 

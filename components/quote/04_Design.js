@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -9,6 +9,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Design', {
   slide: {
@@ -55,29 +56,12 @@ class Design extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = () => {
-    if (this.props.quote.design) {
+    if (this.props.design) {
       return this.props.classes.paperSelected;
     } else if (this.state.hover) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = () => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ design: { value: !this.props.quote.design } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          design: !this.props.quote.design,
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -102,13 +86,17 @@ class Design extends Component {
                     this.handlePaperState()
                   }
                   elevation={
-                    this.props.quote.design ? 12 : 1
+                    this.props.design ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit()}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { design: !this.props.design },
+                    })}
                   onMouseEnter={() => this.setState({ hover: true })}
                   onMouseLeave={() => this.setState({ hover: false })}
                 >
-                  {this.props.quote.design ?
+                  {this.props.design ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -126,13 +114,12 @@ class Design extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      design
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    design: state.quote.design,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Design)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Design)));
+

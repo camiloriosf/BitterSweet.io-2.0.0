@@ -12,7 +12,6 @@ import SecurityIcon from 'material-ui-icons/Security';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Slide from 'material-ui/transitions/Slide';
-import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logEvent } from '../../tools/analytics';
@@ -54,13 +53,13 @@ class Services extends Component {
   };
 
   handleClick = (action) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       logEvent('click', action);
     }
   };
 
   handleChange = (isVisible) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       if (isVisible !== this.state.isVisible) {
         if (isVisible) logEvent('section', 'services');
         this.setState({ isVisible });
@@ -114,34 +113,15 @@ class Services extends Component {
     return null;
   }
 
-  renderContent() {
-    return (
-      <div>
-        <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
-          <Grid item xs={12} sm={12}>
-            <Slide direction="up" enterTransitionDuration={1000} in={this.state.isVisible}>
-              <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
-                {this.props.t('services.title')}
-              </Typography>
-            </Slide>
-            <Slide direction="up" enterTransitionDuration={1000} in={this.state.isVisible}>
-              <Typography type="subheading" align="center" className={this.props.classes.sectionSubTitle}>
-                {this.props.t('services.subtitle')}
-              </Typography>
-            </Slide>
-          </Grid>
-          {this.renderFeatures(0, 2)}
-        </Grid>
-        <Grid container justify="center" align="flex-start" className={this.props.classes.secondRow}>
-          {this.renderFeatures(3, 5)}
-        </Grid>
-      </div>
-    );
-  }
-
   render() {
     return (
-      <VisibilitySensor onChange={this.handleChange} active={!this.state.isVisible} delayedCall>
+      <VisibilitySensor
+        onChange={this.handleChange}
+        active={!this.state.isVisible}
+        delayedCall
+        minTopValue={300}
+        partialVisibility
+      >
         <div className={this.props.classes.section}>
           <Grid container justify="center" align="flex-start" className={this.props.classes.padSections}>
             <Grid item xs={12} sm={12}>
@@ -165,13 +145,4 @@ class Services extends Component {
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
-
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Services)));
+export default translate(['common'])(withStyles(styleSheet)(Services));

@@ -16,9 +16,8 @@ import Prices from './quote/Prices';
 import Comments from './quote/Comments';
 import Send from './quote/Send';
 import Sections from './quote/Sections';
-import fetchUser from '../lib/queries/fetchUser';
-import fetchQuote from '../lib/queries/fetchQuote';
 import * as actions from '../lib/actions/quote';
+import { logPageView, setUser } from '../tools/analytics';
 
 const styleSheet = createStyleSheet('Quote', {
   startButton: {
@@ -31,38 +30,55 @@ const styleSheet = createStyleSheet('Quote', {
 class Quote extends Component {
   state = {
     loaded: false,
-    fetching: false,
+    showCircular: false,
   };
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.quote) {
-      if (nextProps.quote.quote) {
-        if (nextProps.quote.quote.id) {
-          this.setState({ loaded: true, fetching: false });
-        }
+  componentDidMount() {
+    window.addEventListener('scroll', this.hideBar);
+    this.checkUser();
+  }
+
+  checkUser() {
+    if (window.localStorage) {
+      if (window.localStorage.getItem('user')) {
+        setUser(window.localStorage.getItem('user'));
+        logPageView();
+        this.setState({ loaded: true });
+      } else {
+        this.props.createDevice()
+          .then((data) => {
+            window.localStorage.setItem('user', data.data.createDevice.changedDevice.id);
+            setUser(window.localStorage.getItem('user'));
+            logPageView();
+            this.setState({ loaded: true });
+          });
       }
     }
   }
 
   handleClick = () => {
-    if (!this.props.user.loading && this.props.user.user) {
-      if (this.props.user.user.token) {
-        this.setState({ fetching: true });
-        this.props.mutate({ variables: { token: this.props.user.user.token } })
-          .then(data => this.props.getQuote({ id: data.data.createQuote.id }));
-      }
+    if (this.state.loaded && window.localStorage.getItem('user')) {
+      this.setState({ showCircular: true }, () => {
+        this.props.clearForm();
+        console.log(window.localStorage.getItem('user'));
+        this.props.createQuote({ variables: { deviceId: window.localStorage.getItem('user') } })
+          .then(data =>
+            this.props.updateValue({ value: { id: data.data.createQuote.changedQuote.id } }))
+          .then(() => this.setState({ showCircular: false }));
+      });
     }
   }
 
   checkQuote = () => {
-    if (!this.state.loaded) {
-      if (this.props.user.loading || this.state.fetching) {
-        return (
-          <div className={this.props.classes.startButton}>
-            <CircularProgress />
-          </div>
-        );
-      }
+    if (!this.state.loaded || this.state.showCircular) {
+      return (
+        <div className={this.props.classes.startButton}>
+          <CircularProgress />
+        </div>
+      );
+    }
+
+    if (this.state.loaded && !this.props.id) {
       return (
         <div className={this.props.classes.startButton}>
           <Button raised color="primary" onClick={this.handleClick}>Start</Button>
@@ -70,10 +86,7 @@ class Quote extends Component {
       );
     }
 
-    if (
-      this.props.quote.quote.saved &&
-      this.props.quote.quote.id === this.props.id &&
-      !this.state.fetching) {
+    if (this.props.saved) {
       return (
         <div>
           <Typography type="title" align="center" paragraph>
@@ -89,19 +102,12 @@ class Quote extends Component {
       );
     }
 
-    if (this.props.quote.quote.saved) {
-      return (
-        <div className={this.props.classes.startButton}>
-          <CircularProgress />
-        </div>);
-    }
-
     return (
       <span>
-        <Sections quote={this.props.quote.quote} />
-        <Prices quote={this.props.quote.quote} />
-        <Comments quote={this.props.quote.quote} />
-        <Send quote={this.props.quote.quote} />
+        <Sections />
+        <Prices />
+        <Comments />
+        <Send />
       </span>
     );
   }
@@ -109,10 +115,10 @@ class Quote extends Component {
   render() {
     return (
       <div >
-        <Header url={this.props.url} />
-        <Hero />
+        <Header url={this.props.url} id={window.localStorage.getItem('user')} />
+        <Hero id={window.localStorage.getItem('user')} />
         {this.checkQuote()}
-        <Footer />
+        <Footer id={window.localStorage.getItem('user')} />
         <Languages />
         <Hidden mdUp><Nav url={this.props.url} /></Hidden>
       </div>
@@ -120,10 +126,22 @@ class Quote extends Component {
   }
 }
 
-const mutation = gql`
-  mutation CreateQuote($token: String!) {
-    createQuote(token: $token) {
-      id
+const createDevice = gql`
+  mutation {
+    createDevice(input:{}){
+      changedDevice{
+        id
+      }
+    }
+  }
+`;
+
+const createQuote = gql`
+  mutation createQuote($deviceId: ID!){
+    createQuote(input:{deviceId:$deviceId}){
+      changedQuote{
+        id
+      }
     }
   }
 `;
@@ -131,6 +149,7 @@ const mutation = gql`
 function mapStateToProps(state) {
   return {
     id: state.quote.id,
+    saved: state.quote.saved,
   };
 }
 
@@ -138,8 +157,7 @@ export default
   translate(['common'])(
     connect(mapStateToProps, actions)(
       compose(
-        graphql(mutation),
-        graphql(fetchUser, { props: data => data, name: 'user' }),
-        graphql(fetchQuote, { props: data => data, options: props => ({ variables: { id: props.id } }), skip: props => !props.id, name: 'quote' }),
+        graphql(createDevice, { name: 'createDevice' }),
+        graphql(createQuote, { name: 'createQuote' }),
       )(
         withStyles(styleSheet)(Quote))));

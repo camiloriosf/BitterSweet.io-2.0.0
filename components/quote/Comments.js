@@ -21,7 +21,12 @@ const styleSheet = createStyleSheet('Comments', {
 class Comments extends Component {
 
   handleChange = ({ comments }) => {
-    this.props.updateComments({ comments });
+    this.props.updateValue({
+      value:
+      {
+        comments,
+      },
+    });
   }
 
   render() {

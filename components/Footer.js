@@ -6,7 +6,6 @@ import Typography from 'material-ui/Typography';
 import EmailIcon from 'material-ui-icons/Email';
 import SettingsEthernetIcon from 'material-ui-icons/SettingsEthernet';
 import CallIcon from 'material-ui-icons/Call';
-import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import Router from 'next/router';
@@ -76,14 +75,14 @@ class Footer extends Component {
   };
 
   handleClick = (action) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       logEvent('click', action);
     }
     Router.push('/quote');
   };
 
   handleChange = (isVisible) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       if (isVisible !== this.state.isVisible) {
         if (isVisible) logEvent('section', 'footer');
         this.setState({ isVisible });
@@ -93,67 +92,65 @@ class Footer extends Component {
 
   render() {
     return (
-      <div className={this.props.classes.section}>
-        <VisibilitySensor onChange={this.handleChange} />
-        <Grid container justify="center" align="center">
-          <Grid item xs={12} sm={12}>
-            <div className={this.props.classes.div}>
-              <Typography type="display1" align="center" className={this.props.classes.title}>{this.props.t('name')}</Typography>
-            </div>
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <div className={this.props.classes.middleDiv}>
-              <Grid container justify="center" align="center">
-                <Grid item xs={12} sm={3}>
-                  <div className={this.props.classes.contactDiv}>
-                    <a href="mailto:contact@bittersweet.io?Subject=Hi!" target="_top" className={this.props.classes.anchor}>
-                      <EmailIcon className={this.props.classes.icon} />
-                      <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.mail.title')}</Typography>
-                      <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.mail.subtitle')}</Typography>
-                    </a>
-                  </div>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                  <div className={this.props.classes.quote}>
-                    <div className={this.props.classes.contactDiv} >
-                      <span role="presentation" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
-                        <SettingsEthernetIcon className={this.props.classes.icon} />
-                        <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.quote.title')}</Typography>
-                        <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.quote.subtitle')}</Typography>
-                      </span>
+      <VisibilitySensor
+        onChange={this.handleChange}
+        active={!this.state.isVisible}
+        delayedCall
+        minTopValue={300}
+        partialVisibility
+      >
+        <div className={this.props.classes.section}>
+          <Grid container justify="center" align="center">
+            <Grid item xs={12} sm={12}>
+              <div className={this.props.classes.div}>
+                <Typography type="display1" align="center" className={this.props.classes.title}>{this.props.t('name')}</Typography>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <div className={this.props.classes.middleDiv}>
+                <Grid container justify="center" align="center">
+                  <Grid item xs={12} sm={3}>
+                    <div className={this.props.classes.contactDiv}>
+                      <a href="mailto:contact@bittersweet.io?Subject=Hi!" target="_top" className={this.props.classes.anchor}>
+                        <EmailIcon className={this.props.classes.icon} />
+                        <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.mail.title')}</Typography>
+                        <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.mail.subtitle')}</Typography>
+                      </a>
                     </div>
-                  </div>
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <div className={this.props.classes.quote}>
+                      <div className={this.props.classes.contactDiv} >
+                        <span role="presentation" className={this.props.classes.anchor} onClick={() => this.handleClick('hero_quote')}>
+                          <SettingsEthernetIcon className={this.props.classes.icon} />
+                          <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.quote.title')}</Typography>
+                          <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.quote.subtitle')}</Typography>
+                        </span>
+                      </div>
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} sm={3}>
+                    <div className={this.props.classes.contactDiv}>
+                      <a href="tel:+56-2-22222222" className={this.props.classes.anchor}>
+                        <CallIcon className={this.props.classes.icon} />
+                        <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.call.title')}</Typography>
+                        <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.call.subtitle')}</Typography>
+                      </a>
+                    </div>
+                  </Grid>
                 </Grid>
-                <Grid item xs={12} sm={3}>
-                  <div className={this.props.classes.contactDiv}>
-                    <a href="tel:+56-2-22222222" className={this.props.classes.anchor}>
-                      <CallIcon className={this.props.classes.icon} />
-                      <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.call.title')}</Typography>
-                      <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.call.subtitle')}</Typography>
-                    </a>
-                  </div>
-                </Grid>
-              </Grid>
-            </div>
+              </div>
+            </Grid>
+            <Grid item xs={12} sm={12}>
+              <div className={this.props.classes.lastDiv}>
+                <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>&copy; 2017 BitterSweet.io all rights reserved</Typography>
+              </div>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={12}>
-            <div className={this.props.classes.lastDiv}>
-              <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>&copy; 2017 BitterSweet.io all rights reserved</Typography>
-            </div>
-          </Grid>
-        </Grid>
-      </div>
+        </div>
+      </VisibilitySensor>
     );
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
-
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(Footer)));
+export default translate(['common'])(withStyles(styleSheet)(Footer));

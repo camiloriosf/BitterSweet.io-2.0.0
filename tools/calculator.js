@@ -9,13 +9,13 @@ const calculator = (props, type) => {
   summer = 0;
   helper = 0;
   // Platforms
-  if (props.platforms.web) multiplier *= 1.25;
-  if (props.platforms.ios) multiplier *= 1.25;
-  if (props.platforms.android) multiplier *= 1.25;
-  if (props.platforms.desktop) multiplier *= 1.25;
+  if (props.platform.web) multiplier *= 1.25;
+  if (props.platform.ios) multiplier *= 1.25;
+  if (props.platform.android) multiplier *= 1.25;
+  if (props.platform.desktop) multiplier *= 1.25;
   helper =
-    props.platforms.web + props.platforms.ios +
-    props.platforms.android + props.platforms.desktop;
+    props.platform.web + props.platform.ios +
+    props.platform.android + props.platform.desktop;
   if (helper === 2) multiplier *= 0.94;
   if (helper === 3) multiplier *= 0.88;
   if (helper === 4) multiplier *= 0.82;

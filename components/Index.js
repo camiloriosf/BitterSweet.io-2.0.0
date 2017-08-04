@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Hidden from 'material-ui/Hidden';
 import { translate } from 'react-i18next';
+import { gql, graphql } from 'react-apollo';
+import { logPageView, setUser } from '../tools/analytics';
 import Header from './Header';
 import Footer from './Footer';
 import Nav from './Nav';
@@ -24,6 +26,19 @@ class Index extends Component {
 
   componentDidMount() {
     window.addEventListener('scroll', this.hideBar);
+    if (window.localStorage) {
+      if (window.localStorage.getItem('user')) {
+        setUser(window.localStorage.getItem('user'));
+        logPageView();
+      } else {
+        this.props.mutate()
+          .then((data) => {
+            window.localStorage.setItem('user', data.data.createDevice.changedDevice.id);
+            setUser(window.localStorage.getItem('user'));
+            logPageView();
+          });
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -38,26 +53,36 @@ class Index extends Component {
     return (
       <div>
         <section id="home" />
-        <Header url={this.props.url} />
+        <Header url={this.props.url} id={window.localStorage.getItem('user')} />
         <section id="hero" />
-        <Hero />
+        <Hero id={window.localStorage.getItem('user')} />
         <section id="services" />
-        <Services />
+        <Services id={window.localStorage.getItem('user')} />
         <section id="how" />
-        <How />
+        <How id={window.localStorage.getItem('user')} />
         <section id="pricing" />
-        <Pricing />
+        <Pricing id={window.localStorage.getItem('user')} />
         <section id="faq" />
-        <FAQ />
+        <FAQ id={window.localStorage.getItem('user')} />
         <section id="contact" />
-        <Contact />
-        <Footer />
+        <Contact id={window.localStorage.getItem('user')} />
+        <Footer id={window.localStorage.getItem('user')} />
         <Languages />
         <Hidden mdUp><Nav url={this.props.url} /></Hidden>
-        {this.state.scrollY > 100 ? <Up /> : null}
+        {this.state.scrollY > 100 ? <Up id={window.localStorage.getItem('user')} /> : null}
       </div>
     );
   }
 }
 
-export default translate(['common'])(Index);
+const mutation = gql`
+  mutation{
+    createDevice(input:{}){
+      changedDevice{
+        id
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(Index));
