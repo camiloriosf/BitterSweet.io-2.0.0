@@ -3,7 +3,7 @@ BitterSweet Website
 
 1.0.9
 
-* Updated API. Changed to Graph.Cool
+* Updated API. Changed to scaphold.io
 
 1.0.8
 
