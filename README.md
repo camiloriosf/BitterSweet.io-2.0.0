@@ -1,10 +1,6 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
-1.0.9
-
-* Updated API. Changed to scaphold.io
-
 1.0.8
 
 * Updated locales folder [es]
