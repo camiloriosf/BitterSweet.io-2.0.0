@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -11,6 +11,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Time', {
   slide: {
@@ -59,32 +60,12 @@ class Time extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.time[paper]) {
+    if (this.props.time[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ time: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          time: {
-            ...state,
-            __typename: 'TimeType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -109,21 +90,20 @@ class Time extends Component {
                     this.handlePaperState('normal')
                   }
                   elevation={
-                    this.props.quote.time.normal ? 12 : 1
+                    this.props.time.normal ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'normal',
-                      true,
-                    {
-                      normal: true,
-                      asap: false,
-                      now: false,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { time: {
+                        normal: true,
+                        asap: false,
+                        now: false,
+                      } } })}
                   onMouseEnter={() => this.setState({ normalHover: true })}
                   onMouseLeave={() => this.setState({ normalHover: false })}
                 >
-                  {this.props.quote.time.normal ?
+                  {this.props.time.normal ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -139,21 +119,20 @@ class Time extends Component {
                     this.handlePaperState('asap')
                   }
                   elevation={
-                    this.props.quote.time.asap ? 12 : 1
+                    this.props.time.asap ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'asap',
-                      true,
-                    {
-                      normal: false,
-                      asap: true,
-                      now: false,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { time: {
+                        normal: false,
+                        asap: true,
+                        now: false,
+                      } } })}
                   onMouseEnter={() => this.setState({ asapHover: true })}
                   onMouseLeave={() => this.setState({ asapHover: false })}
                 >
-                  {this.props.quote.time.asap ?
+                  {this.props.time.asap ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -169,21 +148,20 @@ class Time extends Component {
                     this.handlePaperState('now')
                   }
                   elevation={
-                    this.props.quote.time.now ? 12 : 1
+                    this.props.time.now ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'now',
-                      true,
-                    {
-                      normal: false,
-                      asap: false,
-                      now: true,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { time: {
+                        normal: false,
+                        asap: false,
+                        now: true,
+                      } } })}
                   onMouseEnter={() => this.setState({ nowHover: true })}
                   onMouseLeave={() => this.setState({ nowHover: false })}
                 >
-                  {this.props.quote.time.now ?
+                  {this.props.time.now ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -201,17 +179,11 @@ class Time extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      time {
-        normal
-        asap
-        now
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    time: state.quote.time,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Time)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Time)));

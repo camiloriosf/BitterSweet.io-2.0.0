@@ -4,7 +4,6 @@ import Button from 'material-ui/Button';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
-import { gql, graphql } from 'react-apollo';
 import Fade from 'material-ui/transitions/Fade';
 import onClickOutside from 'react-onclickoutside';
 import { translate } from 'react-i18next';
@@ -249,14 +248,5 @@ class Nav extends Component {
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
-
 export default
-  translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(onClickOutside(Nav))));
+  translate(['common'])(withStyles(styleSheet)(onClickOutside(Nav)));

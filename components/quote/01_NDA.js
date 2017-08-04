@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -9,6 +9,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('NDA', {
   slide: {
@@ -55,29 +56,12 @@ class NDA extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = () => {
-    if (this.props.quote.NDA) {
+    if (this.props.nda) {
       return this.props.classes.paperSelected;
     } else if (this.state.hover) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = () => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ NDA: { value: !this.props.quote.NDA } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          NDA: !this.props.quote.NDA,
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -102,13 +86,16 @@ class NDA extends Component {
                     this.handlePaperState()
                   }
                   elevation={
-                    this.props.quote.NDA ? 12 : 1
+                    this.props.nda ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit()}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { nda: !this.props.nda } })}
                   onMouseEnter={() => this.setState({ hover: true })}
                   onMouseLeave={() => this.setState({ hover: false })}
                 >
-                  {this.props.quote.NDA ?
+                  {this.props.nda ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -126,13 +113,11 @@ class NDA extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      NDA
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    nda: state.quote.nda,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(NDA)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(NDA)));

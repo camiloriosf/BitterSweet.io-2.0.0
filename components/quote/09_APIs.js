@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -8,6 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import AddIcon from 'material-ui-icons/Add';
 import RemoveIcon from 'material-ui-icons/Remove';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('APIs', {
   slide: {
@@ -24,37 +25,17 @@ class APIs extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handleUp = () => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ apis: { value: this.props.quote.apis + 1 } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          apis: this.props.quote.apis + 1,
-          __typename: 'QuoteType',
-        },
-      },
+    this.props.updateValue({
+      value:
+      { apis: this.props.apis + 1 },
     });
   };
 
   handleDown = () => {
-    if (this.props.quote.apis > 0) {
-      this.props.mutate({
-        variables: {
-          id: this.props.quote.id,
-          key: JSON.stringify({ apis: { value: this.props.quote.apis - 1 } }),
-        },
-        optimisticResponse: {
-          __typename: 'Mutation',
-          updateQuote: {
-            id: this.props.quote.id,
-            apis: this.props.quote.apis - 1,
-            __typename: 'QuoteType',
-          },
-        },
+    if (this.props.pages > 0) {
+      this.props.updateValue({
+        value:
+        { apis: this.props.apis - 1 },
       });
     }
   };
@@ -86,7 +67,7 @@ class APIs extends Component {
                     <Grid item xs={4}>
                       <div>
                         <Typography type="display1" align="center">
-                          {this.props.quote.apis}
+                          {this.props.apis}
                         </Typography>
                       </div>
                     </Grid>
@@ -106,13 +87,12 @@ class APIs extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      apis
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    apis: state.quote.apis,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(APIs)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(APIs)));
+

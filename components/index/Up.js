@@ -5,7 +5,6 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import common from 'material-ui/colors/common';
 import blue from 'material-ui/colors/blue';
-import { gql, graphql } from 'react-apollo';
 import { logEvent } from '../../tools/analytics';
 
 const { transparent } = common;
@@ -36,7 +35,7 @@ const styleSheet = createStyleSheet('Up', {
 
 function Up(props) {
   const handleClick = (action) => {
-    if (!props.data.loading) {
+    if (props.id) {
       logEvent('click', action);
     }
   };
@@ -56,13 +55,5 @@ function Up(props) {
   );
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
 
-export default graphql(user, { props: data => data })(withStyles(styleSheet)(Up));
+export default withStyles(styleSheet)(Up);

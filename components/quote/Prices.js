@@ -6,7 +6,6 @@ import Typography from 'material-ui/Typography';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
-import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
 
@@ -44,75 +43,18 @@ const styleSheet = createStyleSheet('Prices', {
 
 class Prices extends Component {
   state = {
-    payg: true,
-    installments: false,
-    fee: false,
     paygHover: true,
     installmentsHover: false,
     feeHover: false,
   };
 
-  componentWillReceiveProps = (nextProps) => {
-    this.props.updatePrice(nextProps.quote);
-    if (this.props.installments !== nextProps.installments) {
-      this.props.mutate({
-        variables: {
-          id: this.props.quote.id,
-          key: JSON.stringify({
-            prices: { sub: 'installments', value: nextProps.installments },
-          }),
-        },
-      });
-    }
-    if (this.props.payg !== nextProps.payg) {
-      this.props.mutate({
-        variables: {
-          id: this.props.quote.id,
-          key: JSON.stringify({
-            prices: { sub: 'payg', value: nextProps.payg },
-          }),
-        },
-      });
-    }
-    if (this.props.fee !== nextProps.fee) {
-      this.props.mutate({
-        variables: {
-          id: this.props.quote.id,
-          key: JSON.stringify({
-            prices: { sub: 'fee', value: nextProps.fee },
-          }),
-        },
-      });
-    }
-  }
-
   handlePaperState = (paper) => {
-    if (this.props.quote.plan[paper]) {
+    if (this.props.plan[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ plan: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          plan: {
-            ...state,
-            __typename: 'PlanType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   formatPrice = price => `$${price.toLocaleString()}`;
@@ -135,24 +77,23 @@ class Prices extends Component {
                 this.handlePaperState('installments')
               }
               elevation={
-                this.props.quote.plan.installments ? 12 : 1
+                this.props.plan.installments ? 12 : 1
               }
-              onClick={() => this.handleSubmit(
-                'installments',
-                true,
-                {
-                  payg: false,
-                  installments: true,
-                  fee: false,
-                },
-              )}
+              onClick={() =>
+                this.props.updateValue({
+                  value:
+                  { plan: {
+                    installments: true,
+                    fee: false,
+                    payg: false,
+                  } } })}
               onMouseEnter={() => this.setState({ installmentsHover: true })}
               onMouseLeave={() => this.setState({ installmentsHover: false })}
             >
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <Typography type="title" color="accent" component="h2" align="center" className={this.props.classes.title}>
-                    {this.formatPrice(this.props.installments)}
+                    {this.formatPrice(this.props.prices.installments)}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -169,24 +110,23 @@ class Prices extends Component {
                 this.handlePaperState('payg')
               }
               elevation={
-                this.props.quote.plan.payg ? 12 : 1
+                this.props.plan.payg ? 12 : 1
               }
-              onClick={() => this.handleSubmit(
-                'payg',
-                true,
-                {
-                  payg: true,
-                  installments: false,
-                  fee: false,
-                },
-              )}
+              onClick={() =>
+                this.props.updateValue({
+                  value:
+                  { plan: {
+                    installments: false,
+                    fee: false,
+                    payg: true,
+                  } } })}
               onMouseEnter={() => this.setState({ paygHover: true })}
               onMouseLeave={() => this.setState({ paygHover: false })}
             >
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <Typography type="title" component="h2" align="center" className={this.props.classes.title}>
-                    {this.formatPrice(this.props.payg)}
+                    {this.formatPrice(this.props.prices.payg)}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -203,24 +143,23 @@ class Prices extends Component {
                 this.handlePaperState('fee')
               }
               elevation={
-                this.props.quote.plan.fee ? 12 : 1
+                this.props.plan.fee ? 12 : 1
               }
-              onClick={() => this.handleSubmit(
-                'fee',
-                true,
-                {
-                  payg: false,
-                  installments: false,
-                  fee: true,
-                },
-              )}
+              onClick={() =>
+                this.props.updateValue({
+                  value:
+                  { plan: {
+                    installments: false,
+                    fee: true,
+                    payg: false,
+                  } } })}
               onMouseEnter={() => this.setState({ feeHover: true })}
               onMouseLeave={() => this.setState({ feeHover: false })}
             >
               <Grid container justify="center" align="flex-start">
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
                   <Typography type="title" color="accent" component="h2" align="center" className={this.props.classes.title}>
-                    {this.formatPrice(this.props.fee)}
+                    {this.formatPrice(this.props.prices.fee)}
                   </Typography>
                 </Grid>
                 <Grid item xs={12} sm={12} className={this.props.classes.grid}>
@@ -237,26 +176,12 @@ class Prices extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      plan {
-        payg
-        installments
-        fee
-      }
-    }
-  }
-`;
-
 function mapStateToProps(state) {
   return {
-    installments: state.quote.installments,
-    payg: state.quote.payg,
-    fee: state.quote.fee,
+    prices: state.quote.prices,
+    plan: state.quote.plan,
   };
 }
 
 export default translate(['common'])(
-  connect(mapStateToProps, actions)(graphql(mutation)(withStyles(styleSheet)(Prices))));
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Prices)));

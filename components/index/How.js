@@ -5,7 +5,6 @@ import blue from 'material-ui/colors/blue';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import Slide from 'material-ui/transitions/Slide';
-import { gql, graphql } from 'react-apollo';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logEvent } from '../../tools/analytics';
@@ -41,13 +40,13 @@ class How extends Component {
   };
 
   handleClick = (action) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       logEvent('click', action);
     }
   };
 
   handleChange = (isVisible) => {
-    if (!this.props.data.loading) {
+    if (this.props.id) {
       if (isVisible !== this.state.isVisible) {
         if (isVisible) logEvent('section', 'how');
         this.setState({ isVisible });
@@ -109,7 +108,13 @@ class How extends Component {
   render() {
     return (
       <div className={this.props.classes.section}>
-        <VisibilitySensor onChange={this.handleChange} active={!this.state.isVisible} delayedCall>
+        <VisibilitySensor
+          onChange={this.handleChange}
+          active={!this.state.isVisible}
+          delayedCall
+          minTopValue={300}
+          partialVisibility
+        >
           <Grid container justify="center" align="center" className={this.props.classes.padSections}>
             <Grid item xs={12} sm={12}>
               <Typography type="display1" align="center" className={this.props.classes.sectionTitle}>
@@ -129,13 +134,4 @@ class How extends Component {
   }
 }
 
-const user = gql`
-  query User {
-    user {
-      token
-      id
-    }
-  }
-`;
-
-export default translate(['common'])(graphql(user, { props: data => data })(withStyles(styleSheet)(How)));
+export default translate(['common'])(withStyles(styleSheet)(How));

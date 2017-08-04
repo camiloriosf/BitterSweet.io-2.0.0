@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -12,6 +12,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('Communication', {
   slide: {
@@ -61,32 +62,12 @@ class Communication extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.communication[paper]) {
+    if (this.props.communication[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ communication: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          communication: {
-            ...state,
-            __typename: 'CommunicationType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -111,22 +92,24 @@ class Communication extends Component {
                     this.handlePaperState('chat')
                   }
                   elevation={
-                    this.props.quote.communication.chat ? 12 : 1
+                    this.props.communication.chat ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'chat',
-                      !this.props.quote.communication.chat,
-                    {
-                      chat: !this.props.quote.communication.chat,
-                      email: this.props.quote.communication.email,
-                      push: this.props.quote.communication.push,
-                      sms: this.props.quote.communication.sms,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        communication: {
+                          chat: !this.props.communication.chat,
+                          email: this.props.communication.email,
+                          push: this.props.communication.push,
+                          sms: this.props.communication.sms,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ chatHover: true })}
                   onMouseLeave={() => this.setState({ chatHover: false })}
                 >
-                  {this.props.quote.communication.chat ?
+                  {this.props.communication.chat ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -142,22 +125,24 @@ class Communication extends Component {
                     this.handlePaperState('email')
                   }
                   elevation={
-                    this.props.quote.communication.email ? 12 : 1
+                    this.props.communication.email ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'email',
-                      !this.props.quote.communication.email,
-                    {
-                      chat: this.props.quote.communication.chat,
-                      email: !this.props.quote.communication.email,
-                      push: this.props.quote.communication.push,
-                      sms: this.props.quote.communication.sms,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        communication: {
+                          chat: this.props.communication.chat,
+                          email: !this.props.communication.email,
+                          push: this.props.communication.push,
+                          sms: this.props.communication.sms,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ emailHover: true })}
                   onMouseLeave={() => this.setState({ emailHover: false })}
                 >
-                  {this.props.quote.communication.email ?
+                  {this.props.communication.email ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -173,22 +158,24 @@ class Communication extends Component {
                     this.handlePaperState('push')
                   }
                   elevation={
-                    this.props.quote.communication.push ? 12 : 1
+                    this.props.communication.push ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'push',
-                      !this.props.quote.communication.push,
-                    {
-                      chat: this.props.quote.communication.chat,
-                      email: this.props.quote.communication.email,
-                      push: !this.props.quote.communication.push,
-                      sms: this.props.quote.communication.sms,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        communication: {
+                          chat: this.props.communication.chat,
+                          email: this.props.communication.email,
+                          push: !this.props.communication.push,
+                          sms: this.props.communication.sms,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ pushHover: true })}
                   onMouseLeave={() => this.setState({ pushHover: false })}
                 >
-                  {this.props.quote.communication.push ?
+                  {this.props.communication.push ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -204,22 +191,24 @@ class Communication extends Component {
                     this.handlePaperState('sms')
                   }
                   elevation={
-                    this.props.quote.communication.sms ? 12 : 1
+                    this.props.communication.sms ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'sms',
-                      !this.props.quote.communication.sms,
-                    {
-                      chat: this.props.quote.communication.chat,
-                      email: this.props.quote.communication.email,
-                      push: this.props.quote.communication.push,
-                      sms: !this.props.quote.communication.sms,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      {
+                        communication: {
+                          chat: this.props.communication.chat,
+                          email: this.props.communication.email,
+                          push: this.props.communication.push,
+                          sms: !this.props.communication.sms,
+                        },
+                      },
+                    })}
                   onMouseEnter={() => this.setState({ smsHover: true })}
                   onMouseLeave={() => this.setState({ smsHover: false })}
                 >
-                  {this.props.quote.communication.sms ?
+                  {this.props.communication.sms ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -237,18 +226,12 @@ class Communication extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      communication{
-        sms
-        push
-        email
-        chat
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    communication: state.quote.communication,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Communication)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(Communication)));
+

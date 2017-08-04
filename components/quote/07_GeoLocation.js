@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { gql, graphql } from 'react-apollo';
+import { connect } from 'react-redux';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -10,6 +10,7 @@ import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
+import * as actions from '../../lib/actions/quote';
 
 const styleSheet = createStyleSheet('GeoLocation', {
   slide: {
@@ -57,32 +58,12 @@ class GeoLocation extends Component {
   handleRequestClose = () => this.setState({ open: false });
 
   handlePaperState = (paper) => {
-    if (this.props.quote.geolocation[paper]) {
+    if (this.props.geolocation[paper]) {
       return this.props.classes.paperSelected;
     } else if (this.state[`${paper}Hover`]) {
       return this.props.classes.paperHover;
     }
     return this.props.classes.paperUnSelected;
-  }
-
-  handleSubmit = (paper, value, state) => {
-    this.props.mutate({
-      variables: {
-        id: this.props.quote.id,
-        key: JSON.stringify({ geolocation: { sub: paper, value } }),
-      },
-      optimisticResponse: {
-        __typename: 'Mutation',
-        updateQuote: {
-          id: this.props.quote.id,
-          geolocation: {
-            ...state,
-            __typename: 'DataType',
-          },
-          __typename: 'QuoteType',
-        },
-      },
-    });
   }
 
   render() {
@@ -107,20 +88,19 @@ class GeoLocation extends Component {
                     this.handlePaperState('simple')
                   }
                   elevation={
-                    this.props.quote.geolocation.simple ? 12 : 1
+                    this.props.geolocation.simple ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'simple',
-                      !this.props.quote.geolocation.simple,
-                    {
-                      simple: !this.props.quote.geolocation.simple,
-                      advanced: false,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { geolocation: {
+                        simple: !this.props.geolocation.simple,
+                        advanced: false,
+                      } } })}
                   onMouseEnter={() => this.setState({ simpleHover: true })}
                   onMouseLeave={() => this.setState({ simpleHover: false })}
                 >
-                  {this.props.quote.geolocation.simple ?
+                  {this.props.geolocation.simple ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -136,20 +116,19 @@ class GeoLocation extends Component {
                     this.handlePaperState('advanced')
                   }
                   elevation={
-                    this.props.quote.geolocation.advanced ? 12 : 1
+                    this.props.geolocation.advanced ? 12 : 1
                   }
-                  onClick={() => this.handleSubmit(
-                      'advanced',
-                      !this.props.quote.geolocation.advanced,
-                    {
-                      simple: false,
-                      advanced: !this.props.quote.geolocation.advanced,
-                    },
-                  )}
+                  onClick={() =>
+                    this.props.updateValue({
+                      value:
+                      { geolocation: {
+                        simple: false,
+                        advanced: !this.props.geolocation.advanced,
+                      } } })}
                   onMouseEnter={() => this.setState({ advancedHover: true })}
                   onMouseLeave={() => this.setState({ advancedHover: false })}
                 >
-                  {this.props.quote.geolocation.advanced ?
+                  {this.props.geolocation.advanced ?
                     <DoneIcon className={this.props.classes.done} />
                     : null
                   }
@@ -167,16 +146,11 @@ class GeoLocation extends Component {
   }
 }
 
-const mutation = gql`
-  mutation UpdateQuote($id: String!, $key: JSON) {
-    updateQuote(id: $id, key: $key) {
-      id
-      geolocation {
-        simple
-        advanced
-      }
-    }
-  }
-`;
+function mapStateToProps(state) {
+  return {
+    geolocation: state.quote.geolocation,
+  };
+}
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(GeoLocation)));
+export default translate(['common'])(
+  connect(mapStateToProps, actions)(withStyles(styleSheet)(GeoLocation)));
