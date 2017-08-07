@@ -3,7 +3,7 @@ BitterSweet Website
 
 1.0.10
 
-*Added email functionality
+* Added contact functionality
 
 1.0.9
 
