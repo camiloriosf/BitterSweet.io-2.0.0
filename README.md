@@ -1,6 +1,12 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+1.0.11
+
+* Added Header on scroll
+* Quote sections Modals
+* Check user in scaphold
+
 1.0.10
 
 * Added contact functionality
