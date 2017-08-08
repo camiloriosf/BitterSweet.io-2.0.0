@@ -148,7 +148,14 @@
     "sections": {
       "NDA": {
         "title": "Need an NDA?",
-        "content": "NDA"
+        "content": "NDA",
+        "dialog": {
+          "title": "NDA",
+          "content": [
+            "Select if you want to sign an NDA."
+          ],
+          "button": "Great!"
+        }
       },
       "Platforms": {
         "title": "Choose Platforms",
@@ -159,19 +166,31 @@
         "dialog": {
           "title": "Platforms",
           "content": [
-            "Select the platforms you want your app to support. You can select as may as you want.",
-            "You can also select wheter you want us to take care of the design or not.",
-            "Please also select the number of pages/screens your app will have. For example, if the website has 8 pages and the mobile app has 5 screens, please select 8."
+            "Select the platforms you want your app to support. You can select as may as you want."
           ],
           "button": "Great!"
         }
       },
       "Pages": {
-        "title": "N° of Pages/Screens"
+        "title": "N° of Pages/Screens",
+        "dialog": {
+          "title": "Pages/Screens",
+          "content": [
+            "Select the number of pages/screens your app will have. For example, if the website has 8 pages and the mobile app has 5 screens, select 8."
+          ],
+          "button": "Great!"
+        }
       },
       "Design": {
         "title": "Need Design Services?",
-        "content": "Design"
+        "content": "Design",
+        "dialog": {
+          "title": "Design",
+          "content": [
+            "Select wheter you want us to take care of the design or not."
+          ],
+          "button": "Great!"
+        }
       },
       "Authentication": {
         "title": "Authentication",
@@ -198,7 +217,7 @@
             "This is how your app can store data, like users accounts, usage information, etc.",
             "None: No database will be used, this is perfect for sites that only want to show static (the same the whole time) information.",
             "Database: We will set up a Full Database for you, that will grow with your application.",
-            "Database + Media: Along with the Database, we will also set up a special storage for all your documents, images and any kind of files that you want to store",
+            "Media: We will set up a special storage for all your documents, images and any kind of files that you want to store",
             "Data Source: You already have a Database? No problem, we can integrate it with your new app."
           ],
           "button": "Great!"
@@ -212,7 +231,6 @@
           "title": "GeoLocation",
           "content": [
             "GeoLocation can help you give a better experience to your users.",
-            "None: No GeoLocation will be used.",
             "Simple: Simple location queries, see where your users are.",
             "Advanced: Geo Fencing, Location Queries, etc."
           ],
@@ -224,7 +242,14 @@
         "chat": "Chat",
         "email": "Email",
         "push": "Push",
-        "sms": "SMS"
+        "sms": "SMS",
+        "dialog": {
+          "title": "Communication",
+          "content": [
+            "Select how you want to communicate with your customers."
+          ],
+          "button": "Great!"
+        }
       },
       "APIs": {
         "title": "Number of Cloud APIs",

@@ -4,6 +4,15 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import IconButton from 'material-ui/IconButton';
+import HelpOutlineIcon from 'material-ui-icons/HelpOutline';
 import WebIcon from 'material-ui-icons/Web';
 import AndroidIcon from 'material-ui-icons/Android';
 import TabletMacIcon from 'material-ui-icons/TabletMac';
@@ -37,6 +46,9 @@ const styleSheet = createStyleSheet('Platforms', {
     cursor: 'pointer',
     position: 'relative',
   },
+  iconButton: {
+    textAlign: 'right',
+  },
   icon: {
     width: 40,
     height: 40,
@@ -57,9 +69,12 @@ class Platforms extends Component {
     androidHover: false,
     iosHover: false,
     desktopHover: false,
+    open: false,
   };
 
   handleRequestClose = () => this.setState({ open: false });
+
+  handleRequestOpen = () => this.setState({ open: true });
 
   handlePaperState = (paper) => {
     if (this.props.platform[paper]) {
@@ -83,6 +98,11 @@ class Platforms extends Component {
             <Typography type="title" color="secondary" align="right">
               {this.props.t('quote.sections.Platforms.title')}
             </Typography>
+            <div className={this.props.classes.iconButton}>
+              <IconButton color="primary" aria-label="Help" onClick={this.handleRequestOpen}>
+                <HelpOutlineIcon />
+              </IconButton>
+            </div>
           </Grid>
           <Grid item xs={12} sm={9} className={this.props.classes.section}>
             <Grid container justify="flex-start" align="flex-start">
@@ -209,6 +229,21 @@ class Platforms extends Component {
             </Grid>
           </Grid>
         </Grid>
+        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+          <DialogTitle>
+            {this.props.t('quote.sections.Platforms.dialog.title')}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {this.props.t('quote.sections.Platforms.dialog.content.0')}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleRequestClose} color="primary">
+              {this.props.t('quote.sections.Platforms.dialog.button')}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

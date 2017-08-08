@@ -4,7 +4,15 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 import IconButton from 'material-ui/IconButton';
+import HelpOutlineIcon from 'material-ui-icons/HelpOutline';
 import AddIcon from 'material-ui-icons/Add';
 import RemoveIcon from 'material-ui-icons/Remove';
 import { translate } from 'react-i18next';
@@ -18,11 +26,19 @@ const styleSheet = createStyleSheet('APIs', {
     textAlign: 'center',
     padding: 20,
   },
+  iconButton: {
+    textAlign: 'right',
+  },
 });
 
 class APIs extends Component {
+  state = {
+    open: false,
+  };
 
   handleRequestClose = () => this.setState({ open: false });
+
+  handleRequestOpen = () => this.setState({ open: true });
 
   handleUp = () => {
     this.props.updateValue({
@@ -53,6 +69,11 @@ class APIs extends Component {
             <Typography type="title" color="secondary" align="right">
               {this.props.t('quote.sections.APIs.title')}
             </Typography>
+            <div className={this.props.classes.iconButton}>
+              <IconButton color="primary" aria-label="Help" onClick={this.handleRequestOpen}>
+                <HelpOutlineIcon />
+              </IconButton>
+            </div>
           </Grid>
           <Grid item xs={12} sm={9} className={this.props.classes.section}>
             <Grid container justify="flex-start" align="flex-start">
@@ -82,6 +103,22 @@ class APIs extends Component {
             </Grid>
           </Grid>
         </Grid>
+        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+          <DialogTitle>
+            {this.props.t('quote.sections.APIs.dialog.title')}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {this.props.t('quote.sections.APIs.dialog.content.0')}<br /><br />
+              {this.props.t('quote.sections.APIs.dialog.content.1')}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleRequestClose} color="primary">
+              {this.props.t('quote.sections.APIs.dialog.button')}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }
