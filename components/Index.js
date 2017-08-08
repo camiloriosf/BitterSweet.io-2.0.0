@@ -4,6 +4,7 @@ import { translate } from 'react-i18next';
 import { gql, graphql, compose } from 'react-apollo';
 import { logPageView, setUser } from '../tools/analytics';
 import Header from './Header';
+import HeaderFixed from './HeaderFixed';
 import Footer from './Footer';
 import Nav from './Nav';
 import Languages from './Languages';
@@ -86,6 +87,7 @@ class Index extends Component {
         <Languages />
         <Hidden mdUp><Nav url={this.props.url} /></Hidden>
         {this.state.scrollY > 100 ? <Up id={window.localStorage.getItem('user')} /> : null}
+        {this.state.scrollY > 100 ? <Hidden smDown><HeaderFixed url={this.props.url} id={window.localStorage.getItem('user')} /></Hidden> : null}
       </div>
     );
   }
