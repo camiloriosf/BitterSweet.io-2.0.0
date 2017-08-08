@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { gql, graphql } from 'react-apollo';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
+import { CircularProgress } from 'material-ui/Progress';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import blue from 'material-ui/colors/blue';
+import Snackbar from 'material-ui/Snackbar';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
@@ -33,7 +36,21 @@ const styleSheet = createStyleSheet('Contact', {
 class Contact extends Component {
   state = {
     isVisible: null,
+    loading: false,
+    name: '',
+    email: '',
+    message: '',
+    open: false,
+    status: '',
   };
+
+  validateEmail = (value) => {
+    const re = /[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}/igm;
+    if (value === '' || !re.test(value)) {
+      return true;
+    }
+    return false;
+  }
 
   handleClick = (action) => {
     if (this.props.id) {
@@ -49,6 +66,27 @@ class Contact extends Component {
       }
     }
   };
+
+  handleRequestClose = () => {
+    this.setState({ open: false });
+  };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({ loading: true });
+    this.props.mutate({
+      variables: {
+        user: {
+          name: this.state.name,
+          email: this.state.email,
+          message: this.state.message,
+          sent: true,
+        },
+      },
+    })
+      .then(() => this.setState({ loading: false, name: '', email: '', message: '', open: true, status: 'Message Sent' }))
+      .catch(() => this.setState({ loading: false, open: true, status: 'Error, try again' }));
+  }
 
   render() {
     return (
@@ -71,29 +109,71 @@ class Contact extends Component {
             </Grid>
             <Grid item xs={12} sm={12}>
               <div className={this.props.classes.div}>
-                <form>
+                <form onSubmit={this.handleSubmit}>
                   <Grid container justify="center" align="flex-start">
                     <Grid item xs={12} sm={6}>
-                      <TextField label={this.props.t('contact.form.name')} type="text" className={this.props.classes.textFields} />
+                      <TextField
+                        label={this.props.t('contact.form.name')}
+                        type="text"
+                        className={this.props.classes.textFields}
+                        value={this.state.name}
+                        onChange={event => this.setState({ name: event.target.value })}
+                      />
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                      <TextField label={this.props.t('contact.form.email')} type="email" className={this.props.classes.textFields} />
+                      <TextField
+                        label={this.props.t('contact.form.email')}
+                        type="email"
+                        className={this.props.classes.textFields}
+                        value={this.state.email}
+                        onChange={event => this.setState({ email: event.target.value })}
+                      />
                     </Grid>
                     <Grid item xs={12} sm={12}>
-                      <TextField label={this.props.t('contact.form.about')} rows="4" multiline type="text" className={this.props.classes.textFields} />
+                      <TextField
+                        label={this.props.t('contact.form.about')}
+                        rows="4"
+                        multiline
+                        type="text"
+                        className={this.props.classes.textFields}
+                        value={this.state.message}
+                        onChange={event => this.setState({ message: event.target.value })}
+                      />
                     </Grid>
                     <div className={this.props.classes.buttonDiv}>
-                      <Button raised type="submit">{this.props.t('contact.form.button')}</Button>
+                      {
+                      this.state.loading
+                        ? <CircularProgress />
+                      : <Button raised type="submit" disabled={this.validateEmail(this.state.email)}>{this.props.t('contact.form.button')}</Button>}
                     </div>
                   </Grid>
                 </form>
               </div>
             </Grid>
           </Grid>
+          <Snackbar
+            open={this.state.open}
+            autoHideDuration={2000}
+            onRequestClose={this.handleRequestClose}
+            SnackbarContentProps={{
+              'aria-describedby': 'message-id',
+            }}
+            message={<span id="message-id">{this.state.status}</span>}
+          />
         </div>
       </VisibilitySensor>
     );
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Contact));
+const mutation = gql`
+  mutation CreateContact($user: CreateContactInput!){
+    createContact(input:$user){
+      changedContact{
+        sent
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Contact)));

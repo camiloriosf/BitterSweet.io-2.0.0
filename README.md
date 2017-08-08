@@ -1,6 +1,10 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+1.0.10
+
+* Added contact functionality
+
 1.0.9
 
 * Updated API. Changed to scaphold.io
