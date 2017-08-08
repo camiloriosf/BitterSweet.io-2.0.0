@@ -90,7 +90,7 @@ class Send extends Component {
           <Grid item xs={12} sm={3}>
             <TextField
               label={this.props.t('quote.send.email')}
-              type="text"
+              type="email"
               className={this.props.classes.field}
               value={this.props.quote.email}
               onChange={event => this.handleEmailChange({ email: event.target.value })}
