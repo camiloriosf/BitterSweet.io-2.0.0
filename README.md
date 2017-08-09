@@ -1,6 +1,10 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+2.0.1
+
+* Updated to Next 3.0
+
 1.0.11
 
 * Added Header on scroll
