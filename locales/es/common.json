@@ -43,10 +43,10 @@
       }
     ]
   },
-  "how":{
+  "how": {
     "title": "Cómo lo hacemos?",
     "subtitle": "Introduciendo un enfoque moderno y modular para desarrollar aplicaciones rápidas, responsivas y escalables.",
-    "features":[
+    "features": [
       {
         "title": "Adiós al viejo estilo, bienvenido BitterSweet.io",
         "description": "En BitterSweet.io hemos creado una nueva manera de desarrollar aplicaciones. Con esta, somos capaces de disminuir costos, tiempos de lanzamiento y agregamos todas las características que poseen los softwares industriales."
@@ -60,7 +60,7 @@
         "description": "Creemos que cada requerimiento requiere un enfoque único, es por esto que no utilizamos plantillas pre-diseñadas, hacemos todo nosotros mismos."
       },
       {
-        "title": "Estado del arte en Tecnología",
+        "title": "Lo último en tecnologías",
         "description": "En BitterSweet.io solo usamos las últimas tecnologías, las mismas que utilizan compañías como Facebook, Airbnb o Netflix."
       },
       {
@@ -69,27 +69,37 @@
       }
     ]
   },
-  "pricing":{
+  "pricing": {
     "title": "Precio",
     "subtitle": "Sin precios ocultos, sin contratos, just pay as you go.",
-    "payg":{
-      "title":"Pay-as-you-Go",
-      "features":[
+    "installments": {
+      "title": "Cuotas Fijas",
+      "features": [
+        "Paga por 6 meses",
+        "Todo incluido",
+        "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
+        "Tú eres el dueño de la propiedad intelectual",
+        "Nosotros somos dueños del código hasta el 6to mes"
+      ]
+    },
+    "payg": {
+      "title": "Pay-as-you-Go",
+      "features": [
         "Paga por el tiempo que tu quieras",
         "Todo incluido",
         "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
         "Tú eres el dueño de la propiedad intelectual",
-        "nosotros somos dueños del código"
+        "Nosotros somos dueños del código"
       ]
     },
-    "fee":{
-      "title":"1-Time Fee",
-      "features":[
-       "Paga una cuota única",
-       "3 meses con todo incluido",
-       "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
+    "fee": {
+      "title": "1 solo pago",
+      "features": [
+        "Paga una cuota única",
+        "3 meses con todo incluido",
+        "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
         "Tú eres el dueño de la propiedad intelectual",
-       "Tú eres dueño del código"
+        "Tú eres dueño del código"
       ]
     },
     "button": "Cotizar"
@@ -99,56 +109,44 @@
     "subtitle": "Cotiza cuánto costará tu proyecto, este será el precio final, sin sorpresas.",
     "start": "comenzar",
     "prices": {
-      "title": "Choose the plan that fits you best",
-      "subtitle": "You can change it later.",
+      "title": "Elige el plan que mejor se adapta a tí",
+      "subtitle": "Lo puedes cambiar mas adelante.",
       "payg": {
-        "title": "Pay-as-you-Go",
-        "features": [
-          "Pay for as long as you want",
-          "All inclusive",
-          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
-          "You own the intelectual property",
-          "We own the code"
-        ]
+        "title": "Pay-as-you-Go"
       },
       "installments": {
-        "title": "Fixed Installments",
-        "features": [
-          "Pay a fixed price for 12 months",
-          "All inclusive",
-          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
-          "You own the intelectual property",
-          "We own the code",
-          "After the 12 month you own the code"
-        ]
+        "title": "Cuotas Fijas"
       },
       "fee": {
-        "title": "1-Time Fee",
-        "features": [
-          "Pay a 1 time fee",
-          "3 months of All inclusive",
-          "(Hosting, support, Maintenance, auto-scale, load-balancing, CDN, SSL certificate)",
-          "You own the intelectual property",
-          "You own the code"
-        ]
+        "title": "1 solo pago"
       }
     },
     "comments": {
-      "title": "Comments",
-      "subtitle": "Tell us more about your project",
-      "textField": "comments"
+      "title": "Comentarios",
+      "subtitle": "Cuentanos mas de tu proyecto",
+      "textField": "comentarios"
     },
     "send": {
-      "title": "Submit Quote",
-      "subtitle": "We will get in touch shortly",
-      "name": "name",
-      "email": "email",
-      "submit": "send"
+      "title": "Enviar cotización",
+      "subtitle": "Nos pondremos en contacto pronto",
+      "name": "nombre",
+      "email": "correo",
+      "submit": "enviar",
+      "success": "Genial!",
+      "message": "Hemos recibido tu cotización, nos pondremos en contacto a la brevedad.",
+      "again": "nueva cotizar"
     },
     "sections": {
       "NDA": {
         "title": "¿Necesitas una NDA?",
-        "content": "NDA"
+        "content": "NDA",
+        "dialog": {
+          "title": "NDA",
+          "content": [
+            "Selecciona si quieres firmar una NDA."
+          ],
+          "button": "Entendido!"
+        }
       },
       "Platforms": {
         "title": "Selecciona la(s) plataforma(s)",
@@ -159,19 +157,31 @@
         "dialog": {
           "title": "Plataformas",
           "content": [
-            "Selecciona las plataformas que deseas para tu aplicación. Puedes seleccionar una o más.",
-            "Puedes seleccionar si deseas que nos preocupemos del diseño de tu aplicación o no.",
-            "Por favor, selecciona el número de páginas que tu aplicación tendrá. Por ejemplo, si tu aplicación tendrá 8 páginas web y la aplicación móvil tendrá 5 páginas, selecciona 8."
+            "Selecciona las plataformas que deseas para tu aplicación. Puedes seleccionar una o más."
           ],
           "button": "Entendido!"
         }
       },
       "Pages": {
-        "title": "Número de páginas/pantallas"
+        "title": "Número de páginas/pantallas",
+        "dialog": {
+          "title": "Páginas/Pantallas",
+          "content": [
+            "Selecciona el número de páginas/pantallas que tendrá tu aplicación. Por ejemplo, si la página web tiene 8 páginas y la aplicación móvil tiene 5, selecciona 8."
+          ],
+          "button": "Entendido!"
+        }
       },
       "Design": {
         "title": "Servicio de diseño",
-        "content": "Diseño"
+        "content": "Diseño",
+        "dialog": {
+          "title": "Diseño",
+          "content": [
+            "Selecciona si quieres que nosotros nos encargemos del diseño."
+          ],
+          "button": "Entendido!"
+        }
       },
       "Authentication": {
         "title": "Autenticación",
@@ -195,9 +205,9 @@
         "dialog": {
           "title": "Datos",
           "content": [
-            "Esto corresponde a como tu aplicación puede almacenar datos como cuentas de usuario, información de uso, etc.",
+            "Esto corresponde a como tu aplicación puede almacenar datos como cuentas de usuario, información de uso, imágenes, videos, etc.",
             "Base de datos: Configuraremos una base de datos para ti, la cual crecerá junto con tu aplicación.",
-            "Media: Junto con la base de datos, configuraremos un lugar de almacenamiento para tus documentos, imágenes y cualquier tipo de archivo que quieras almacenar",
+            "Media: Junto con la base de datos, configuraremos un lugar de almacenamiento para tus documentos, imágenes y cualquier tipo de archivo que quieras guardar",
             "Fuente de Datos: Ya tienes una base de datos? No hay problema, podemos integrarla a tu nueva aplicación."
           ],
           "button": "Entendido!"
@@ -222,7 +232,14 @@
         "chat": "Chat",
         "email": "Email",
         "push": "Push",
-        "sms": "SMS"
+        "sms": "SMS",
+        "dialog": {
+          "title": "Comunicación",
+          "content": [
+            "Selecciona como quieres comunicarte con los usuarios de tu aplicación."
+          ],
+          "button": "Entendido!"
+        }
       },
       "APIs": {
         "title": "Número de APIs externas",
@@ -294,7 +311,7 @@
           "title": "Tiempos de entrega",
           "content": [
             "Selecciona que tan rápido quieres que tu aplicación esté lista.",
-            "Normal: Normal time is about 3 months, but we will start your app as soon as an opening is available, this could be tomorrow or the next month, it depends on our work load.",
+            "Normal: El tiempo normal es de 4 meses. Comenzaremos a desarrollar tu app tan pronto se abra una vacante, esto puede ser mañana o en 1 mes más, depende de nuestra carga de trabajo.",
             "ASAP: Comenzaremos tu aplicación lo más pronto posible, con un tiempo de entrega de 3 meses.",
             "Para ayer: Comenzaremos tu aplicación lo más pronto posible, con un tiempo de entrega menor a 3 meses."
           ],
@@ -303,10 +320,10 @@
       }
     }
   },
-  "faq":{
+  "faq": {
     "title": "Preguntas frecuentes",
-    "subtitle" : "Tienes preguntas? Nosotros tenemos respuestas.",
-    "questions":[
+    "subtitle": "Tienes preguntas? Nosotros tenemos respuestas.",
+    "questions": [
       {
         "question": "Debo pagar por avanzado antes de comenzar el trabajo?",
         "answer": "No, queremos minimizar el riesgo y, al mismo tiempo, hacer una aplicación asombrosa. No te cargaremos nada hasta que hayamos probado y terminado tu aplicación y aún más importante, que te encuentres feliz con ella."
@@ -357,17 +374,19 @@
       }
     ]
   },
-  "contact":{
+  "contact": {
     "title": "Conversemos!",
     "subtitle": "Estamos aquí para ayudarte.",
-    "form":{
+    "form": {
       "name": "Nombre",
       "email": "Correo",
       "about": "Cuéntanos sobre tu compañía y tu proyecto",
-      "button": "Enviar"
+      "button": "Enviar",
+      "success": "Mensaje Enviado",
+      "error": "Error, intentar nuevamente"
     }
   },
-  "footer":{
+  "footer": {
     "mail": {
       "title": "Correo",
       "subtitle": "contact@bittersweet.io"

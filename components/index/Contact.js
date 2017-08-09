@@ -84,8 +84,8 @@ class Contact extends Component {
         },
       },
     })
-      .then(() => this.setState({ loading: false, name: '', email: '', message: '', open: true, status: 'Message Sent' }))
-      .catch(() => this.setState({ loading: false, open: true, status: 'Error, try again' }));
+      .then(() => this.setState({ loading: false, name: '', email: '', message: '', open: true, status: this.props.t('contact.form.success') }))
+      .catch(() => this.setState({ loading: false, open: true, status: this.props.t('contact.form.error') }));
   }
 
   render() {

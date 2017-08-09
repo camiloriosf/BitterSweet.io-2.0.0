@@ -5,7 +5,7 @@ BitterSweet Website
 
 * Updated prices section
 * Updated Locales
-* Fixed header
+* Fixed anchor tag problem on quote
 
 2.0.2
 

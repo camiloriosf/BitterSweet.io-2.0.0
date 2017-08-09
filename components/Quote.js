@@ -97,7 +97,7 @@ class Quote extends Component {
     if (this.state.loaded && !this.props.id) {
       return (
         <div className={this.props.classes.startButton}>
-          <Button raised color="primary" onClick={this.handleClick}>Start</Button>
+          <Button raised color="primary" onClick={this.handleClick}>{this.props.t('quote.start')}</Button>
         </div>
       );
     }
@@ -106,13 +106,13 @@ class Quote extends Component {
       return (
         <div>
           <Typography type="title" align="center" paragraph>
-            Great!
+            {this.props.t('quote.send.success')}
           </Typography>
           <Typography type="subheading" align="center" paragraph>
-            We have received your quotation, we will get in touch with you shortly.
+            {this.props.t('quote.send.message')}
           </Typography>
           <div className={this.props.classes.startButton}>
-            <Button raised color="primary" onClick={this.handleClick}>Quote again</Button>
+            <Button raised color="primary" onClick={this.handleClick}>{this.props.t('quote.send.again')}</Button>
           </div>
         </div>
       );

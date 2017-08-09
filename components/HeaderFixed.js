@@ -44,44 +44,16 @@ const styleSheet = createStyleSheet('Header', {
 // Create Class
 class Header extends Component {
 
-  handleClick = (action) => {
-    if (this.props.id) {
-      logEvent('click', action);
-    }
-  };
-
-  handleQuoteClick = (action) => {
-    if (this.props.id) {
-      logEvent('click', action);
-    }
-
-    Router.push('/quote');
-  };
-
-  renderLinks = () => {
-    if (this.props.url.pathname !== '/') {
-      return (
-        <div className={this.props.classes.buttons}>
-          <Link href="/#services"><Button>{this.props.t('header.what')}</Button></Link>
-          <Link href="/#how"><Button>{this.props.t('header.how')}</Button></Link>
-          <Link href="/#pricing"><Button>{this.props.t('header.pricing')}</Button></Link>
-          <Link href="/quote"><Button>{this.props.t('header.quote')}</Button></Link>
-          <Link href="/#faq"><Button>{this.props.t('header.faq')}</Button></Link>
-          <Link href="/#contact"><Button>{this.props.t('header.contact')}</Button></Link>
-        </div>
-      );
-    }
-    return (
-      <div className={this.props.classes.buttons}>
-        <a href="#services" className={this.props.classes.anchor} onClick={() => this.handleClick('header_services')}><Button>{this.props.t('header.what')}</Button></a>
-        <a href="#how" className={this.props.classes.anchor} onClick={() => this.handleClick('header_how')}><Button>{this.props.t('header.how')}</Button></a>
-        <a href="#pricing" className={this.props.classes.anchor} onClick={() => this.handleClick('header_pricing')}><Button>{this.props.t('header.pricing')}</Button></a>
-        <Button className={this.props.classes.button} onClick={() => this.handleQuoteClick('header_quote')}>{this.props.t('header.quote')}</Button>
-        <a href="#faq" className={this.props.classes.anchor} onClick={() => this.handleClick('header_faq')}><Button>{this.props.t('header.faq')}</Button></a>
-        <a href="#contact" className={this.props.classes.anchor} onClick={() => this.handleClick('header_contact')}><Button>{this.props.t('header.contact')}</Button></a>
-      </div>
-    );
-  }
+  renderLinks = () => (
+    <div className={this.props.classes.buttons}>
+      <Link href="/#services" prefetch ><Button>{this.props.t('header.what')}</Button></Link>
+      <Link href="/#how" prefetch ><Button>{this.props.t('header.how')}</Button></Link>
+      <Link href="/#pricing" prefetch ><Button>{this.props.t('header.pricing')}</Button></Link>
+      <Link href="/quote" prefetch ><Button>{this.props.t('header.quote')}</Button></Link>
+      <Link href="/#faq" prefetch ><Button>{this.props.t('header.faq')}</Button></Link>
+      <Link href="/#contact" prefetch ><Button>{this.props.t('header.contact')}</Button></Link>
+    </div>
+  )
 
   render() {
     return (

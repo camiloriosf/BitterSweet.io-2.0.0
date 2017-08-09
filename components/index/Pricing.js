@@ -133,29 +133,29 @@ class Pricing extends Component {
               <Paper square elevation={10} className={this.props.classes.paper}>
                 <Grid container justify="center" align="flex-start">
                   <Grid item xs={12} sm={12} className={this.props.classes.grid}>
-                    <FlightIcon className={this.props.classes.icon} />
+                    <FlightTakeoffIcon className={this.props.classes.icon} />
                     <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
-                      {this.props.t('pricing.fee.title')}
+                      {this.props.t('pricing.installments.title')}
                     </Typography>
                     <Divider light className={this.props.classes.divider} />
                     <Typography component="p" align="center" paragraph className={this.props.classes.features}>
-                      {this.props.t('pricing.fee.features.0')}
+                      {this.props.t('pricing.installments.features.0')}
                     </Typography>
                     <Typography component="p" align="center" paragraph className={this.props.classes.features}>
-                      {this.props.t('pricing.fee.features.1')}
+                      {this.props.t('pricing.installments.features.1')}
                     </Typography>
                     <Typography component="p" align="center" paragraph className={this.props.classes.features}>
-                      {this.props.t('pricing.fee.features.3')}
+                      {this.props.t('pricing.installments.features.3')}
                     </Typography>
                     <Typography component="p" align="center" paragraph className={this.props.classes.features}>
-                      {this.props.t('pricing.fee.features.4')}
+                      {this.props.t('pricing.installments.features.4')}
                     </Typography>
                     <Divider light className={this.props.classes.divider} />
                   </Grid>
                   <Grid item xs={12} sm={12}>
                     <div className={this.props.classes.quote}>
-                      <Button color="primary" onClick={() => this.handleClick('pricing_quote_fee')}>
-                        <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
+                      <Button color="primary" onClick={() => this.handleClick('pricing_quote_payg')}>
+                        <Typography type="title" align="center" color="inherit">QUOTE</Typography>
                       </Button>
                     </div>
                   </Grid>

@@ -10,10 +10,7 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 // Import Extra Libraries
 import { translate } from 'react-i18next';
-import Router from 'next/router';
 import Link from 'next/link';
-// Import Local Files
-import { logEvent } from '../tools/analytics';
 // Create Component StyleSheet
 const styleSheet = createStyleSheet('Header', {
   root: {
@@ -28,6 +25,11 @@ const styleSheet = createStyleSheet('Header', {
     flex: 1,
     textAlign: 'left',
     padding: 10,
+  },
+  titleQuote: {
+    flex: 1,
+    textAlign: 'center',
+    cursor: 'pointer',
   },
   buttons: {
     textAlign: 'right',
@@ -44,41 +46,36 @@ const styleSheet = createStyleSheet('Header', {
 // Create Class
 class Header extends Component {
 
-  handleClick = (action) => {
-    if (this.props.id) {
-      logEvent('click', action);
+  renderTitle = () => {
+    if (this.props.url.pathname !== '/') {
+      return (
+        <Link href="/" >
+          <Typography type="title" align="center" className={this.props.classes.titleQuote}>
+            {this.props.t('name')}
+          </Typography>
+        </Link>
+      );
     }
-  };
 
-  handleQuoteClick = (action) => {
-    if (this.props.id) {
-      logEvent('click', action);
-    }
-
-    Router.push('/quote');
-  };
+    return (
+      <Typography type="title" align="center" className={this.props.classes.title}>
+        {this.props.t('name')}
+      </Typography>
+    );
+  }
 
   renderLinks = () => {
     if (this.props.url.pathname !== '/') {
-      return (
-        <div className={this.props.classes.buttons}>
-          <Link href="/#services" prefetch ><a>{this.props.t('header.what')}</a></Link>
-          <Link href="/#how"><Button>{this.props.t('header.how')}</Button></Link>
-          <Link href="/#pricing"><Button>{this.props.t('header.pricing')}</Button></Link>
-          <Link href="/quote"><Button>{this.props.t('header.quote')}</Button></Link>
-          <Link href="/#faq"><Button>{this.props.t('header.faq')}</Button></Link>
-          <Link href="/#contact"><Button>{this.props.t('header.contact')}</Button></Link>
-        </div>
-      );
+      return null;
     }
     return (
       <div className={this.props.classes.buttons}>
-        <a href="#services" className={this.props.classes.anchor} onClick={() => this.handleClick('header_services')}><Button>{this.props.t('header.what')}</Button></a>
-        <a href="#how" className={this.props.classes.anchor} onClick={() => this.handleClick('header_how')}><Button>{this.props.t('header.how')}</Button></a>
-        <a href="#pricing" className={this.props.classes.anchor} onClick={() => this.handleClick('header_pricing')}><Button>{this.props.t('header.pricing')}</Button></a>
-        <Button className={this.props.classes.button} onClick={() => this.handleQuoteClick('header_quote')}>{this.props.t('header.quote')}</Button>
-        <a href="#faq" className={this.props.classes.anchor} onClick={() => this.handleClick('header_faq')}><Button>{this.props.t('header.faq')}</Button></a>
-        <a href="#contact" className={this.props.classes.anchor} onClick={() => this.handleClick('header_contact')}><Button>{this.props.t('header.contact')}</Button></a>
+        <Link href="/#services" ><Button>{this.props.t('header.what')}</Button></Link>
+        <Link href="/#how" replace ><Button>{this.props.t('header.how')}</Button></Link>
+        <Link href="/#pricing" ><Button>{this.props.t('header.pricing')}</Button></Link>
+        <Link href="/quote" prefetch ><Button>{this.props.t('header.quote')}</Button></Link>
+        <Link href="/#faq" ><Button>{this.props.t('header.faq')}</Button></Link>
+        <Link href="/#contact" ><Button>{this.props.t('header.contact')}</Button></Link>
       </div>
     );
   }
@@ -88,9 +85,7 @@ class Header extends Component {
       <div className={this.props.classes.root}>
         <AppBar position="static" className={this.props.classes.appBar}>
           <Toolbar>
-            <Typography type="title" align="center" className={this.props.classes.title}>
-              {this.props.t('name')}
-            </Typography>
+            {this.renderTitle()}
             <Hidden smDown>
               {this.renderLinks()}
             </Hidden>
