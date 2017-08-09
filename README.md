@@ -1,6 +1,12 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+2.0.3
+
+* Updated prices section
+* Updated Locales
+* Fixed header
+
 2.0.2
 
 * Updated to React 15.6
