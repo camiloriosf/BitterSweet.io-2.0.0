@@ -62,7 +62,7 @@ class Header extends Component {
     if (this.props.url.pathname !== '/') {
       return (
         <div className={this.props.classes.buttons}>
-          <Link href="/#services"><Button>{this.props.t('header.what')}</Button></Link>
+          <Link href="/#services" prefetch ><a>{this.props.t('header.what')}</a></Link>
           <Link href="/#how"><Button>{this.props.t('header.how')}</Button></Link>
           <Link href="/#pricing"><Button>{this.props.t('header.pricing')}</Button></Link>
           <Link href="/quote"><Button>{this.props.t('header.quote')}</Button></Link>
