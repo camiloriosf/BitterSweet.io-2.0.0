@@ -1,6 +1,10 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+2.0.4
+
+* Web page optimization
+
 2.0.3
 
 * Updated prices section
