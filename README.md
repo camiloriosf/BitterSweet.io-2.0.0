@@ -4,6 +4,7 @@ BitterSweet Website
 2.0.2
 
 * Updated to React 15.6
+* Fixed bug on header click
 
 2.0.1
 

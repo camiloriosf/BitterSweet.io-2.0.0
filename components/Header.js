@@ -27,7 +27,6 @@ const styleSheet = createStyleSheet('Header', {
   title: {
     flex: 1,
     textAlign: 'left',
-    cursor: 'pointer',
     padding: 10,
   },
   buttons: {
@@ -89,11 +88,9 @@ class Header extends Component {
       <div className={this.props.classes.root}>
         <AppBar position="static" className={this.props.classes.appBar}>
           <Toolbar>
-            <Link href="/">
-              <Typography type="title" align="center" className={this.props.classes.title}>
-                {this.props.t('name')}
-              </Typography>
-            </Link>
+            <Typography type="title" align="center" className={this.props.classes.title}>
+              {this.props.t('name')}
+            </Typography>
             <Hidden smDown>
               {this.renderLinks()}
             </Hidden>
