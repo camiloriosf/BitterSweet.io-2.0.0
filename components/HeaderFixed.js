@@ -6,6 +6,7 @@ import withStyles from 'material-ui/styles/withStyles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
+import Slide from 'material-ui/transitions/Slide';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 // Import Extra Libraries
@@ -18,11 +19,10 @@ import { logEvent } from '../tools/analytics';
 const styleSheet = createStyleSheet('Header', {
   root: {
     width: '100%',
-  },
-  appBar: {
-    boxShadow: 'none',
-    backgroundColor: '#fff',
-    border: 0,
+    position: 'fixed',
+    top: 0,
+    backgroundColor: '#FFF',
+    zIndex: 999999999,
   },
   title: {
     flex: 1,
@@ -86,20 +86,22 @@ class Header extends Component {
 
   render() {
     return (
-      <div className={this.props.classes.root}>
-        <AppBar position="static" className={this.props.classes.appBar}>
-          <Toolbar>
-            <Link href="/">
-              <Typography type="title" align="center" className={this.props.classes.title}>
-                {this.props.t('name')}
-              </Typography>
-            </Link>
-            <Hidden smDown>
-              {this.renderLinks()}
-            </Hidden>
-          </Toolbar>
-        </AppBar>
-      </div>
+      <Slide direction="down" enterTransitionDuration={1000} in>
+        <div className={this.props.classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Link href="/">
+                <Typography type="title" align="center" className={this.props.classes.title}>
+                  {this.props.t('name')}
+                </Typography>
+              </Link>
+              <Hidden smDown>
+                {this.renderLinks()}
+              </Hidden>
+            </Toolbar>
+          </AppBar>
+        </div>
+      </Slide>
     );
   }
 }

@@ -4,6 +4,15 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
+import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import IconButton from 'material-ui/IconButton';
+import HelpOutlineIcon from 'material-ui-icons/HelpOutline';
 import SecurityIcon from 'material-ui-icons/Security';
 import DoneIcon from 'material-ui-icons/Done';
 import blue from 'material-ui/colors/blue';
@@ -34,6 +43,9 @@ const styleSheet = createStyleSheet('NDA', {
     cursor: 'pointer',
     position: 'relative',
   },
+  iconButton: {
+    textAlign: 'right',
+  },
   icon: {
     width: 40,
     height: 40,
@@ -51,9 +63,12 @@ const styleSheet = createStyleSheet('NDA', {
 class NDA extends Component {
   state = {
     hover: false,
+    open: false,
   };
 
   handleRequestClose = () => this.setState({ open: false });
+
+  handleRequestOpen = () => this.setState({ open: true });
 
   handlePaperState = () => {
     if (this.props.nda) {
@@ -77,6 +92,11 @@ class NDA extends Component {
             <Typography type="title" color="secondary" align="right">
               {this.props.t('quote.sections.NDA.title')}
             </Typography>
+            <div className={this.props.classes.iconButton}>
+              <IconButton color="primary" aria-label="Help" onClick={this.handleRequestOpen}>
+                <HelpOutlineIcon />
+              </IconButton>
+            </div>
           </Grid>
           <Grid item xs={12} sm={9} className={this.props.classes.section}>
             <Grid container justify="flex-start" align="flex-start">
@@ -108,6 +128,21 @@ class NDA extends Component {
             </Grid>
           </Grid>
         </Grid>
+        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+          <DialogTitle>
+            {this.props.t('quote.sections.NDA.dialog.title')}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              {this.props.t('quote.sections.NDA.dialog.content.0')}
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleRequestClose} color="primary">
+              {this.props.t('quote.sections.NDA.dialog.button')}
+            </Button>
+          </DialogActions>
+        </Dialog>
       </div>
     );
   }

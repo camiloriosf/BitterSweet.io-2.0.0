@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import Hidden from 'material-ui/Hidden';
 import { translate } from 'react-i18next';
-import { gql, graphql } from 'react-apollo';
+import { gql, graphql, compose } from 'react-apollo';
 import { logPageView, setUser } from '../tools/analytics';
 import Header from './Header';
+import HeaderFixed from './HeaderFixed';
 import Footer from './Footer';
 import Nav from './Nav';
 import Languages from './Languages';
@@ -28,8 +29,24 @@ class Index extends Component {
     window.addEventListener('scroll', this.hideBar);
     if (window.localStorage) {
       if (window.localStorage.getItem('user')) {
-        setUser(window.localStorage.getItem('user'));
-        logPageView();
+        this.props.updateDevice(
+          {
+            variables: {
+              device: { id: window.localStorage.getItem('user') },
+            },
+          },
+        ).then(() => {
+          setUser(window.localStorage.getItem('user'));
+          logPageView();
+        },
+        ).catch(() => {
+          this.props.mutate()
+            .then((data) => {
+              window.localStorage.setItem('user', data.data.createDevice.changedDevice.id);
+              setUser(window.localStorage.getItem('user'));
+              logPageView();
+            });
+        });
       } else {
         this.props.mutate()
           .then((data) => {
@@ -70,6 +87,7 @@ class Index extends Component {
         <Languages />
         <Hidden mdUp><Nav url={this.props.url} /></Hidden>
         {this.state.scrollY > 100 ? <Up id={window.localStorage.getItem('user')} /> : null}
+        {this.state.scrollY > 100 ? <Hidden smDown><HeaderFixed url={this.props.url} id={window.localStorage.getItem('user')} /></Hidden> : null}
       </div>
     );
   }
@@ -85,4 +103,15 @@ const mutation = gql`
   }
 `;
 
-export default translate(['common'])(graphql(mutation)(Index));
+const updateDevice = gql`
+  mutation UpdateDevice($device:UpdateDeviceInput!){
+    updateDevice(input:$device){
+      changedDevice{
+        id
+      }
+    }
+  }
+`;
+
+export default translate(['common'])(
+  compose(graphql(mutation), graphql(updateDevice, { name: 'updateDevice' }))(Index));

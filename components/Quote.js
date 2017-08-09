@@ -41,9 +41,26 @@ class Quote extends Component {
   checkUser() {
     if (window.localStorage) {
       if (window.localStorage.getItem('user')) {
-        setUser(window.localStorage.getItem('user'));
-        logPageView();
-        this.setState({ loaded: true });
+        this.props.updateDevice(
+          {
+            variables: {
+              device: { id: window.localStorage.getItem('user') },
+            },
+          },
+        ).then(() => {
+          setUser(window.localStorage.getItem('user'));
+          logPageView();
+          this.setState({ loaded: true });
+        },
+        ).catch(() => {
+          this.props.createDevice()
+            .then((data) => {
+              window.localStorage.setItem('user', data.data.createDevice.changedDevice.id);
+              setUser(window.localStorage.getItem('user'));
+              logPageView();
+              this.setState({ loaded: true });
+            });
+        });
       } else {
         this.props.createDevice()
           .then((data) => {
@@ -60,7 +77,6 @@ class Quote extends Component {
     if (this.state.loaded && window.localStorage.getItem('user')) {
       this.setState({ showCircular: true }, () => {
         this.props.clearForm();
-        console.log(window.localStorage.getItem('user'));
         this.props.createQuote({ variables: { deviceId: window.localStorage.getItem('user') } })
           .then(data =>
             this.props.updateValue({ value: { id: data.data.createQuote.changedQuote.id } }))
@@ -136,6 +152,16 @@ const createDevice = gql`
   }
 `;
 
+const updateDevice = gql`
+  mutation UpdateDevice($device:UpdateDeviceInput!){
+    updateDevice(input:$device){
+      changedDevice{
+        id
+      }
+    }
+  }
+`;
+
 const createQuote = gql`
   mutation createQuote($deviceId: ID!){
     createQuote(input:{deviceId:$deviceId}){
@@ -159,5 +185,6 @@ export default
       compose(
         graphql(createDevice, { name: 'createDevice' }),
         graphql(createQuote, { name: 'createQuote' }),
+        graphql(updateDevice, { name: 'updateDevice' }),
       )(
         withStyles(styleSheet)(Quote))));
