@@ -73,7 +73,7 @@ class Index extends Component {
         <Header url={this.props.url} id={window.localStorage.getItem('user')} />
         <section id="hero" />
         <Hero id={window.localStorage.getItem('user')} />
-        <section id="services" />
+        <div id="services" />
         <Services id={window.localStorage.getItem('user')} />
         <section id="how" />
         <How id={window.localStorage.getItem('user')} />

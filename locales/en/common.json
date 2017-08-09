@@ -72,6 +72,16 @@
   "pricing": {
     "title": "Pricing",
     "subtitle": "No hidden costs, no contracts, just pay as you go.",
+    "installments": {
+      "title": "Installments",
+      "features": [
+        "Pay for 6 months",
+        "All inclusive",
+        "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
+        "You own the intelectual property",
+        "We own the code until the 6th month"
+      ]
+    },
     "payg": {
       "title": "Pay-as-you-Go",
       "features": [
@@ -102,35 +112,13 @@
       "title": "Choose the plan that fits you best",
       "subtitle": "You can change it later.",
       "payg": {
-        "title": "Pay-as-you-Go",
-        "features": [
-          "Pay for as long as you want",
-          "All inclusive",
-          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
-          "You own the intelectual property",
-          "We own the code"
-        ]
+        "title": "Pay-as-you-Go"
       },
       "installments": {
-        "title": "Fixed Installments",
-        "features": [
-          "Pay a fixed price for 12 months",
-          "All inclusive",
-          "(Hosting, support, Maintenance, auto-scale,load-balancing, CDN, SSL certificate)",
-          "You own the intelectual property",
-          "We own the code",
-          "After the 12 month you own the code"
-        ]
+        "title": "Fixed Installments"
       },
       "fee": {
-        "title": "1-Time Fee",
-        "features": [
-          "Pay a 1 time fee",
-          "3 months of All inclusive",
-          "(Hosting, support, Maintenance, auto-scale, load-balancing, CDN, SSL certificate)",
-          "You own the intelectual property",
-          "You own the code"
-        ]
+        "title": "1-Time Fee"
       }
     },
     "comments": {
@@ -143,7 +131,10 @@
       "subtitle": "We will get in touch shortly",
       "name": "name",
       "email": "email",
-      "submit": "send"
+      "submit": "send",
+      "success": "Great!",
+      "message": "We have received your quotation, we will get in touch with you shortly.",
+      "again": "Quote again"
     },
     "sections": {
       "NDA": {
@@ -246,7 +237,7 @@
         "dialog": {
           "title": "Communication",
           "content": [
-            "Select how you want to communicate with your customers."
+            "Select how you want to communicate with the users of your app."
           ],
           "button": "Great!"
         }
@@ -391,7 +382,9 @@
       "name": "Name",
       "email": "Email",
       "about": "About your company and project",
-      "button": "Send"
+      "button": "Send",
+      "success": "Message Sent",
+      "error": "Error, try again"
     }
   },
   "footer": {
