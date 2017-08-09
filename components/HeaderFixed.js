@@ -24,10 +24,6 @@ const styleSheet = createStyleSheet('Header', {
     backgroundColor: '#FFF',
     zIndex: 999999999,
   },
-  appBar: {
-    boxShadow: 'none',
-    border: 0,
-  },
   title: {
     flex: 1,
     textAlign: 'left',
@@ -92,7 +88,7 @@ class Header extends Component {
     return (
       <Slide direction="down" enterTransitionDuration={1000} in>
         <div className={this.props.classes.root}>
-          <AppBar position="static" className={this.props.classes.appBar}>
+          <AppBar position="static">
             <Toolbar>
               <Link href="/">
                 <Typography type="title" align="center" className={this.props.classes.title}>
