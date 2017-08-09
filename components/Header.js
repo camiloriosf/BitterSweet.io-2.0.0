@@ -6,6 +6,8 @@ import withStyles from 'material-ui/styles/withStyles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
 // Import Extra Libraries
 import { translate } from 'react-i18next';
 import Router from 'next/router';
@@ -17,11 +19,15 @@ const styleSheet = createStyleSheet('Header', {
   root: {
     width: '100%',
   },
+  appBar: {
+    boxShadow: 'none',
+    backgroundColor: '#fff',
+    border: 0,
+  },
   title: {
     flex: 1,
     textAlign: 'left',
     cursor: 'pointer',
-    position: 'absolute',
     padding: 10,
   },
   buttons: {
@@ -81,14 +87,18 @@ class Header extends Component {
   render() {
     return (
       <div className={this.props.classes.root}>
-        <Link href="/">
-          <Typography type="title" align="center" className={this.props.classes.title}>
-            {this.props.t('name')}
-          </Typography>
-        </Link>
-        <Hidden smDown>
-          {this.renderLinks()}
-        </Hidden>
+        <AppBar position="static" className={this.props.classes.appBar}>
+          <Toolbar>
+            <Link href="/">
+              <Typography type="title" align="center" className={this.props.classes.title}>
+                {this.props.t('name')}
+              </Typography>
+            </Link>
+            <Hidden smDown>
+              {this.renderLinks()}
+            </Hidden>
+          </Toolbar>
+        </AppBar>
       </div>
     );
   }
