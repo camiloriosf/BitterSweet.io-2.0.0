@@ -1,6 +1,10 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+2.0.2
+
+* Updated to React 15.6
+
 2.0.1
 
 * Updated to Next 3.0
