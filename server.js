@@ -29,8 +29,16 @@ i18n
         server.use(i18nextMiddleware.handle(i18n));
 
         // serve locales for client
-        server.use('/locales', express.static(`${__dirname}/locales`));
-        server.use('/static', express.static(`${__dirname}/static`));
+        server.use('/locales', express.static(`${__dirname}/locales`, {
+          setHeaders(res) {
+            res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
+          },
+        }));
+        server.use('/static', express.static(`${__dirname}/static`, {
+          setHeaders(res) {
+            res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
+          },
+        }));
 
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18n));
