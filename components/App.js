@@ -6,10 +6,9 @@ import { getContext } from '../styles/context';
 import withData from '../lib/withData';
 import { initGA } from '../tools/analytics';
 
-const styleSheet = createStyleSheet('App', theme => ({
+const styleSheet = createStyleSheet('App', () => ({
   '@global': {
     html: {
-      fontFamily: theme.typography.fontFamily,
       WebkitFontSmoothing: 'antialiased', // Antialiasing.
       MozOsxFontSmoothing: 'grayscale', // Antialiasing.
     },

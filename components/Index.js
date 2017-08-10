@@ -1,20 +1,34 @@
 import React, { Component } from 'react';
+import dynamic from 'next/dynamic';
 import Hidden from 'material-ui/Hidden';
 import { translate } from 'react-i18next';
 import { gql, graphql, compose } from 'react-apollo';
 import { logPageView, setUser } from '../tools/analytics';
-import Header from './Header';
-import HeaderFixed from './HeaderFixed';
-import Footer from './Footer';
-import Nav from './Nav';
-import Languages from './Languages';
-import Hero from './index/Hero';
-import Services from './index/Services';
-import How from './index/How';
-import Pricing from './index/Pricing';
-import FAQ from './index/FAQ';
-import Contact from './index/Contact';
-import Up from './index/Up';
+// import Header from './Header';
+// import HeaderFixed from './HeaderFixed';
+// import Footer from './Footer';
+// import Nav from './Nav';
+// import Languages from './Languages';
+// import Hero from './index/Hero';
+// import Services from './index/Services';
+// import How from './index/How';
+// import Pricing from './index/Pricing';
+// import FAQ from './index/FAQ';
+// import Contact from './index/Contact';
+// import Up from './index/Up';
+
+const Header = dynamic(import('./Header'));
+const HeaderFixed = dynamic(import('./HeaderFixed'));
+const Footer = dynamic(import('./Footer'));
+const Nav = dynamic(import('./Nav'));
+const Languages = dynamic(import('./Languages'));
+const Hero = dynamic(import('./index/Hero'));
+const Services = dynamic(import('./index/Services'));
+const How = dynamic(import('./index/How'));
+const Pricing = dynamic(import('./index/Pricing'));
+const FAQ = dynamic(import('./index/FAQ'));
+const Contact = dynamic(import('./index/Contact'));
+const Up = dynamic(import('./index/Up'));
 
 class Index extends Component {
   constructor(props) {
