@@ -1,5 +1,9 @@
 {
   "name": "BitterSweet.io",
+  "title": {
+    "index": "BitterSweet.io | Desarrollo de Aplicaciones",
+    "quote": "BitterSweet.io | Cotiza tu Aplicacion"
+  },
   "header": {
     "what": "qué hacemos",
     "how": "cómo",

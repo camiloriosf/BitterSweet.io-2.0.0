@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
@@ -8,27 +8,17 @@ import Hidden from 'material-ui/Hidden';
 import { gql, graphql, compose } from 'react-apollo';
 import { translate } from 'react-i18next';
 import { connect } from 'react-redux';
-// import Header from './Header';
-// import Footer from './Footer';
-// import Nav from './Nav';
-// import Languages from './Languages';
-// import Hero from './quote/Hero';
-// import Prices from './quote/Prices';
-// import Comments from './quote/Comments';
-// import Send from './quote/Send';
-// import Sections from './quote/Sections';
 import * as actions from '../lib/actions/quote';
 import { logPageView, setUser } from '../tools/analytics';
-
-const Header = dynamic(import('./Header'));
-const Footer = dynamic(import('./Footer'));
-const Nav = dynamic(import('./Nav'));
-const Languages = dynamic(import('./Languages'));
-const Hero = dynamic(import('./quote/Hero'));
-const Prices = dynamic(import('./quote/Prices'));
-const Comments = dynamic(import('./quote/Comments'));
-const Send = dynamic(import('./quote/Send'));
-const Sections = dynamic(import('./quote/Sections'));
+import Header from './Header';
+import Footer from './Footer';
+import Nav from './Nav';
+import Languages from './Languages';
+import Hero from './quote/Hero';
+import Prices from './quote/Prices';
+import Comments from './quote/Comments';
+import Send from './quote/Send';
+import Sections from './quote/Sections';
 
 
 const styleSheet = createStyleSheet('Quote', {
@@ -143,6 +133,9 @@ class Quote extends Component {
   render() {
     return (
       <div >
+        <Head>
+          <title>{this.props.t('title.quote')}</title>
+        </Head>
         <Header url={this.props.url} id={window.localStorage.getItem('user')} />
         <Hero id={window.localStorage.getItem('user')} />
         {this.checkQuote()}

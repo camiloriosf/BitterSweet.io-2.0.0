@@ -43,6 +43,20 @@ i18n
         // missing keys
         server.post('/locales/add/:lng/:ns', i18nextMiddleware.missingKeyHandler(i18n));
 
+        // serve robots.txt and sitemap.xml
+        const options = {
+          root: `${__dirname}/static/`,
+          headers: {
+            'Content-Type': 'text/plain;charset=UTF-8',
+          },
+        };
+        server.get('/robots.txt', (req, res) => (
+          res.status(200).sendFile('robots.txt', options)
+        ));
+        server.get('/sitemap.xml', (req, res) => (
+          res.status(200).sendFile('sitemap.xml', options)
+        ));
+
         // use next.js
         server.get('*', (req, res) => handle(req, res));
 

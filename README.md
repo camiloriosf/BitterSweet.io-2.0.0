@@ -4,6 +4,9 @@ BitterSweet Website
 2.0.4
 
 * Web page optimization
+* Added robots.txt
+* Added sitemap.xml
+* Added Dynamic Head Title
 
 2.0.3
 
