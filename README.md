@@ -1,6 +1,11 @@
 # BitterSweet.io-2.0.0
 BitterSweet Website
 
+2.0.5
+* Added Static Head Title for SEO
+* Updated images
+
+
 2.0.4
 
 * Web page optimization

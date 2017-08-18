@@ -14,7 +14,7 @@
   },
   "hero": {
     "title": "SIMPLIFICA TU NEGOCIO",
-    "subtitle": "BitterSweet.io simplifica el desarrollo de softwares, preocupándose de todo el ciclo de vida de tu proyecto.",
+    "subtitle": "BitterSweet.io simplifica el desarrollo de aplicaciones, preocupándose de todo el ciclo de vida de tu proyecto.",
     "button": "COTIZAR"
   },
   "services": {
@@ -23,7 +23,7 @@
     "features": [
       {
         "title": "Desarrollo multiplataforma",
-        "description": "Podemos desarrollar tu aplicación para la web, Android, iOS o escritorio."
+        "description": "Podemos desarrollar tu aplicación Web, Android, iOS o Escritorio."
       },
       {
         "title": "Precio transparente y justo",
@@ -42,8 +42,8 @@
         "description": "Nosotros nos ocupamos de todo, desde el desarrollo hasta el soporte y optimización de SEO. Mantén la atención solo en tu negocio."
       },
       {
-        "title": "Como en pequeñas y grandes compañías",
-        "description": "Usamos lo último en tecnología, con certificados SSL integrados, load-balancing, auto-escalamiento y CDN."
+        "title": "Pequeñas y grandes empresas",
+        "description": "Certificados SSL integrados, load-balancing, auto-escalamiento y CDN. No importa si no sabes esto, nosotos lo haremos sencillo para tí"
       }
     ]
   },
@@ -53,7 +53,7 @@
     "features": [
       {
         "title": "Adiós al viejo estilo, bienvenido BitterSweet.io",
-        "description": "En BitterSweet.io hemos creado una nueva manera de desarrollar aplicaciones. Con esta, somos capaces de disminuir costos, tiempos de lanzamiento y agregamos todas las características que poseen los softwares industriales."
+        "description": "En BitterSweet.io hemos creado una nueva manera de desarrollar aplicaciones. Con esta, somos capaces de disminuir costos, tiempos de lanzamiento y agregamos todas las características que poseen las aplicaciones industriales."
       },
       {
         "title": "No pagues por nuestra oficina, no tenemos una",
@@ -69,7 +69,7 @@
       },
       {
         "title": "Tal vez no somos lo que requieres",
-        "description": "En BitterSweet.io creemos en la transparencia. Es por esto, que sabemos que nuestros servicios no son para todos. No obstante, te invitamos a que nos envíes un mensaje, nosotros te podemos guiar, incluso si no contratas nuestros servicios."
+        "description": "En BitterSweet.io creemos en la transparencia. Es por esto,que sabemos que nuestros servicios no son para todos. No obstante, te invitamos a que nos envíes un mensaje, nosotros te podemos guiar incluso si no contratas nuestros servicios."
       }
     ]
   },

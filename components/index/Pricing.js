@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
-import FlightTakeoffIcon from 'material-ui-icons/FlightTakeoff';
-import FlightIcon from 'material-ui-icons/Flight';
 import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button';
 import blue from 'material-ui/colors/blue';
@@ -13,6 +11,9 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import Router from 'next/router';
 import { logEvent } from '../../tools/analytics';
+import PAYGIcon from '../../static/choose_plan_fixed.svg';
+import InstallmentsIcon from '../../static/choose_plan_pay.svg';
+import OneTimeIcon from '../../static/choose_plan_one_time.svg';
 
 const styleSheet = createStyleSheet('Pricing', {
   section: {
@@ -100,7 +101,7 @@ class Pricing extends Component {
               <Paper square elevation={10} className={this.props.classes.paper}>
                 <Grid container justify="center" align="flex-start">
                   <Grid item xs={12} sm={12} className={this.props.classes.grid}>
-                    <FlightTakeoffIcon className={this.props.classes.icon} />
+                    <PAYGIcon className={this.props.classes.icon} />
                     <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
                       {this.props.t('pricing.payg.title')}
                     </Typography>
@@ -133,7 +134,7 @@ class Pricing extends Component {
               <Paper square elevation={10} className={this.props.classes.paper}>
                 <Grid container justify="center" align="flex-start">
                   <Grid item xs={12} sm={12} className={this.props.classes.grid}>
-                    <FlightTakeoffIcon className={this.props.classes.icon} />
+                    <InstallmentsIcon className={this.props.classes.icon} />
                     <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
                       {this.props.t('pricing.installments.title')}
                     </Typography>
@@ -166,7 +167,7 @@ class Pricing extends Component {
               <Paper square elevation={10} className={this.props.classes.paper}>
                 <Grid container justify="center" align="flex-start">
                   <Grid item xs={12} sm={12} className={this.props.classes.grid}>
-                    <FlightIcon className={this.props.classes.icon} />
+                    <OneTimeIcon className={this.props.classes.icon} />
                     <Typography type="headline" component="h2" align="center" className={this.props.classes.service}>
                       {this.props.t('pricing.fee.title')}
                     </Typography>

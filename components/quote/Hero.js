@@ -20,7 +20,7 @@ const styleSheet = createStyleSheet('HeroQuote', {
     textAlign: 'center',
   },
   image: {
-    width: '90%',
+    maxWidth: 394,
   },
 });
 
@@ -70,7 +70,7 @@ class Hero extends Component {
       </Grid>
       <Grid item xs={12} sm={5}>
         <div className={this.props.classes.imageContainer}>
-          <img src="static/imagen_01.png" alt="imagen_01" className={this.props.classes.image} />
+          <img src="static/cabecera_quote.png" alt="Quote my project" className={this.props.classes.image} />
         </div>
       </Grid>
     </Grid>

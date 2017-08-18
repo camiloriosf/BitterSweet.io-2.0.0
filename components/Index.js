@@ -91,7 +91,7 @@ class Index extends Component {
         <Languages />
         <Hidden mdUp><Nav url={this.props.url} /></Hidden>
         {this.state.scrollY > 100 ? <Up id={window.localStorage.getItem('user')} /> : null}
-        {this.state.scrollY > 100 ? <Hidden smDown><HeaderFixed url={this.props.url} id={window.localStorage.getItem('user')} /></Hidden> : null}
+        {this.state.scrollY > 10 ? <Hidden smDown><HeaderFixed url={this.props.url} id={window.localStorage.getItem('user')} /></Hidden> : null}
       </div>
     );
   }

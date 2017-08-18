@@ -8,6 +8,11 @@ import Slide from 'material-ui/transitions/Slide';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logEvent } from '../../tools/analytics';
+import Hwdi1 from '../../static/hwdi_1.svg';
+import Hwdi2 from '../../static/hwdi_2.svg';
+import Hwdi3 from '../../static/hwdi_3.svg';
+import Hwdi4 from '../../static/hwdi_4.svg';
+import Hwdi5 from '../../static/hwdi_5.svg';
 
 const styleSheet = createStyleSheet('How', {
   section: {
@@ -31,6 +36,7 @@ const styleSheet = createStyleSheet('How', {
   },
   img: {
     maxWidth: '70%',
+    maxHeight: 200,
   },
 });
 
@@ -54,6 +60,23 @@ class How extends Component {
     }
   };
 
+  renderIcon = (index) => {
+    switch (index) {
+      case 0:
+        return <Hwdi1 className={this.props.classes.img} />;
+      case 1:
+        return <Hwdi2 className={this.props.classes.img} />;
+      case 2:
+        return <Hwdi3 className={this.props.classes.img} />;
+      case 3:
+        return <Hwdi4 className={this.props.classes.img} />;
+      case 4:
+        return <Hwdi5 className={this.props.classes.img} />;
+      default:
+        return null;
+    }
+  }
+
   renderFeatures = () => {
     if (this.props.i18n.store.data.en.common.how.features) {
       const features = this.props.i18n.store.data.en.common.how.features;
@@ -61,23 +84,23 @@ class How extends Component {
         const array = [];
         if ((index + 1) % 2 === 0) {
           array.push(
-            <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ smUp: true }}>
+            <Grid item xs={12} sm={5} className={this.props.classes.grid} hidden={{ smUp: true }}>
               <Fade in enterTransitionDuration={2000}>
-                <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+                {this.renderIcon(index)}
               </Fade>
             </Grid>);
         } else {
           array.push(
-            <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+            <Grid item xs={12} sm={5} className={this.props.classes.grid}>
               <Fade in enterTransitionDuration={2000}>
-                <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+                {this.renderIcon(index)}
               </Fade>
             </Grid>,
           );
         }
 
         array.push(
-          <Grid item xs={12} sm={6} className={this.props.classes.grid}>
+          <Grid item xs={12} sm={5} className={this.props.classes.grid}>
             <div className={this.props.classes.div}>
               <Typography type="title" align="left" paragraph>
                 {this.props.t(`how.features.${index}.title`)}
@@ -91,9 +114,9 @@ class How extends Component {
 
         if ((index + 1) % 2 === 0) {
           array.push(
-            <Grid item xs={12} sm={6} className={this.props.classes.grid} hidden={{ xsDown: true }}>
+            <Grid item xs={12} sm={5} className={this.props.classes.grid} hidden={{ xsDown: true }}>
               <Fade in enterTransitionDuration={2000}>
-                <img src={`/static/how_${index}.png`} alt={`imagen ${index + 1}`} className={this.props.classes.img} />
+                {this.renderIcon(index)}
               </Fade>
             </Grid>,
           );

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
 import Hidden from 'material-ui/Hidden';
+import Button from 'material-ui/Button';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
-import Slide from 'material-ui/transitions/Slide';
 import Fade from 'material-ui/transitions/Fade';
 import Router from 'next/router';
 import { logEvent } from '../../tools/analytics';
@@ -16,16 +15,16 @@ const styleSheet = createStyleSheet('Hero', {
     padding: '0px 10px 0px 10px',
   },
   pad1: {
-    marginTop: '7%',
+    marginTop: 30,
   },
   pad2: {
-    marginTop: '1%',
+    marginTop: 10,
   },
   pad3: {
-    marginTop: '3%',
+    marginTop: 10,
   },
   pad4: {
-    marginTop: '7%',
+    marginTop: 10,
   },
   subTitle: {
     maxWidth: 700,
@@ -34,38 +33,14 @@ const styleSheet = createStyleSheet('Hero', {
   button: {
     minWidth: 200,
     minHeight: 40,
-
+  },
+  image: {
+    width: '100%',
   },
   crop1: {
-    width: 940,
-    height: 250,
-    overflow: 'hidden',
     margin: '0 auto',
-    position: 'relative',
-  },
-  crop2: {
-    width: 626,
-    height: 250,
-    overflow: 'hidden',
-    margin: '0 auto',
-    position: 'relative',
-  },
-  mockup1: {
-    position: 'absolute',
-    zIndex: 900000,
-  },
-  mockup11: {
-    position: 'absolute',
-    left: -157,
-    zIndex: 900000,
-  },
-  mockup2: {
-    position: 'absolute',
-    zIndex: 700000,
-  },
-  mockup3: {
-    position: 'absolute',
-    zIndex: 700000,
+    paddingLeft: 200,
+    paddingRight: 200,
   },
   quote: {
     textAlign: 'center',
@@ -132,19 +107,12 @@ class Hero extends Component {
       <Grid item xs={12} sm={12} className={this.props.classes.pad4}>
         <Hidden smDown>
           <div className={this.props.classes.crop1}>
-            <Slide direction="up" enterTransitionDuration={500} in><img src="/static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup1} /></Slide>
-            <Slide direction="up" enterTransitionDuration={1000} in><img src="static/home_mockups_2.png" alt="WebSite Mockup 2" className={this.props.classes.mockup2} /></Slide>
-            <Slide direction="up" enterTransitionDuration={1000} in><img src="static/home_mockups_3.png" alt="WebSite Mockup 3" className={this.props.classes.mockup3} /></Slide>
-          </div>
-        </Hidden>
-        <Hidden mdUp xsDown>
-          <div className={this.props.classes.crop2}>
-            <img src="/static/home_mockups_1.png" alt="WebSite Mockup 1" className={this.props.classes.mockup11} />
+            <img src="/static/cabecera_home.png" alt="Make your business easier" className={this.props.classes.image} />
           </div>
         </Hidden>
       </Grid>
     </Grid>
-    )
+  )
 
   render() {
     return (
