@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import Grid from 'material-ui/Grid';
 import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
 
-const styleSheet = createStyleSheet('Comments', {
+const styles = {
   section: {
     padding: 20,
     marginTop: 50,
@@ -16,7 +16,7 @@ const styleSheet = createStyleSheet('Comments', {
     textAlign: 'center',
     width: '100%',
   },
-});
+};
 
 class Comments extends Component {
 
@@ -65,4 +65,4 @@ function mapStateToProps(state) {
 }
 
 export default translate(['common'])(
-  connect(mapStateToProps, actions)(withStyles(styleSheet)(Comments)));
+  connect(mapStateToProps, actions)(withStyles(styles, { name: 'CommentsQuote' })(Comments)));

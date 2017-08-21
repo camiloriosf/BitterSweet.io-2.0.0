@@ -1,7 +1,6 @@
 // Import React Components
 import React, { Component } from 'react';
 // Import Material-UI components
-import { createStyleSheet } from 'material-ui/styles';
 import withStyles from 'material-ui/styles/withStyles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -11,12 +10,9 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 // Import Extra Libraries
 import { translate } from 'react-i18next';
-import Router from 'next/router';
 import Link from 'next/link';
-// Import Local Files
-import { logEvent } from '../tools/analytics';
 // Create Component StyleSheet
-const styleSheet = createStyleSheet('Header', {
+const styles = {
   root: {
     width: '100%',
     position: 'fixed',
@@ -40,7 +36,7 @@ const styleSheet = createStyleSheet('Header', {
   links: {
     textAlign: 'right',
   },
-});
+};
 // Create Class
 class Header extends Component {
 
@@ -76,4 +72,4 @@ class Header extends Component {
 }
 
 // Export Class
-export default translate(['common'])(withStyles(styleSheet)(Header));
+export default translate(['common'])(withStyles(styles, { name: 'HeaderFixed' })(Header));

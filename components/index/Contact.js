@@ -7,12 +7,12 @@ import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
 import blue from 'material-ui/colors/blue';
 import Snackbar from 'material-ui/Snackbar';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logEvent } from '../../tools/analytics';
 
-const styleSheet = createStyleSheet('Contact', {
+const styles = {
   section: {
     padding: '50px 10px 100px 10px',
   },
@@ -31,7 +31,7 @@ const styleSheet = createStyleSheet('Contact', {
   textFields: {
     width: '100%',
   },
-});
+};
 
 class Contact extends Component {
   state = {
@@ -176,4 +176,4 @@ const mutation = gql`
   }
 `;
 
-export default translate(['common'])(graphql(mutation)(withStyles(styleSheet)(Contact)));
+export default translate(['common'])(graphql(mutation)(withStyles(styles, { name: 'ContactIndex' })(Contact)));

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
@@ -22,7 +22,7 @@ import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
 
-const styleSheet = createStyleSheet('Product', {
+const styles = {
   slide: {
     padding: 30,
   },
@@ -60,7 +60,7 @@ const styleSheet = createStyleSheet('Product', {
     top: 0,
     right: 0,
   },
-});
+};
 
 class Product extends Component {
   state = {
@@ -224,5 +224,5 @@ function mapStateToProps(state) {
 }
 
 export default translate(['common'])(
-  connect(mapStateToProps, actions)(withStyles(styleSheet)(Product)));
+  connect(mapStateToProps, actions)(withStyles(styles, { name: 'ProductQuote' })(Product)));
 

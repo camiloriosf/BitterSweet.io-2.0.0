@@ -5,12 +5,12 @@ import TextField from 'material-ui/TextField';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { gql, graphql } from 'react-apollo';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
 
-const styleSheet = createStyleSheet('Send', {
+const styles = {
   section: {
     padding: 20,
     marginTop: 50,
@@ -20,7 +20,7 @@ const styleSheet = createStyleSheet('Send', {
     textAlign: 'center',
     width: '100%',
   },
-});
+};
 
 class Send extends Component {
 
@@ -127,4 +127,4 @@ function mapStateToProps(state) {
 
 export default translate(['common'])(
   connect(mapStateToProps, actions)(
-    graphql(mutation)(withStyles(styleSheet)(Send))));
+    graphql(mutation)(withStyles(styles, { name: 'SendQuote' })(Send))));

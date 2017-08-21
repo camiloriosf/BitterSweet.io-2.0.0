@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { translate } from 'react-i18next';
 import Fade from 'material-ui/transitions/Fade';
 import { logEvent } from '../../tools/analytics';
 
-const styleSheet = createStyleSheet('HeroQuote', {
+const styles = {
   section: {
     padding: '20px 10px 50px 10px',
   },
@@ -20,9 +20,9 @@ const styleSheet = createStyleSheet('HeroQuote', {
     textAlign: 'center',
   },
   image: {
-    width: '90%',
+    maxWidth: 394,
   },
-});
+};
 
 class Hero extends Component {
   constructor(props) {
@@ -70,7 +70,7 @@ class Hero extends Component {
       </Grid>
       <Grid item xs={12} sm={5}>
         <div className={this.props.classes.imageContainer}>
-          <img src="static/imagen_01.png" alt="imagen_01" className={this.props.classes.image} />
+          <img src="static/cabecera_quote.png" alt="Quote my project" className={this.props.classes.image} />
         </div>
       </Grid>
     </Grid>
@@ -85,5 +85,5 @@ class Hero extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Hero));
+export default translate(['common'])(withStyles(styles, { name: 'HeroQuote' })(Hero));
 

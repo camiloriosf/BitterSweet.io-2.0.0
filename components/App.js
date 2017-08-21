@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { JssProvider } from 'react-jss';
-import { withStyles, createStyleSheet, MuiThemeProvider } from 'material-ui/styles';
+import { withStyles, MuiThemeProvider } from 'material-ui/styles';
 import { getContext } from '../styles/context';
 import withData from '../lib/withData';
 import { initGA } from '../tools/analytics';
 
-const styleSheet = createStyleSheet('App', () => ({
+const styles = () => ({
   '@global': {
     html: {
       WebkitFontSmoothing: 'antialiased', // Antialiasing.
@@ -16,11 +16,11 @@ const styleSheet = createStyleSheet('App', () => ({
       margin: 0,
     },
   },
-}));
+});
 
 let AppWrapper = props => props.children;
 
-AppWrapper = withStyles(styleSheet)(AppWrapper);
+AppWrapper = withStyles(styles)(AppWrapper);
 
 class App extends Component {
   componentDidMount() {

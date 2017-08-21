@@ -3,13 +3,13 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logEvent } from '../../tools/analytics';
 
-const styleSheet = createStyleSheet('FAQ', {
+const styles = {
   section: {
     background: grey[50],
     padding: '50px 10px 100px 10px',
@@ -31,7 +31,7 @@ const styleSheet = createStyleSheet('FAQ', {
   answer: {
     color: grey[500],
   },
-});
+};
 
 class FAQ extends Component {
   state = {
@@ -119,4 +119,4 @@ class FAQ extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(FAQ));
+export default translate(['common'])(withStyles(styles, { name: 'FAQIndex' })(FAQ));

@@ -14,7 +14,7 @@
   },
   "hero": {
     "title": "SIMPLIFICA TU NEGOCIO",
-    "subtitle": "BitterSweet.io simplifica el desarrollo de softwares, preocupándose de todo el ciclo de vida de tu proyecto.",
+    "subtitle": "BitterSweet.io simplifica el desarrollo de aplicaciones, preocupándose de todo el ciclo de vida de tu proyecto.",
     "button": "COTIZAR"
   },
   "services": {
@@ -23,7 +23,7 @@
     "features": [
       {
         "title": "Desarrollo multiplataforma",
-        "description": "Podemos desarrollar tu aplicación para la web, Android, iOS o escritorio."
+        "description": "Podemos desarrollar tu aplicación Web, Android, iOS o Escritorio."
       },
       {
         "title": "Precio transparente y justo",
@@ -42,8 +42,8 @@
         "description": "Nosotros nos ocupamos de todo, desde el desarrollo hasta el soporte y optimización de SEO. Mantén la atención solo en tu negocio."
       },
       {
-        "title": "Como en pequeñas y grandes compañías",
-        "description": "Usamos lo último en tecnología, con certificados SSL integrados, load-balancing, auto-escalamiento y CDN."
+        "title": "Pequeñas y grandes empresas",
+        "description": "Certificados SSL integrados, load-balancing, auto-escalamiento y CDN. No importa si no sabes esto, nosotos lo haremos sencillo para tí"
       }
     ]
   },
@@ -53,29 +53,29 @@
     "features": [
       {
         "title": "Adiós al viejo estilo, bienvenido BitterSweet.io",
-        "description": "En BitterSweet.io hemos creado una nueva manera de desarrollar aplicaciones. Con esta, somos capaces de disminuir costos, tiempos de lanzamiento y agregamos todas las características que poseen los softwares industriales."
+        "description": "En BitterSweet.io hemos creado una nueva manera de desarrollar aplicaciones. Con esta, somos capaces de disminuir costos, tiempos de lanzamiento y agregamos todas las características que poseen aplicaciones industriales."
       },
       {
         "title": "No pagues por nuestra oficina, no tenemos una",
-        "description": "Somos una compañía totalmente virtual, usamos todas las tecnologías disponibles para aumentar el trabajo colaborativo, por lo tanto, no te transferimos esos costos."
+        "description": "Somos una compañía totalmente virtual, usamos todas las tecnologías disponibles para potenciar el trabajo colaborativo, por lo tanto, no te transferimos esos costos."
       },
       {
         "title": "No utilizamos plantillas, construímos desde cero",
-        "description": "Creemos que cada requerimiento requiere un enfoque único, es por esto que no utilizamos plantillas pre-diseñadas, hacemos todo nosotros mismos."
+        "description": "Creemos que cada requerimiento requiere un enfoque único, es por esto que no utilizamos plantillas pre-diseñadas, creamos tu aplicación desde la base."
       },
       {
         "title": "Lo último en tecnologías",
         "description": "En BitterSweet.io solo usamos las últimas tecnologías, las mismas que utilizan compañías como Facebook, Airbnb o Netflix."
       },
       {
-        "title": "Tal vez no somos lo que requieres",
-        "description": "En BitterSweet.io creemos en la transparencia. Es por esto, que sabemos que nuestros servicios no son para todos. No obstante, te invitamos a que nos envíes un mensaje, nosotros te podemos guiar, incluso si no contratas nuestros servicios."
+        "title": "Tal vez no somos lo que necesitas",
+        "description": "En BitterSweet.io creemos en la transparencia, es por esto que sabemos que nuestros servicios no son para todos. No obstante, te invitamos a que nos envíes un mensaje, nosotros te podemos guiar incluso si no contratas nuestros servicios."
       }
     ]
   },
   "pricing": {
     "title": "Precio",
-    "subtitle": "Sin precios ocultos, sin contratos, just pay as you go.",
+    "subtitle": "Sin precios ocultos ni contratos.",
     "installments": {
       "title": "Cuotas Fijas",
       "features": [
@@ -83,7 +83,7 @@
         "Todo incluido",
         "(Hosting, soporte, mantención, auto-escalamiento, load-balancing, CDN, certificado SSL)",
         "Tú eres el dueño de la propiedad intelectual",
-        "Nosotros somos dueños del código hasta el 6to mes"
+        "El código es tuyo al 6to mes"
       ]
     },
     "payg": {
@@ -138,7 +138,7 @@
       "submit": "enviar",
       "success": "Genial!",
       "message": "Hemos recibido tu cotización, nos pondremos en contacto a la brevedad.",
-      "again": "nueva cotizar"
+      "again": "cotizar otra app"
     },
     "sections": {
       "NDA": {
@@ -147,7 +147,8 @@
         "dialog": {
           "title": "NDA",
           "content": [
-            "Selecciona si quieres firmar una NDA."
+            "Selecciona si quieres firmar una NDA.",
+            "Nosotros nunca revelaremos información confidencial a terceros, pero si quieres más resguardo, una NDA es la forma para hacerlo."
           ],
           "button": "Entendido!"
         }
@@ -326,54 +327,54 @@
   },
   "faq": {
     "title": "Preguntas frecuentes",
-    "subtitle": "Tienes preguntas? Nosotros tenemos respuestas.",
+    "subtitle": "¿Tienes preguntas? Nosotros tenemos respuestas.",
     "questions": [
       {
-        "question": "Debo pagar por avanzado antes de comenzar el trabajo?",
-        "answer": "No, queremos minimizar el riesgo y, al mismo tiempo, hacer una aplicación asombrosa. No te cargaremos nada hasta que hayamos probado y terminado tu aplicación y aún más importante, que te encuentres feliz con ella."
+        "question": "¿Debo pagar por avanzado antes de comenzar el trabajo?",
+        "answer": "No, queremos minimizar el riesgo y, al mismo tiempo, hacer una aplicación asombrosa. No te cargaremos nada hasta que hayamos probado y terminado tu aplicación y aún más importante, que estes feliz con ella."
       },
       {
-        "question": "Deseo mostrar un diagrama/sketch de mi aplicación, cómo lo hago?",
+        "question": "Deseo mostrar un diagrama/sketch de mi aplicación, ¿cómo lo hago?",
         "answer": "Grandioso! Entre más información tengamos, más rápido podremos desarrollar tu aplicación. Si deseas comunicarte con nosotros, envíanos un correo a contact@bittersweet.io. También podemos arreglar una video-llamada a través de Skype y conversamos sobre tu proyecto."
       },
       {
-        "question": "Debo preocuparme por la mantención de mi aplicación?",
-        "answer": "De ninguna manera. Con nuestro servicio Pay-as-you-Go nosotros nos preocupamos de todo, y con esto nos referimos a todo (mantenimiento, soporte, escalamiento, balancing, etc.)."
+        "question": "¿Debo preocuparme por la mantención de mi aplicación?",
+        "answer": "De ninguna manera. Con nuestro servicio Pay-as-you-Go nosotros nos preocupamos de todo, y con esto nos referimos a todo (mantenimiento, soporte, escalamiento, balanceado, etc.)."
       },
       {
-        "question": "Es posible modificar mi aplicación si ya ha sido lanzada?",
+        "question": "¿Es posible modificar mi aplicación si ya ha sido lanzada?",
         "answer": "Entendemos que la idea inicial de tu aplicación pueda necesitar ciertos ajustes. También podemos ocuparnos de eso, mientras esto no signifique rehacer tu aplicación."
       },
       {
-        "question": "Qué pasa si quiero agregar otras nuevas características?",
+        "question": "¿Qué pasa si quiero agregar otras nuevas características?",
         "answer": "No hay problema, solo debes cotizar nuevamente y ese será el nuevo precio a pagar cuando agreguemos estas nuevas características. Esto también aplica si necesitas remover otras características."
       },
       {
-        "question": "Es mi responsabilidad comprar el dominio?",
-        "answer": "Podemos hacernos cargo de eso. Sin embargo, nuestra recomendación es que lo hagas tú. The name of your Company should always be yours. Nevertheless, we can guide you with this important step."
+        "question": "¿Es mi responsabilidad comprar el dominio?",
+        "answer": "Podemos hacernos cargo de eso. Sin embargo, nuestra recomendación es que lo hagas tú. El nombre de tu aplicación debe ser siempre tuyo. Sin embargo, podemos guiarte en este importante paso."
       },
       {
-        "question": "Tengo acceso al código de mi aplicación?",
-        "answer": "A fin de preocuparnos de todo, mantenemos el código fuente cerrado a tu acceso. Dado que nuestros servicios son más baratos que los ofrecidos por otras compañías, no podemos darte acceso al código fuente."
+        "question": "¿Tengo acceso al código de mi aplicación?",
+        "answer": "A fin de preocuparnos de todo en nuestro servicio Pay-as-you-Go, mantenemos el código fuente cerrado a tu acceso. Dado que nuestros servicios son más baratos que los ofrecidos por otras compañías, no podemos darte acceso al código fuente."
       },
       {
-        "question": "Quién es el dueño de la propiedad intelectual de la aplicación?",
-        "answer": "Tú, desde el día 0 hasta el final de los tiempos. Nosotros solo somos dueños del código fuente, pero la idea detrás de la aplicación siempre será tuya."
+        "question": "¿Quién es el dueño de la propiedad intelectual de la aplicación?",
+        "answer": "Tú, desde el día 0 hasta el fin de los tiempos. Nosotros solo somos dueños del código fuente, pero la idea detrás de la aplicación siempre será tuya."
       },
       {
-        "question": "Es mi aplicación segura?",
+        "question": "¿Es mi aplicación segura?",
         "answer": "Puedes contar con esto. Solo utilizamos la última tecnología existentes. Todas nuestras aplicaciones vienen con certificados SSL para conexiones seguras. Esto quiere decir que puedes realizar todo tipo de operación crítica con los mismos estándares que utilizan grandes compañías."
       },
       {
-        "question": "Si deseo terminar el servicio, cómo lo hago?",
-        "answer": "Sencillamente, debes dejar de pagar. Usamos el mismo modelo de pago de compañías como Spotify o Netflix, solo pagas mientras deseas mantener el servicio."
+        "question": "Si deseo terminar el servicio, ¿cómo lo hago?",
+        "answer": "Sencillamente debes dejar de pagar. Usamos el mismo modelo de pago de compañías como Spotify o Netflix, solo pagas mientras deseas mantener el servicio."
       },
       {
-        "question": "Si deseo terminar el servicio, cómo puedo obtener el código fuente?",
-        "answer": "Puedes detener el servicio cuando quieras. Sin embargo, si deseas obtener el código fuente deberás pagar como si fuera una aplicación 1-Time fee."
+        "question": "Si deseo terminar el servicio, ¿cómo puedo obtener el código fuente?",
+        "answer": "Puedes detener el servicio cuando quieras. Sin embargo, si deseas obtener el código fuente deberás pagar como si fuera una aplicación de 1 solo pago."
       },
       {
-        "question": "Una vez finalizado el servicio, sigo siendo el dueño del dominio?",
+        "question": "Una vez finalizado el servicio, ¿sigo siendo el dueño del dominio?",
         "answer": "Sí, el dominio siempre será tuyo."
       }
     ]
