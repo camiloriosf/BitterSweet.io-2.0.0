@@ -5,11 +5,11 @@ import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import blue from 'material-ui/colors/blue';
 import grey from 'material-ui/colors/grey';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
 
-const styleSheet = createStyleSheet('Prices', {
+const styles = {
   section: {
     padding: 20,
     marginTop: 20,
@@ -39,7 +39,7 @@ const styleSheet = createStyleSheet('Prices', {
     cursor: 'pointer',
     position: 'relative',
   },
-});
+};
 
 class Prices extends Component {
   state = {
@@ -184,4 +184,4 @@ function mapStateToProps(state) {
 }
 
 export default translate(['common'])(
-  connect(mapStateToProps, actions)(withStyles(styleSheet)(Prices)));
+  connect(mapStateToProps, actions)(withStyles(styles, { name: 'PricesQuote' })(Prices)));

@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from 'material-ui/Button';
 import KeyboardArrowUpIcon from 'material-ui-icons/KeyboardArrowUp';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import common from 'material-ui/colors/common';
 import blue from 'material-ui/colors/blue';
@@ -9,7 +9,7 @@ import { logEvent } from '../../tools/analytics';
 
 const { transparent } = common;
 
-const styleSheet = createStyleSheet('Up', {
+const styles = {
   section: {
     position: 'fixed',
     bottom: 0,
@@ -31,7 +31,7 @@ const styleSheet = createStyleSheet('Up', {
   icon: {
     fill: blue[500],
   },
-});
+};
 
 function Up(props) {
   const handleClick = (action) => {
@@ -56,4 +56,4 @@ function Up(props) {
 }
 
 
-export default withStyles(styleSheet)(Up);
+export default withStyles(styles, { name: 'UpIndex' })(Up);

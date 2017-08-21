@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
@@ -20,7 +20,7 @@ import grey from 'material-ui/colors/grey';
 import { translate } from 'react-i18next';
 import * as actions from '../../lib/actions/quote';
 
-const styleSheet = createStyleSheet('NDA', {
+const styles = {
   slide: {
     padding: 30,
   },
@@ -58,7 +58,7 @@ const styleSheet = createStyleSheet('NDA', {
     top: 0,
     right: 0,
   },
-});
+};
 
 class NDA extends Component {
   state = {
@@ -135,6 +135,7 @@ class NDA extends Component {
           <DialogContent>
             <DialogContentText>
               {this.props.t('quote.sections.NDA.dialog.content.0')}
+              {this.props.t('quote.sections.NDA.dialog.content.1')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -155,4 +156,4 @@ function mapStateToProps(state) {
 }
 
 export default translate(['common'])(
-  connect(mapStateToProps, actions)(withStyles(styleSheet)(NDA)));
+  connect(mapStateToProps, actions)(withStyles(styles, { name: 'NDAQuote' })(NDA)));

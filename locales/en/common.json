@@ -147,7 +147,8 @@
         "dialog": {
           "title": "NDA",
           "content": [
-            "Select if you want to sign an NDA."
+            "Select if you want to sign an NDA.",
+            "We will never disclose confidential information to third parties, but if you want more protection, an NDA is the way to go."
           ],
           "button": "Great!"
         }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import grey from 'material-ui/colors/grey';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
@@ -11,7 +11,7 @@ import { translate } from 'react-i18next';
 import Router from 'next/router';
 import { logEvent } from '../tools/analytics';
 
-const styleSheet = createStyleSheet('Footer', {
+const styles = {
   section: {
     background: grey[900],
     padding: '10px 10px 10px 10px',
@@ -67,7 +67,7 @@ const styleSheet = createStyleSheet('Footer', {
   icon: {
     fill: grey[600],
   },
-});
+};
 
 class Footer extends Component {
   state = {
@@ -129,15 +129,6 @@ class Footer extends Component {
                       </div>
                     </div>
                   </Grid>
-                  <Grid item xs={12} sm={3}>
-                    <div className={this.props.classes.contactDiv}>
-                      <a href="tel:+56-2-22222222" className={this.props.classes.anchor}>
-                        <CallIcon className={this.props.classes.icon} />
-                        <Typography type="button" align="center" className={this.props.classes.contact}>{this.props.t('footer.call.title')}</Typography>
-                        <Typography type="subheading" align="center" className={this.props.classes.contactInfo}>{this.props.t('footer.call.subtitle')}</Typography>
-                      </a>
-                    </div>
-                  </Grid>
                 </Grid>
               </div>
             </Grid>
@@ -153,4 +144,4 @@ class Footer extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Footer));
+export default translate(['common'])(withStyles(styles, { name: 'Footer' })(Footer));

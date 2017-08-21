@@ -4,6 +4,7 @@ BitterSweet Website
 2.0.5
 * Added Static Head Title for SEO
 * Updated images
+* Updated Material-ui to v1.0.0-beta.5
 
 
 2.0.4

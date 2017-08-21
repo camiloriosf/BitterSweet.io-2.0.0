@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
 import Typography from 'material-ui/Typography';
@@ -21,13 +21,13 @@ import Send from './quote/Send';
 import Sections from './quote/Sections';
 
 
-const styleSheet = createStyleSheet('Quote', {
+const styles = {
   startButton: {
     margin: '0 auto',
     textAlign: 'center',
     paddingBottom: 100,
   },
-});
+};
 
 class Quote extends Component {
   state = {
@@ -192,4 +192,4 @@ export default
         graphql(createQuote, { name: 'createQuote' }),
         graphql(updateDevice, { name: 'updateDevice' }),
       )(
-        withStyles(styleSheet)(Quote))));
+        withStyles(styles, { name: 'Quote' })(Quote))));

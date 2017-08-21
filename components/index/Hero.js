@@ -3,14 +3,14 @@ import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import Hidden from 'material-ui/Hidden';
 import Button from 'material-ui/Button';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import Fade from 'material-ui/transitions/Fade';
 import Router from 'next/router';
 import { logEvent } from '../../tools/analytics';
 
-const styleSheet = createStyleSheet('Hero', {
+const styles = {
   section: {
     padding: '0px 10px 0px 10px',
   },
@@ -50,7 +50,7 @@ const styleSheet = createStyleSheet('Hero', {
   anchor: {
     textDecoration: 'none',
   },
-});
+};
 
 class Hero extends Component {
   constructor(props) {
@@ -126,5 +126,5 @@ class Hero extends Component {
 }
 
 
-export default translate(['common'])(withStyles(styleSheet)(Hero));
+export default translate(['common'])(withStyles(styles, { name: 'HeroIndex' })(Hero));
 

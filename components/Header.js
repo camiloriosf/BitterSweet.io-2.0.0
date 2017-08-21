@@ -1,7 +1,6 @@
 // Import React Components
 import React, { Component } from 'react';
 // Import Material-UI components
-import { createStyleSheet } from 'material-ui/styles';
 import withStyles from 'material-ui/styles/withStyles';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
@@ -12,7 +11,7 @@ import Toolbar from 'material-ui/Toolbar';
 import { translate } from 'react-i18next';
 import Link from 'next/link';
 // Create Component StyleSheet
-const styleSheet = createStyleSheet('Header', {
+const styles = {
   root: {
     width: '100%',
   },
@@ -42,7 +41,7 @@ const styleSheet = createStyleSheet('Header', {
   links: {
     textAlign: 'right',
   },
-});
+};
 // Create Class
 class Header extends Component {
 
@@ -97,4 +96,4 @@ class Header extends Component {
 }
 
 // Export Class
-export default translate(['common'])(withStyles(styleSheet)(Header));
+export default translate(['common'])(withStyles(styles, { name: 'Header' })(Header));

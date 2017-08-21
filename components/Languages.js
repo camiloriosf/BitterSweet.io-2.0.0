@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Button from 'material-ui/Button';
 import LanguageIcon from 'material-ui-icons/Language';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Fade from 'material-ui/transitions/Fade';
 import onClickOutside from 'react-onclickoutside';
 import { translate } from 'react-i18next';
 
-const styleSheet = createStyleSheet('Languages', {
+const styles = {
   section: {
     position: 'fixed',
     bottom: 0,
@@ -29,7 +29,7 @@ const styleSheet = createStyleSheet('Languages', {
     margin: 5,
     zIndex: 9999999999,
   },
-});
+};
 
 class Languages extends Component {
   state = {
@@ -93,4 +93,4 @@ class Languages extends Component {
 }
 
 export default
-  translate(['common'])(withStyles(styleSheet)(onClickOutside(Languages)));
+  translate(['common'])(withStyles(styles, { name: 'Languages' })(onClickOutside(Languages)));

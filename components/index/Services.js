@@ -10,13 +10,13 @@ import WeekendIcon from 'material-ui-icons/Weekend';
 import MoneyOffIcon from 'material-ui-icons/MoneyOff';
 import SecurityIcon from 'material-ui-icons/Security';
 import FavoriteBorderIcon from 'material-ui-icons/FavoriteBorder';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Slide from 'material-ui/transitions/Slide';
 import VisibilitySensor from 'react-visibility-sensor';
 import { translate } from 'react-i18next';
 import { logEvent } from '../../tools/analytics';
 
-const styleSheet = createStyleSheet('Services', {
+const styles = {
   section: {
     background: grey[50],
     minHeight: 200,
@@ -45,7 +45,7 @@ const styleSheet = createStyleSheet('Services', {
   secondRow: {
     marginTop: 10,
   },
-});
+};
 
 class Services extends Component {
   state = {
@@ -145,4 +145,4 @@ class Services extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Services));
+export default translate(['common'])(withStyles(styles, { name: 'ServicesIndex' })(Services));

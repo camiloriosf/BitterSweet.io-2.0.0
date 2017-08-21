@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import blue from 'material-ui/colors/blue';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Fade from 'material-ui/transitions/Fade';
 import Slide from 'material-ui/transitions/Slide';
 import VisibilitySensor from 'react-visibility-sensor';
@@ -14,7 +14,7 @@ import Hwdi3 from '../../static/hwdi_3.svg';
 import Hwdi4 from '../../static/hwdi_4.svg';
 import Hwdi5 from '../../static/hwdi_5.svg';
 
-const styleSheet = createStyleSheet('How', {
+const styles = {
   section: {
     padding: '50px 10px 100px 10px',
   },
@@ -38,7 +38,7 @@ const styleSheet = createStyleSheet('How', {
     maxWidth: '70%',
     maxHeight: 200,
   },
-});
+};
 
 class How extends Component {
   state = {
@@ -157,4 +157,4 @@ class How extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(How));
+export default translate(['common'])(withStyles(styles, { name: 'HowIndex' })(How));

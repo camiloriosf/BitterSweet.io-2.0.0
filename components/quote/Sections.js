@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import MobileStepper from 'material-ui/MobileStepper';
 import { translate } from 'react-i18next';
 import SwipeableViews from 'react-swipeable-views';
@@ -17,7 +17,7 @@ import Admin from './11_Admin';
 import Product from './12_Product';
 import Time from './13_Time';
 
-const styleSheet = createStyleSheet('Comments', {
+const styles = {
   section: {
     textAlign: 'center',
   },
@@ -27,7 +27,7 @@ const styleSheet = createStyleSheet('Comments', {
   stepper: {
     backgroundColor: '#FFF',
   },
-});
+};
 
 class Comments extends Component {
   state = {
@@ -82,4 +82,4 @@ class Comments extends Component {
   }
 }
 
-export default translate(['common'])(withStyles(styleSheet)(Comments));
+export default translate(['common'])(withStyles(styles, { name: 'SectionsQuote' })(Comments));

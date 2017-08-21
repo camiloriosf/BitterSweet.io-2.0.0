@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import Link from 'next/link';
 import Button from 'material-ui/Button';
 import MoreVertIcon from 'material-ui-icons/MoreVert';
-import { withStyles, createStyleSheet } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import Fade from 'material-ui/transitions/Fade';
 import onClickOutside from 'react-onclickoutside';
 import { translate } from 'react-i18next';
 
-const styleSheet = createStyleSheet('Nav', {
+const styles = {
   section: {
     position: 'fixed',
     top: 0,
@@ -64,7 +64,7 @@ const styleSheet = createStyleSheet('Nav', {
     minWidth: 100,
     zIndex: 9999999999,
   },
-});
+};
 
 class Nav extends Component {
   state = {
@@ -249,4 +249,4 @@ class Nav extends Component {
 }
 
 export default
-  translate(['common'])(withStyles(styleSheet)(onClickOutside(Nav)));
+  translate(['common'])(withStyles(styles, { name: 'Nav' })(onClickOutside(Nav)));
