@@ -123,7 +123,7 @@ class Pricing extends Component {
                   <Grid item xs={12} sm={12}>
                     <div className={this.props.classes.quote}>
                       <Button color="primary" onClick={() => this.handleClick('pricing_quote_payg')}>
-                        <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                        <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
                       </Button>
                     </div>
                   </Grid>
@@ -156,7 +156,7 @@ class Pricing extends Component {
                   <Grid item xs={12} sm={12}>
                     <div className={this.props.classes.quote}>
                       <Button color="primary" onClick={() => this.handleClick('pricing_quote_payg')}>
-                        <Typography type="title" align="center" color="inherit">QUOTE</Typography>
+                        <Typography type="title" align="center" color="inherit">{this.props.t('pricing.button')}</Typography>
                       </Button>
                     </div>
                   </Grid>
